@@ -1,0 +1,224 @@
+import { useState, useEffect } from "react";
+import { useBrand, API, useAuth } from "@/App";
+import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { Pencil, Trash2, Plus } from "lucide-react";
+
+const AnnouncementsManager = () => {
+  const { currentBrand } = useBrand();
+  const { authToken } = useAuth();
+  const [announcements, setAnnouncements] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [editingAnnouncement, setEditingAnnouncement] = useState(null);
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    is_urgent: false,
+    scheduled_start: "",
+    scheduled_end: "",
+  });
+
+  useEffect(() => {
+    if (currentBrand && authToken) {
+      loadAnnouncements();
+    }
+  }, [currentBrand, authToken]);
+
+  const loadAnnouncements = async () => {
+    try {
+      const response = await axios.get(`${API}/announcements?brand_id=${currentBrand.id}`, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      });
+      setAnnouncements(response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+    } catch (error) {
+      console.error("Error loading announcements:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const config = { headers: { Authorization: `Bearer ${authToken}` } };
+      const data = { 
+        ...formData, 
+        brand_id: currentBrand.id,
+        scheduled_start: formData.scheduled_start || null,
+        scheduled_end: formData.scheduled_end || null,
+      };
+
+      if (editingAnnouncement) {
+        await axios.put(`${API}/announcements/${editingAnnouncement.id}`, data, config);
+        toast.success("Announcement updated successfully!");
+      } else {
+        await axios.post(`${API}/announcements`, data, config);
+        toast.success("Announcement created successfully!");
+      }
+
+      loadAnnouncements();
+      resetForm();
+    } catch (error) {
+      toast.error("Failed to save announcement. Please try again.");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm("Are you sure you want to delete this announcement?")) return;
+
+    try {
+      await axios.delete(`${API}/announcements/${id}`, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      });
+      toast.success("Announcement deleted successfully!");
+      loadAnnouncements();
+    } catch (error) {
+      toast.error("Failed to delete announcement.");
+    }
+  };
+
+  const handleEdit = (announcement) => {
+    setEditingAnnouncement(announcement);
+    setFormData({
+      title: announcement.title,
+      content: announcement.content,
+      is_urgent: announcement.is_urgent,
+      scheduled_start: announcement.scheduled_start || "",
+      scheduled_end: announcement.scheduled_end || "",
+    });
+    setShowForm(true);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      content: "",
+      is_urgent: false,
+      scheduled_start: "",
+      scheduled_end: "",
+    });
+    setEditingAnnouncement(null);
+    setShowForm(false);
+  };
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold" data-testid="announcements-manager-title">Announcements Manager</h1>
+        <Button onClick={() => setShowForm(true)} data-testid="add-announcement-btn">
+          <Plus size={20} className="mr-2" /> Add Announcement
+        </Button>
+      </div>
+
+      {showForm && (
+        <div className="bg-white rounded-lg p-6 shadow mb-8">
+          <h2 className="text-xl font-semibold mb-4">{editingAnnouncement ? "Edit Announcement" : "Create New Announcement"}</h2>
+          <form onSubmit={handleSubmit} className="space-y-4" data-testid="announcement-form">
+            <div>
+              <Label htmlFor="title">Title *</Label>
+              <Input
+                id="title"
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                required
+                data-testid="announcement-title-input"
+              />
+            </div>
+            <div>
+              <Label htmlFor="content">Content *</Label>
+              <Textarea
+                id="content"
+                rows={6}
+                value={formData.content}
+                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                required
+                data-testid="announcement-content-input"
+              />
+            </div>
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="is_urgent"
+                checked={formData.is_urgent}
+                onChange={(e) => setFormData({ ...formData, is_urgent: e.target.checked })}
+                data-testid="announcement-urgent-checkbox"
+              />
+              <Label htmlFor="is_urgent" className="mb-0">Mark as Urgent (Show as popup)</Label>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="scheduled_start">Schedule Start (Optional)</Label>
+                <Input
+                  id="scheduled_start"
+                  type="datetime-local"
+                  value={formData.scheduled_start}
+                  onChange={(e) => setFormData({ ...formData, scheduled_start: e.target.value })}
+                  data-testid="announcement-start-input"
+                />
+              </div>
+              <div>
+                <Label htmlFor="scheduled_end">Schedule End (Optional)</Label>
+                <Input
+                  id="scheduled_end"
+                  type="datetime-local"
+                  value={formData.scheduled_end}
+                  onChange={(e) => setFormData({ ...formData, scheduled_end: e.target.value })}
+                  data-testid="announcement-end-input"
+                />
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Button type="submit" data-testid="announcement-save-btn">{editingAnnouncement ? "Update" : "Create"} Announcement</Button>
+              <Button type="button" variant="outline" onClick={resetForm} data-testid="announcement-cancel-btn">Cancel</Button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Urgent</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {announcements.map((announcement) => (
+              <tr key={announcement.id} data-testid={`announcement-row-${announcement.id}`}>
+                <td className="max-w-md truncate">{announcement.title}</td>
+                <td>
+                  {announcement.is_urgent ? (
+                    <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Yes</span>
+                  ) : (
+                    <span className="text-gray-500">No</span>
+                  )}
+                </td>
+                <td>{new Date(announcement.created_at).toLocaleDateString()}</td>
+                <td>
+                  <div className="flex gap-2">
+                    <button onClick={() => handleEdit(announcement)} className="text-blue-600 hover:text-blue-800" data-testid={`edit-announcement-${announcement.id}`}>
+                      <Pencil size={18} />
+                    </button>
+                    <button onClick={() => handleDelete(announcement.id)} className="text-red-600 hover:text-red-800" data-testid={`delete-announcement-${announcement.id}`}>
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {announcements.length === 0 && (
+          <div className="text-center py-12 text-gray-500">No announcements yet. Create your first announcement!</div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default AnnouncementsManager;

@@ -1,0 +1,246 @@
+import { useState, useEffect } from "react";
+import { useBrand, API, useAuth } from "@/App";
+import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { Pencil, Plus } from "lucide-react";
+
+const BrandsManager = () => {
+  const { brands, switchBrand } = useBrand();
+  const { authToken } = useAuth();
+  const [showForm, setShowForm] = useState(false);
+  const [editingBrand, setEditingBrand] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    domain: "",
+    logo_url: "",
+    primary_color: "#1a1a1a",
+    secondary_color: "#4a90e2",
+    tagline: "",
+    hero_video_url: "",
+    hero_image_url: "",
+    service_times: "",
+    location: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const config = { headers: { Authorization: `Bearer ${authToken}` } };
+
+      if (editingBrand) {
+        await axios.put(`${API}/brands/${editingBrand.id}`, formData, config);
+        toast.success("Brand updated successfully!");
+      } else {
+        await axios.post(`${API}/brands`, formData, config);
+        toast.success("Brand created successfully!");
+      }
+
+      window.location.reload(); // Reload to refresh brands
+    } catch (error) {
+      toast.error("Failed to save brand. Please try again.");
+    }
+  };
+
+  const handleEdit = (brand) => {
+    setEditingBrand(brand);
+    setFormData({
+      name: brand.name,
+      domain: brand.domain,
+      logo_url: brand.logo_url || "",
+      primary_color: brand.primary_color,
+      secondary_color: brand.secondary_color,
+      tagline: brand.tagline || "",
+      hero_video_url: brand.hero_video_url || "",
+      hero_image_url: brand.hero_image_url || "",
+      service_times: brand.service_times || "",
+      location: brand.location || "",
+    });
+    setShowForm(true);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      domain: "",
+      logo_url: "",
+      primary_color: "#1a1a1a",
+      secondary_color: "#4a90e2",
+      tagline: "",
+      hero_video_url: "",
+      hero_image_url: "",
+      service_times: "",
+      location: "",
+    });
+    setEditingBrand(null);
+    setShowForm(false);
+  };
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold" data-testid="brands-manager-title">Brands Manager</h1>
+        <Button onClick={() => setShowForm(true)} data-testid="add-brand-btn">
+          <Plus size={20} className="mr-2" /> Add Brand
+        </Button>
+      </div>
+
+      {showForm && (
+        <div className="bg-white rounded-lg p-6 shadow mb-8">
+          <h2 className="text-xl font-semibold mb-4">{editingBrand ? "Edit Brand" : "Create New Brand"}</h2>
+          <form onSubmit={handleSubmit} className="space-y-4" data-testid="brand-form">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="name">Brand Name *</Label>
+                <Input
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  data-testid="brand-name-input"
+                />
+              </div>
+              <div>
+                <Label htmlFor="domain">Domain *</Label>
+                <Input
+                  id="domain"
+                  value={formData.domain}
+                  onChange={(e) => setFormData({ ...formData, domain: e.target.value })}
+                  required
+                  placeholder="example.com"
+                  data-testid="brand-domain-input"
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="tagline">Tagline</Label>
+              <Input
+                id="tagline"
+                value={formData.tagline}
+                onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
+                placeholder="Your church's tagline"
+                data-testid="brand-tagline-input"
+              />
+            </div>
+            <div>
+              <Label htmlFor="logo_url">Logo URL</Label>
+              <Input
+                id="logo_url"
+                value={formData.logo_url}
+                onChange={(e) => setFormData({ ...formData, logo_url: e.target.value })}
+                placeholder="https://example.com/logo.png"
+                data-testid="brand-logo-input"
+              />
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="primary_color">Primary Color</Label>
+                <Input
+                  id="primary_color"
+                  type="color"
+                  value={formData.primary_color}
+                  onChange={(e) => setFormData({ ...formData, primary_color: e.target.value })}
+                  data-testid="brand-primary-color-input"
+                />
+              </div>
+              <div>
+                <Label htmlFor="secondary_color">Secondary Color</Label>
+                <Input
+                  id="secondary_color"
+                  type="color"
+                  value={formData.secondary_color}
+                  onChange={(e) => setFormData({ ...formData, secondary_color: e.target.value })}
+                  data-testid="brand-secondary-color-input"
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="hero_video_url">Hero Video URL</Label>
+              <Input
+                id="hero_video_url"
+                value={formData.hero_video_url}
+                onChange={(e) => setFormData({ ...formData, hero_video_url: e.target.value })}
+                placeholder="https://example.com/video.mp4"
+                data-testid="brand-hero-video-input"
+              />
+            </div>
+            <div>
+              <Label htmlFor="hero_image_url">Hero Image URL (Fallback)</Label>
+              <Input
+                id="hero_image_url"
+                value={formData.hero_image_url}
+                onChange={(e) => setFormData({ ...formData, hero_image_url: e.target.value })}
+                placeholder="https://example.com/image.jpg"
+                data-testid="brand-hero-image-input"
+              />
+            </div>
+            <div>
+              <Label htmlFor="service_times">Service Times</Label>
+              <Input
+                id="service_times"
+                value={formData.service_times}
+                onChange={(e) => setFormData({ ...formData, service_times: e.target.value })}
+                placeholder="Sunday 10:00 AM"
+                data-testid="brand-service-times-input"
+              />
+            </div>
+            <div>
+              <Label htmlFor="location">Location</Label>
+              <Textarea
+                id="location"
+                rows={2}
+                value={formData.location}
+                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                placeholder="Full address"
+                data-testid="brand-location-input"
+              />
+            </div>
+            <div className="flex gap-3">
+              <Button type="submit" data-testid="brand-save-btn">{editingBrand ? "Update" : "Create"} Brand</Button>
+              <Button type="button" variant="outline" onClick={resetForm} data-testid="brand-cancel-btn">Cancel</Button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      <div className="grid md:grid-cols-2 gap-6">
+        {brands.map((brand) => (
+          <div key={brand.id} className="bg-white rounded-lg p-6 shadow" data-testid={`brand-card-${brand.id}`}>
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h3 className="text-xl font-semibold mb-1">{brand.name}</h3>
+                <p className="text-gray-600 text-sm">{brand.domain}</p>
+              </div>
+              <button onClick={() => handleEdit(brand)} className="text-blue-600 hover:text-blue-800" data-testid={`edit-brand-${brand.id}`}>
+                <Pencil size={18} />
+              </button>
+            </div>
+            {brand.tagline && <p className="text-gray-700 text-sm mb-3">{brand.tagline}</p>}
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-6 h-6 rounded" style={{ backgroundColor: brand.primary_color }} />
+                <span className="text-gray-600">Primary</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-6 h-6 rounded" style={{ backgroundColor: brand.secondary_color }} />
+                <span className="text-gray-600">Secondary</span>
+              </div>
+            </div>
+            <Button size="sm" variant="outline" onClick={() => switchBrand(brand.id)} data-testid={`switch-brand-${brand.id}`}>
+              Switch to this brand
+            </Button>
+          </div>
+        ))}
+      </div>
+
+      {brands.length === 0 && (
+        <div className="text-center py-12 text-gray-500">No brands yet. Create your first brand!</div>
+      )}
+    </div>
+  );
+};
+
+export default BrandsManager;
