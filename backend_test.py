@@ -234,6 +234,631 @@ def test_post_subscribers(brand_id=None):
         print(f"   ❌ Exception: {str(e)}")
         return False
 
+# ========== NEW MEMBER/USER AUTHENTICATION TESTS ==========
+
+def test_admin_login():
+    """Test admin login to get admin token"""
+    print("🔍 Testing Admin Login...")
+    
+    login_data = {
+        "email": "admin@ndm.com",
+        "password": "admin123"
+    }
+    
+    try:
+        response = requests.post(
+            f"{BACKEND_URL}/auth/login",
+            json=login_data,
+            headers={"Content-Type": "application/json"},
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict) and "token" in result:
+                print(f"   Admin Token: {result['token'][:20]}...")
+                print(f"   Admin Email: {result.get('admin', {}).get('email', 'No email')}")
+                return True, result["token"]
+            else:
+                print("   ❌ Response missing token")
+                return False, None
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False, None
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False, None
+
+def test_user_register(brand_id):
+    """Test POST /api/users/register - Register new member"""
+    print("🔍 Testing POST /api/users/register...")
+    
+    user_data = {
+        "email": "john.smith@gracechurch.org",
+        "password": "SecurePass123!",
+        "name": "John Smith",
+        "phone": "+1-555-0123",
+        "brand_id": brand_id
+    }
+    
+    try:
+        response = requests.post(
+            f"{BACKEND_URL}/users/register",
+            json=user_data,
+            headers={"Content-Type": "application/json"},
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict) and "token" in result:
+                print(f"   User Token: {result['token'][:20]}...")
+                print(f"   User Name: {result.get('user', {}).get('name', 'No name')}")
+                print(f"   User Email: {result.get('user', {}).get('email', 'No email')}")
+                return True, result["token"], result.get('user', {}).get('id')
+            else:
+                print("   ❌ Response missing token or user")
+                return False, None, None
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False, None, None
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False, None, None
+
+def test_user_login():
+    """Test POST /api/users/login - Login member"""
+    print("🔍 Testing POST /api/users/login...")
+    
+    login_data = {
+        "email": "john.smith@gracechurch.org",
+        "password": "SecurePass123!"
+    }
+    
+    try:
+        response = requests.post(
+            f"{BACKEND_URL}/users/login",
+            json=login_data,
+            headers={"Content-Type": "application/json"},
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict) and "token" in result:
+                print(f"   Login Token: {result['token'][:20]}...")
+                print(f"   User Name: {result.get('user', {}).get('name', 'No name')}")
+                return True, result["token"]
+            else:
+                print("   ❌ Response missing token")
+                return False, None
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False, None
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False, None
+
+def test_get_current_user(user_token):
+    """Test GET /api/users/me - Get current logged in member info"""
+    print("🔍 Testing GET /api/users/me...")
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {user_token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.get(
+            f"{BACKEND_URL}/users/me",
+            headers=headers,
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict):
+                print(f"   User Name: {result.get('name', 'No name')}")
+                print(f"   User Email: {result.get('email', 'No email')}")
+                print(f"   User Role: {result.get('role', 'No role')}")
+                return True
+            else:
+                print("   ❌ Response is not a dict")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_get_all_users(admin_token, brand_id):
+    """Test GET /api/users - Get all members for a brand (admin only)"""
+    print("🔍 Testing GET /api/users...")
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        url = f"{BACKEND_URL}/users"
+        if brand_id:
+            url += f"?brand_id={brand_id}"
+        
+        response = requests.get(url, headers=headers, timeout=10)
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, list):
+                print(f"   Users Count: {len(result)}")
+                if len(result) > 0:
+                    print(f"   Sample User: {result[0].get('name', 'No name')}")
+                return True
+            else:
+                print("   ❌ Response is not a list")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_create_user_by_admin(admin_token, brand_id):
+    """Test POST /api/users - Admin creates new member"""
+    print("🔍 Testing POST /api/users (Admin Create User)...")
+    
+    user_data = {
+        "email": "mary.johnson@gracechurch.org",
+        "password": "AdminCreated123!",
+        "name": "Mary Johnson",
+        "phone": "+1-555-0456",
+        "brand_id": brand_id
+    }
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.post(
+            f"{BACKEND_URL}/users",
+            json=user_data,
+            headers=headers,
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict):
+                print(f"   Created User Name: {result.get('name', 'No name')}")
+                print(f"   Created User Email: {result.get('email', 'No email')}")
+                return True, result.get('id')
+            else:
+                print("   ❌ Response is not a dict")
+                return False, None
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False, None
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False, None
+
+def test_toggle_user_status(admin_token, user_id):
+    """Test PUT /api/users/{user_id}/status - Admin toggles member status"""
+    print("🔍 Testing PUT /api/users/{user_id}/status...")
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        # Toggle to inactive
+        response = requests.put(
+            f"{BACKEND_URL}/users/{user_id}/status?is_active=false",
+            headers=headers,
+            timeout=10
+        )
+        print(f"   Status Code (deactivate): {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Deactivate Response: {result.get('message', 'No message')}")
+            
+            # Toggle back to active
+            response2 = requests.put(
+                f"{BACKEND_URL}/users/{user_id}/status?is_active=true",
+                headers=headers,
+                timeout=10
+            )
+            print(f"   Status Code (reactivate): {response2.status_code}")
+            
+            if response2.status_code == 200:
+                result2 = response2.json()
+                print(f"   Reactivate Response: {result2.get('message', 'No message')}")
+                return True
+            else:
+                print(f"   ❌ Reactivate failed with status {response2.status_code}")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+# ========== GIVING CATEGORY TESTS ==========
+
+def test_get_giving_categories(brand_id):
+    """Test GET /api/giving-categories?brand_id={id}"""
+    print("🔍 Testing GET /api/giving-categories...")
+    
+    try:
+        url = f"{BACKEND_URL}/giving-categories"
+        if brand_id:
+            url += f"?brand_id={brand_id}"
+        
+        response = requests.get(url, timeout=10)
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, list):
+                print(f"   Categories Count: {len(result)}")
+                if len(result) > 0:
+                    print(f"   Sample Category: {result[0].get('name', 'No name')}")
+                    return True, result[0].get('id')
+                else:
+                    print("   ⚠️  Empty categories list")
+                    return True, None
+            else:
+                print("   ❌ Response is not a list")
+                return False, None
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False, None
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False, None
+
+def test_create_giving_category(admin_token, brand_id):
+    """Test POST /api/giving-categories - Create new giving category"""
+    print("🔍 Testing POST /api/giving-categories...")
+    
+    category_data = {
+        "name": "Building Fund",
+        "description": "Contributions for church building maintenance and improvements",
+        "brand_id": brand_id
+    }
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.post(
+            f"{BACKEND_URL}/giving-categories",
+            json=category_data,
+            headers=headers,
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict):
+                print(f"   Created Category: {result.get('name', 'No name')}")
+                print(f"   Category ID: {result.get('id', 'No ID')}")
+                return True, result.get('id')
+            else:
+                print("   ❌ Response is not a dict")
+                return False, None
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False, None
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False, None
+
+# ========== STRIPE PAYMENT TESTS ==========
+
+def test_create_checkout_session(brand_id, category_id=None):
+    """Test POST /api/payments/create-checkout - Create Stripe checkout session"""
+    print("🔍 Testing POST /api/payments/create-checkout...")
+    
+    checkout_data = {
+        "amount": 50.00,
+        "category": "Tithe",
+        "category_id": category_id,
+        "donor_name": "David Wilson",
+        "brand_id": brand_id
+    }
+    
+    try:
+        response = requests.post(
+            f"{BACKEND_URL}/payments/create-checkout",
+            json=checkout_data,
+            headers={"Content-Type": "application/json"},
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict) and "url" in result and "session_id" in result:
+                print(f"   Checkout URL: {result['url'][:50]}...")
+                print(f"   Session ID: {result['session_id']}")
+                return True, result["session_id"]
+            else:
+                print("   ❌ Response missing url or session_id")
+                return False, None
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False, None
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False, None
+
+def test_get_payment_status(session_id):
+    """Test GET /api/payments/status/{session_id} - Check payment status"""
+    print("🔍 Testing GET /api/payments/status/{session_id}...")
+    
+    try:
+        response = requests.get(
+            f"{BACKEND_URL}/payments/status/{session_id}",
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict):
+                print(f"   Payment Status: {result.get('payment_status', 'No status')}")
+                print(f"   Transaction Status: {result.get('status', 'No status')}")
+                print(f"   Amount: ${result.get('amount', 0)}")
+                return True
+            else:
+                print("   ❌ Response is not a dict")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_get_payment_history(user_token):
+    """Test GET /api/payments/history - Get user's giving history"""
+    print("🔍 Testing GET /api/payments/history...")
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {user_token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.get(
+            f"{BACKEND_URL}/payments/history",
+            headers=headers,
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, list):
+                print(f"   Payment History Count: {len(result)}")
+                if len(result) > 0:
+                    print(f"   Latest Payment: ${result[0].get('amount', 0)} - {result[0].get('category', 'No category')}")
+                return True
+            else:
+                print("   ❌ Response is not a list")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_get_all_transactions(admin_token):
+    """Test GET /api/payments/transactions - Get all transactions (admin only)"""
+    print("🔍 Testing GET /api/payments/transactions...")
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.get(
+            f"{BACKEND_URL}/payments/transactions",
+            headers=headers,
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, list):
+                print(f"   Total Transactions: {len(result)}")
+                if len(result) > 0:
+                    print(f"   Latest Transaction: ${result[0].get('amount', 0)} - {result[0].get('payment_status', 'No status')}")
+                return True
+            else:
+                print("   ❌ Response is not a list")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+# ========== LIVE STREAM TESTS ==========
+
+def test_get_live_streams(brand_id):
+    """Test GET /api/live-streams?brand_id={id}"""
+    print("🔍 Testing GET /api/live-streams...")
+    
+    try:
+        url = f"{BACKEND_URL}/live-streams"
+        if brand_id:
+            url += f"?brand_id={brand_id}"
+        
+        response = requests.get(url, timeout=10)
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, list):
+                print(f"   Live Streams Count: {len(result)}")
+                if len(result) > 0:
+                    print(f"   Sample Stream: {result[0].get('title', 'No title')}")
+                return True
+            else:
+                print("   ❌ Response is not a list")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_get_active_stream(brand_id):
+    """Test GET /api/live-streams/active?brand_id={id}"""
+    print("🔍 Testing GET /api/live-streams/active...")
+    
+    try:
+        url = f"{BACKEND_URL}/live-streams/active"
+        if brand_id:
+            url += f"?brand_id={brand_id}"
+        
+        response = requests.get(url, timeout=10)
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if result is None:
+                print("   ⚠️  No active stream (expected)")
+                return True
+            elif isinstance(result, dict):
+                print(f"   Active Stream: {result.get('title', 'No title')}")
+                print(f"   Stream URL: {result.get('stream_url', 'No URL')}")
+                return True
+            else:
+                print("   ❌ Response is not dict or null")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_create_live_stream(admin_token, brand_id):
+    """Test POST /api/live-streams - Create new live stream"""
+    print("🔍 Testing POST /api/live-streams...")
+    
+    stream_data = {
+        "title": "Sunday Morning Service",
+        "description": "Join us for worship and the Word",
+        "stream_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "thumbnail_url": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+        "is_live": True,
+        "scheduled_time": "2024-01-21T10:00:00Z",
+        "brand_id": brand_id
+    }
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {admin_token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.post(
+            f"{BACKEND_URL}/live-streams",
+            json=stream_data,
+            headers=headers,
+            timeout=10
+        )
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            print(f"   Response Type: {type(result)}")
+            if isinstance(result, dict):
+                print(f"   Created Stream: {result.get('title', 'No title')}")
+                print(f"   Stream ID: {result.get('id', 'No ID')}")
+                print(f"   Is Live: {result.get('is_live', False)}")
+                return True
+            else:
+                print("   ❌ Response is not a dict")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
 def main():
     """Run all backend API tests"""
     print("=" * 60)
