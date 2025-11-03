@@ -81,8 +81,10 @@ const AdminDashboard = () => {
         <Routes>
           <Route path="dashboard" element={<DashboardHome />} />
           <Route path="brands" element={<BrandsManager />} />
+          <Route path="members" element={<MembersManager />} />
           <Route path="events" element={<EventsManager />} />
           <Route path="ministries" element={<MinistriesManager />} />
+          <Route path="live-streams" element={<LiveStreamManager />} />
           <Route path="announcements" element={<AnnouncementsManager />} />
           <Route path="volunteers" element={<VolunteersManager />} />
         </Routes>
