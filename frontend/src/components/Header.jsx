@@ -133,17 +133,17 @@ const Header = () => {
             </nav>
 
             {/* Right Side Actions */}
-            <div className="flex items-center space-x-2 sm:space-x-3">
+            <div className="flex items-center justify-end gap-2">
               {/* Social Media Links */}
-              <div className="hidden md:flex items-center space-x-2">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 text-black hover:text-blue-600 transition">
-                  <Facebook size={18} />
+              <div className="hidden md:flex items-center gap-1">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-1.5 text-black hover:text-blue-600 transition">
+                  <Facebook size={16} />
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 text-black hover:text-pink-600 transition">
-                  <Instagram size={18} />
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-1.5 text-black hover:text-pink-600 transition">
+                  <Instagram size={16} />
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-2 text-black hover:text-red-600 transition">
-                  <Youtube size={18} />
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-1.5 text-black hover:text-red-600 transition">
+                  <Youtube size={16} />
                 </a>
               </div>
 
@@ -151,10 +151,10 @@ const Header = () => {
               {memberUser ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="gap-2 text-black">
-                      <User size={16} />
+                    <Button variant="outline" size="sm" className="gap-1 text-black text-xs">
+                      <User size={14} />
                       <span className="hidden sm:inline">{memberUser.name.split(' ')[0]}</span>
-                      <ChevronDown size={14} />
+                      <ChevronDown size={12} />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
@@ -172,9 +172,9 @@ const Header = () => {
                   variant="outline" 
                   size="sm" 
                   onClick={() => navigate('/member/login')}
-                  className="hidden sm:flex gap-1 text-black"
+                  className="hidden sm:flex gap-1 text-black text-xs"
                 >
-                  <User size={16} />
+                  <User size={14} />
                   Login
                 </Button>
               )}
@@ -183,7 +183,8 @@ const Header = () => {
               {brands.length > 1 && (
                 <button
                   onClick={handleBrandToggle}
-                  className="md:hidden px-2 py-1 text-xs font-medium text-black border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap"
+                  className="md:hidden px-2 py-1 text-xs font-medium text-black border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap max-w-[100px] truncate"
+                  title={currentBrand.name}
                 >
                   {currentBrand.name}
                 </button>
@@ -195,7 +196,7 @@ const Header = () => {
                 data-testid="mobile-menu-toggle"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
