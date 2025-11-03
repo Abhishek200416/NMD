@@ -318,12 +318,12 @@ def test_user_register(brand_id):
         print(f"   ❌ Exception: {str(e)}")
         return False, None, None
 
-def test_user_login():
+def test_user_login(email):
     """Test POST /api/users/login - Login member"""
     print("🔍 Testing POST /api/users/login...")
     
     login_data = {
-        "email": "john.smith@gracechurch.org",
+        "email": email,
         "password": "SecurePass123!"
     }
     
