@@ -110,8 +110,8 @@ const Header = () => {
                       link.highlight
                         ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg"
                         : isActive(link.path)
-                        ? "bg-gray-900 text-white shadow-sm"
-                        : "text-black hover:bg-gray-100"
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "text-gray-200 hover:bg-gray-800 hover:text-white"
                     }`}
                   >
                     {link.label}
