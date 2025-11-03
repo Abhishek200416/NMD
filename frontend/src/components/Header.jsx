@@ -170,10 +170,10 @@ const Header = () => {
               {memberUser ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="hidden sm:flex gap-2 text-black text-sm relative z-50">
-                      <User size={16} />
-                      <span className="hidden lg:inline">{memberUser.name.split(' ')[0]}</span>
-                      <ChevronDown size={14} />
+                    <Button variant="outline" size="sm" className="hidden sm:flex gap-1.5 text-black text-xs relative z-50 px-2 sm:px-3">
+                      <User size={14} />
+                      <span className="hidden md:inline">{memberUser.name.split(' ')[0]}</span>
+                      <ChevronDown size={12} />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="z-[60]">
@@ -191,22 +191,22 @@ const Header = () => {
                   variant="outline" 
                   size="sm" 
                   onClick={() => navigate('/member/login')}
-                  className="hidden sm:flex gap-2 text-black text-sm relative z-50 whitespace-nowrap"
+                  className="hidden sm:flex gap-1.5 text-black text-xs relative z-50 whitespace-nowrap px-2 sm:px-3"
                 >
-                  <User size={16} />
-                  <span className="hidden lg:inline">Login</span>
+                  <User size={14} />
+                  <span className="hidden md:inline">Login</span>
                 </Button>
               )}
 
               {/* Hamburger Menu Button */}
               <button
-                className="lg:hidden p-2.5 rounded-lg hover:bg-gray-100 transition-colors text-black relative z-50 min-h-[44px] min-w-[44px] flex items-center justify-center flex-shrink-0"
+                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors text-black relative z-50 min-h-[40px] min-w-[40px] flex items-center justify-center flex-shrink-0"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 data-testid="mobile-menu-toggle"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen}
               >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
@@ -214,7 +214,7 @@ const Header = () => {
       </header>
 
       {/* Spacer to prevent content from going under fixed header */}
-      <div className="h-16 sm:h-20" aria-hidden="true" />
+      <div className="h-14 sm:h-16 lg:h-20" aria-hidden="true" />
 
       {/* Mobile Menu Overlay */}
       <div
