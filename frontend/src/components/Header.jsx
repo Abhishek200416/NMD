@@ -115,12 +115,12 @@ const Header = () => {
             </div>
 
             {/* Center Section: Navigation - Desktop */}
-            <nav className="hidden lg:flex items-center justify-center gap-1 flex-1 max-w-3xl mx-auto">
+            <nav className="hidden lg:flex items-center justify-center gap-1 flex-1 mx-auto">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-3 py-2.5 rounded-lg font-medium transition-all duration-200 text-sm whitespace-nowrap relative z-50 ${
+                  className={`px-2.5 py-2 rounded-lg font-medium transition-all duration-200 text-sm whitespace-nowrap relative z-50 ${
                     link.highlight
                       ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg"
                       : isActive(link.path)
