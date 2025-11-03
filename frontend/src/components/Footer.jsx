@@ -35,18 +35,18 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-gray-300">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Brand Info */}
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-4" data-testid="footer-brand-name">
+          <div className="text-center sm:text-left">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4" data-testid="footer-brand-name">
               {currentBrand.name}
             </h3>
             {currentBrand.tagline && (
-              <p className="text-gray-400 mb-4">{currentBrand.tagline}</p>
+              <p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{currentBrand.tagline}</p>
             )}
             {currentBrand.location && (
-              <div className="flex items-start space-x-2 mb-2">
+              <div className="flex items-start space-x-2 mb-2 justify-center sm:justify-start">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
                 <span className="text-sm">{currentBrand.location}</span>
               </div>
@@ -54,54 +54,109 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
+          <div className="text-center sm:text-left">
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/events" className="hover:text-white transition-colors">Events</Link></li>
-              <li><Link to="/ministries" className="hover:text-white transition-colors">Ministries</Link></li>
-              <li><Link to="/announcements" className="hover:text-white transition-colors">Announcements</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li>
+                <Link 
+                  to="/about" 
+                  className="hover:text-white transition-all hover:translate-x-1 inline-block text-sm sm:text-base"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/events" 
+                  className="hover:text-white transition-all hover:translate-x-1 inline-block text-sm sm:text-base"
+                >
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/ministries" 
+                  className="hover:text-white transition-all hover:translate-x-1 inline-block text-sm sm:text-base"
+                >
+                  Ministries
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/announcements" 
+                  className="hover:text-white transition-all hover:translate-x-1 inline-block text-sm sm:text-base"
+                >
+                  Announcements
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/contact" 
+                  className="hover:text-white transition-all hover:translate-x-1 inline-block text-sm sm:text-base"
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Newsletter */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Stay Connected</h4>
-            <p className="text-sm mb-4">Subscribe to receive updates and announcements</p>
-            <form onSubmit={handleSubscribe} className="flex gap-2" data-testid="newsletter-form">
+          <div className="text-center sm:text-left sm:col-span-2 lg:col-span-1">
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Stay Connected</h4>
+            <p className="text-xs sm:text-sm mb-3 sm:mb-4 text-gray-400">Subscribe to receive updates and announcements</p>
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2" data-testid="newsletter-form">
               <Input
                 type="email"
                 placeholder="Your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-gray-800 border-gray-700 text-white"
+                className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-gray-500 text-sm sm:text-base"
                 required
                 data-testid="newsletter-email-input"
               />
-              <Button type="submit" disabled={loading} data-testid="newsletter-subscribe-btn">
-                Subscribe
+              <Button 
+                type="submit" 
+                disabled={loading} 
+                data-testid="newsletter-subscribe-btn"
+                className="w-full sm:w-auto whitespace-nowrap"
+              >
+                {loading ? "Subscribing..." : "Subscribe"}
               </Button>
             </form>
-            <div className="flex space-x-4 mt-6">
-              <a href="#" className="hover:text-white transition-colors" aria-label="Facebook">
+            <div className="flex space-x-4 mt-4 sm:mt-6 justify-center sm:justify-start">
+              <a 
+                href="#" 
+                className="hover:text-white transition-all hover:scale-110" 
+                aria-label="Facebook"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="Instagram">
+              <a 
+                href="#" 
+                className="hover:text-white transition-all hover:scale-110" 
+                aria-label="Instagram"
+              >
                 <Instagram size={20} />
               </a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="YouTube">
+              <a 
+                href="#" 
+                className="hover:text-white transition-all hover:scale-110" 
+                aria-label="YouTube"
+              >
                 <Youtube size={20} />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-500 mb-4 md:mb-0">
+        <div className="border-t border-gray-800 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs sm:text-sm text-gray-500 text-center sm:text-left">
             © {new Date().getFullYear()} {currentBrand.name}. All rights reserved.
           </p>
-          <Link to="/admin/login" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">
+          <Link 
+            to="/admin/login" 
+            className="text-xs sm:text-sm text-gray-500 hover:text-gray-300 transition-colors"
+          >
             Admin Login
           </Link>
         </div>
