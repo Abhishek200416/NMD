@@ -125,6 +125,20 @@ function App() {
     setAdmin(null);
   };
 
+  const memberLogout = () => {
+    localStorage.removeItem("memberToken");
+    localStorage.removeItem("memberUser");
+    setMemberToken(null);
+    setMemberUser(null);
+  };
+
+  const memberLogin = (token, user) => {
+    localStorage.setItem("memberToken", token);
+    localStorage.setItem("memberUser", JSON.stringify(user));
+    setMemberToken(token);
+    setMemberUser(user);
+  };
+
   const ProtectedRoute = ({ children }) => {
     if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
     return authToken && admin ? children : <Navigate to="/admin/login" />;
