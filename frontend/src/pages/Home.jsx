@@ -2,8 +2,19 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBrand, API } from "@/App";
 import axios from "axios";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { Calendar, MapPin, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const SkeletonCard = () => (
+  <div className="card animate-pulse">
+    <div className="skeleton skeleton-card w-full h-48" />
+    <div className="card-content">
+      <div className="skeleton skeleton-title mb-3" />
+      <div className="skeleton skeleton-text w-full mb-2" />
+      <div className="skeleton skeleton-text w-3/4" />
+    </div>
+  </div>
+);
 
 const Home = () => {
   const { currentBrand } = useBrand();
@@ -13,6 +24,7 @@ const Home = () => {
   const [ministries, setMinistries] = useState([]);
   const [urgentAnnouncement, setUrgentAnnouncement] = useState(null);
   const [showUrgentModal, setShowUrgentModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (currentBrand) {
@@ -22,6 +34,7 @@ const Home = () => {
   }, [currentBrand]);
 
   const loadData = async () => {
+    setLoading(true);
     try {
       const [eventsRes, announcementsRes, ministriesRes] = await Promise.all([
         axios.get(`${API}/events?brand_id=${currentBrand.id}`),
@@ -34,6 +47,8 @@ const Home = () => {
       setMinistries(ministriesRes.data.slice(0, 3));
     } catch (error) {
       console.error("Error loading data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
