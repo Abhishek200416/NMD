@@ -278,19 +278,19 @@ textarea:focus-visible {
   color: white;
   min-height: 100vh;
   width: 100%;
-  padding: 2rem 0;
+  padding: 2.5rem 0;
   border-right: 1px solid #2d2d2d;
 }
 
 @media (min-width: 768px) {
   .admin-sidebar {
-    width: 250px;
+    width: 260px;
   }
 }
 
 .admin-content {
   flex: 1;
-  padding: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
   background: #fafafa;
   overflow-x: auto;
 }
@@ -299,15 +299,41 @@ textarea:focus-visible {
   background: white;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  padding: clamp(1rem, 3vw, 1.5rem);
+  padding: clamp(1.25rem, 4vw, 1.75rem);
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   transition: all 0.3s ease;
 }
 
 .admin-card:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   border-color: #d1d5db;
+}
+
+/* Custom Scrollbar Class */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af #f3f4f6;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9ca3af 0%, #6b7280 100%);
+  border-radius: 10px;
+  border: 2px solid #f3f4f6;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6b7280 0%, #4b5563 100%);
 }
 
 /* Form Styles */
