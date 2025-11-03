@@ -14,14 +14,15 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #0a0a0a;
-  color: #e5e5e5;
+  background: #ffffff;
+  color: #1f2937;
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
+  color: #111827;
 }
 
 /* Fluid Typography */
