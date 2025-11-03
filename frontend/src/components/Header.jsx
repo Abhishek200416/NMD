@@ -76,10 +76,10 @@ const Header = () => {
           scrolled ? 'border-gray-200 shadow-lg' : 'border-gray-100 shadow-sm'
         }`}
       >
-        <div className="container mx-auto px-6 sm:px-8 lg:px-10">
-          <div className="flex items-center justify-between h-16 sm:h-20 gap-6">
+        <div className="container mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20 gap-2 sm:gap-4 lg:gap-6">
             {/* Left Section: Logo + Navigation */}
-            <div className="flex items-center gap-6 sm:gap-8 flex-1">
+            <div className="flex items-center gap-2 sm:gap-4 lg:gap-8 flex-1 min-w-0">
               <Link 
                 to="/" 
                 className="flex items-center space-x-2 transition-transform hover:scale-105 relative z-50" 
