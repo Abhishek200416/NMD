@@ -93,76 +93,76 @@ const Header = () => {
                   />
                 ) : (
                   <div 
-                    className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-black whitespace-nowrap"
+                    className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-black whitespace-nowrap"
                   >
                     {currentBrand.name}
                   </div>
                 )}
               </Link>
 
+              {/* Desktop Navigation - Moved to left side */}
+              <nav className="hidden lg:flex items-center gap-1 ml-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 text-sm whitespace-nowrap relative z-50 ${
+                      link.highlight
+                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg"
+                        : isActive(link.path)
+                        ? "bg-gray-900 text-white shadow-sm"
+                        : "text-black hover:bg-gray-100"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            {/* Right Section: Brand Switcher + Social + User Actions */}
+            <div className="flex items-center gap-3 sm:gap-4">
               {/* Brand Switcher - Desktop */}
               {brands.length > 1 && (
                 <button
                   onClick={handleBrandToggle}
                   data-testid="brand-switcher"
-                  className="hidden lg:flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg whitespace-nowrap relative z-50"
+                  className="hidden lg:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg whitespace-nowrap relative z-50"
                   title={`Switch brand`}
                 >
                   <span>{currentBrand.name}</span>
                   <ChevronDown size={16} className="flex-shrink-0" />
                 </button>
               )}
-            </div>
 
-            {/* Center Section: Navigation - Desktop - Centered */}
-            <nav className="hidden lg:flex items-center justify-center gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`px-2.5 py-2 rounded-lg font-medium transition-all duration-200 text-sm whitespace-nowrap relative z-50 ${
-                    link.highlight
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg"
-                      : isActive(link.path)
-                      ? "bg-gray-900 text-white shadow-sm"
-                      : "text-black hover:bg-gray-100"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Right Side Actions - Equal width to left for balance */}
-            <div className="flex items-center gap-1 sm:gap-2 justify-end">
               {/* Social Media Links - Desktop */}
-              <div className="hidden xl:flex items-center gap-1">
+              <div className="hidden xl:flex items-center gap-2">
                 <a 
                   href="https://facebook.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-1.5 text-black hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all relative z-50"
+                  className="p-2 text-black hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all relative z-50"
                   aria-label="Facebook"
                 >
-                  <Facebook size={16} />
+                  <Facebook size={18} />
                 </a>
                 <a 
                   href="https://instagram.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-1.5 text-black hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-all relative z-50"
+                  className="p-2 text-black hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-all relative z-50"
                   aria-label="Instagram"
                 >
-                  <Instagram size={16} />
+                  <Instagram size={18} />
                 </a>
                 <a 
                   href="https://youtube.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-1.5 text-black hover:text-red-600 hover:bg-red-50 rounded-lg transition-all relative z-50"
+                  className="p-2 text-black hover:text-red-600 hover:bg-red-50 rounded-lg transition-all relative z-50"
                   aria-label="YouTube"
                 >
-                  <Youtube size={16} />
+                  <Youtube size={18} />
                 </a>
               </div>
 
