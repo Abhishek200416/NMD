@@ -914,7 +914,7 @@ async def register_user(user_data: UserCreate):
     token = create_access_token({"email": user.email, "role": "member"})
     return UserRegisterResponse(token=token, user=user)
 
-@api_router.post("/users/login")
+@api_router.post("/users/login", response_model=UserLoginResponse)
 async def login_user(login_data: UserLogin):
     user = await db.users.find_one({"email": login_data.email}, {"_id": 0})
     if not user or not verify_password(login_data.password, user["password_hash"]):
@@ -925,7 +925,7 @@ async def login_user(login_data: UserLogin):
     
     token = create_access_token({"email": user["email"], "role": "member"})
     user_obj = User(**user)
-    return {"token": token, "user": user_obj}
+    return UserLoginResponse(token=token, user=user_obj)
 
 @api_router.get("/users/me", response_model=User)
 async def get_current_user_info(user = Depends(get_current_user)):
