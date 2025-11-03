@@ -165,6 +165,61 @@ def test_get_events(brand_id=None, brand_name=None, expected_count=None):
         print(f"   ❌ Exception: {str(e)}")
         return False
 
+def test_brand_content_uniqueness(ndm_id, faith_id):
+    """Test that each brand has unique content (events and ministries)"""
+    print("🔍 Testing brand content uniqueness...")
+    
+    try:
+        # Get NMD events
+        ndm_events_response = requests.get(f"{BACKEND_URL}/events?brand_id={ndm_id}", timeout=10)
+        faith_events_response = requests.get(f"{BACKEND_URL}/events?brand_id={faith_id}", timeout=10)
+        
+        # Get NMD ministries
+        ndm_ministries_response = requests.get(f"{BACKEND_URL}/ministries?brand_id={ndm_id}", timeout=10)
+        faith_ministries_response = requests.get(f"{BACKEND_URL}/ministries?brand_id={faith_id}", timeout=10)
+        
+        if all(r.status_code == 200 for r in [ndm_events_response, faith_events_response, ndm_ministries_response, faith_ministries_response]):
+            ndm_events = ndm_events_response.json()
+            faith_events = faith_events_response.json()
+            ndm_ministries = ndm_ministries_response.json()
+            faith_ministries = faith_ministries_response.json()
+            
+            # Check events uniqueness
+            ndm_event_titles = set(e.get('title') for e in ndm_events)
+            faith_event_titles = set(e.get('title') for e in faith_events)
+            
+            events_overlap = ndm_event_titles.intersection(faith_event_titles)
+            if events_overlap:
+                print(f"   ❌ Events overlap between brands: {events_overlap}")
+                return False
+            else:
+                print(f"   ✅ Events are unique between brands")
+            
+            # Check ministries uniqueness
+            ndm_ministry_titles = set(m.get('title') for m in ndm_ministries)
+            faith_ministry_titles = set(m.get('title') for m in faith_ministries)
+            
+            ministries_overlap = ndm_ministry_titles.intersection(faith_ministry_titles)
+            if ministries_overlap:
+                print(f"   ❌ Ministries overlap between brands: {ministries_overlap}")
+                return False
+            else:
+                print(f"   ✅ Ministries are unique between brands")
+            
+            print(f"   NMD Events: {list(ndm_event_titles)}")
+            print(f"   Faith Centre Events: {list(faith_event_titles)}")
+            print(f"   NMD Ministries: {list(ndm_ministry_titles)}")
+            print(f"   Faith Centre Ministries: {list(faith_ministry_titles)}")
+            
+            return True
+        else:
+            print("   ❌ Failed to fetch brand content for comparison")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
 def test_get_ministries(brand_id=None, brand_name=None, expected_count=None):
     """Test GET /api/ministries endpoint"""
     url = f"{BACKEND_URL}/ministries"
