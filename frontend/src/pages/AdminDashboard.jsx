@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/App";
-import { LayoutDashboard, Calendar, Users, Megaphone, Mail, UserCircle, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, Megaphone, Mail, UserCircle, Settings, LogOut, DollarSign, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import DashboardHome from "./admin/DashboardHome";
@@ -10,6 +10,8 @@ import MinistriesManager from "./admin/MinistriesManager";
 import AnnouncementsManager from "./admin/AnnouncementsManager";
 import VolunteersManager from "./admin/VolunteersManager";
 import BrandsManager from "./admin/BrandsManager";
+import MembersManager from "./admin/MembersManager";
+import LiveStreamManager from "./admin/LiveStreamManager";
 
 const AdminDashboard = () => {
   const location = useLocation();
