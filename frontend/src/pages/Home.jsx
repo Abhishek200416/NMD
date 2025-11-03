@@ -119,10 +119,10 @@ const Home = () => {
             <Button 
               size="lg" 
               className="rounded-full w-full sm:w-auto" 
-              onClick={() => navigate("/events")} 
+              onClick={() => navigate("/watch-live")} 
               data-testid="cta-join-sunday"
             >
-              Join Us This Sunday
+              Watch Live
             </Button>
             <Button 
               size="lg" 
