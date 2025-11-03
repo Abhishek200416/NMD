@@ -78,11 +78,11 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-3">
-            {/* Left Section: Logo - with max width to prevent overflow */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0 max-w-[50%] sm:max-w-[40%] lg:max-w-none">
+            {/* Left Section: Logo - Full brand name visible */}
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <Link 
                 to="/" 
-                className="flex items-center space-x-2 transition-transform hover:scale-105 flex-shrink min-w-0 relative z-50" 
+                className="flex items-center space-x-2 transition-transform hover:scale-105 relative z-50" 
                 data-testid="header-logo"
               >
                 {currentBrand.logo_url ? (
@@ -93,8 +93,7 @@ const Header = () => {
                   />
                 ) : (
                   <div 
-                    className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-black truncate" 
-                    title={currentBrand.name}
+                    className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-black whitespace-nowrap"
                   >
                     {currentBrand.name}
                   </div>
@@ -106,11 +105,11 @@ const Header = () => {
                 <button
                   onClick={handleBrandToggle}
                   data-testid="brand-switcher"
-                  className="hidden md:flex items-center gap-1 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg whitespace-nowrap max-w-[120px] lg:max-w-[180px] truncate relative z-50 flex-shrink-0"
-                  title={`Switch from ${currentBrand.name}`}
+                  className="hidden lg:flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg whitespace-nowrap relative z-50"
+                  title={`Switch brand`}
                 >
-                  <span className="truncate">{currentBrand.name}</span>
-                  <ChevronDown size={14} className="flex-shrink-0" />
+                  <span>{currentBrand.name}</span>
+                  <ChevronDown size={16} className="flex-shrink-0" />
                 </button>
               )}
             </div>
