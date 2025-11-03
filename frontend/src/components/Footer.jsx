@@ -35,8 +35,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-gray-300 mt-auto">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-10 py-12 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-16 mb-10 sm:mb-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10">
           {/* Brand Info */}
           <div className="text-center sm:text-left">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-5" data-testid="footer-brand-name">
