@@ -85,13 +85,13 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            <nav className="hidden lg:flex items-center space-x-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   data-testid={`nav-${link.label.toLowerCase()}`}
-                  className={`px-3 xl:px-4 py-2 rounded-lg font-medium transition-all duration-200 text-sm xl:text-base ${
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 text-base whitespace-nowrap ${
                     isActive(link.path)
                       ? "bg-gray-900 text-white shadow-sm"
                       : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
