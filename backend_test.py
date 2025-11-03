@@ -277,8 +277,12 @@ def test_user_register(brand_id):
     """Test POST /api/users/register - Register new member"""
     print("🔍 Testing POST /api/users/register...")
     
+    # Use timestamp to make email unique
+    import time
+    timestamp = int(time.time())
+    
     user_data = {
-        "email": "john.smith@gracechurch.org",
+        "email": f"john.smith.{timestamp}@gracechurch.org",
         "password": "SecurePass123!",
         "name": "John Smith",
         "phone": "+1-555-0123",
