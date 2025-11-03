@@ -53,7 +53,7 @@ const MembersManager = () => {
       } else {
         await axios.post(
           `${API}/users`,
-          { ...formData, brand_id: brandId },
+          { ...formData, brand_id: currentBrand.id },
           { headers: { Authorization: `Bearer ${authToken}` } }
         );
         toast.success('Member added successfully');
