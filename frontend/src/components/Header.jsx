@@ -227,7 +227,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <nav
-        className={`fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-white z-[48] lg:hidden border-b border-gray-200 shadow-2xl transition-all duration-300 ease-out ${
+        className={`fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-gray-800 z-[48] lg:hidden border-b border-gray-700 shadow-2xl transition-all duration-300 ease-out ${
           mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
         }`}
         data-testid="mobile-menu"
@@ -235,12 +235,12 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar">
           {/* Social Media in Mobile Menu */}
-          <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-gray-200 xl:hidden">
+          <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-gray-700 xl:hidden">
             <a 
               href="https://facebook.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="p-2.5 text-black hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+              className="p-2.5 text-gray-300 hover:text-blue-400 hover:bg-gray-700 rounded-lg transition-all"
               aria-label="Facebook"
             >
               <Facebook size={20} />
@@ -249,7 +249,7 @@ const Header = () => {
               href="https://instagram.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="p-2.5 text-black hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-all"
+              className="p-2.5 text-gray-300 hover:text-pink-400 hover:bg-gray-700 rounded-lg transition-all"
               aria-label="Instagram"
             >
               <Instagram size={20} />
@@ -258,7 +258,7 @@ const Header = () => {
               href="https://youtube.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="p-2.5 text-black hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+              className="p-2.5 text-gray-300 hover:text-red-400 hover:bg-gray-700 rounded-lg transition-all"
               aria-label="YouTube"
             >
               <Youtube size={20} />
@@ -274,8 +274,8 @@ const Header = () => {
               style={{ animationDelay: `${index * 30}ms` }}
               className={`block px-4 py-3.5 font-medium rounded-lg transition-all duration-200 mb-2 min-h-[48px] flex items-center ${
                 isActive(link.path)
-                  ? "bg-gray-900 text-white shadow-md"
-                  : "text-black hover:bg-gray-100"
+                  ? "bg-blue-600 text-white shadow-md"
+                  : "text-gray-200 hover:bg-gray-700 hover:text-white"
               } ${mobileMenuOpen ? 'animate-slideIn' : ''}`}
             >
               {link.label}
