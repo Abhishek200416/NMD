@@ -201,6 +201,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "Added scroll-based shadow effect, smooth mobile menu slide-in animation with staggered item animations, better responsive breakpoints (lg instead of md), improved brand switcher with ChevronDown icon, touch-friendly menu buttons"
+      - working: true
+        agent: "main"
+        comment: "Updated header layout: 1) Moved navigation links from center to left side (next to logo), 2) Removed dropdown menus - all nav links now display directly, 3) Changed brand switcher from dropdown to simple click toggle button, 4) Changed all text colors to black for better contrast with white background, 5) Made brand name single-line with whitespace-nowrap"
         
   - task: "Enhanced Footer with better mobile responsiveness"
     implemented: true
