@@ -195,12 +195,36 @@ async def seed_database():
             {
                 "id": str(uuid.uuid4()),
                 "title": "Sunday Worship",
-                "description": "Experience powerful worship and life-changing messages every Sunday.",
+                "description": "Experience powerful worship and life-changing messages every Sunday. Come as you are and encounter God's presence.",
                 "date": "2025-02-02",
                 "time": "9:00 AM",
                 "location": "Faith Centre Main Hall",
                 "is_free": True,
-                "image_url": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800",
+                "image_url": "https://images.unsplash.com/photo-1530688957198-8570b1819eeb?w=800",
+                "brand_id": faith_id,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "title": "Prayer Meeting",
+                "description": "Join us for a powerful time of corporate prayer. Bring your needs, burdens, and thanksgiving to the Lord.",
+                "date": "2025-02-05",
+                "time": "6:00 PM",
+                "location": "Faith Centre Prayer Room",
+                "is_free": True,
+                "image_url": "https://images.unsplash.com/photo-1437603568260-1950d3ca6eab?w=800",
+                "brand_id": faith_id,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "title": "Community Service Day",
+                "description": "Join us as we serve our community with love and compassion. Together we can make a difference.",
+                "date": "2025-02-15",
+                "time": "10:00 AM",
+                "location": "Various Locations",
+                "is_free": True,
+                "image_url": "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800",
                 "brand_id": faith_id,
                 "created_at": datetime.now(timezone.utc).isoformat()
             }
