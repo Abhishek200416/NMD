@@ -77,9 +77,9 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo and Brand Name */}
-            <div className="flex items-center space-x-4">
+          <div className="flex items-center h-16 sm:h-20 gap-4">
+            {/* Left Section: Logo */}
+            <div className="flex items-center">
               <Link 
                 to="/" 
                 className="flex items-center space-x-3 transition-transform hover:scale-105" 
@@ -99,7 +99,10 @@ const Header = () => {
                   </div>
                 )}
               </Link>
+            </div>
 
+            {/* Center Section: Navigation and Brand Switcher */}
+            <div className="flex-1 flex items-center justify-center gap-4">
               {/* Brand Switcher - Click to toggle */}
               {brands.length > 1 && (
                 <button
@@ -111,8 +114,8 @@ const Header = () => {
                 </button>
               )}
               
-              {/* Desktop Navigation - Moved to left */}
-              <nav className="hidden lg:flex items-center space-x-1 ml-4">
+              {/* Desktop Navigation */}
+              <nav className="hidden lg:flex items-center space-x-1">
                 {navLinks.map((link) => (
                   <Link
                     key={link.path}
