@@ -1063,14 +1063,32 @@ def main():
     # Test 3: GET /api/events (with and without brand_id)
     results['events_all'] = test_get_events()
     print()
-    if brand_id:
+    
+    # Test brand-specific events
+    if ndm_id and faith_id:
+        results['ndm_events'] = test_get_events(ndm_id, "Nehemiah David Ministries", 3)
+        print()
+        results['faith_events'] = test_get_events(faith_id, "Faith Centre", 3)
+        print()
+    elif brand_id:
         results['events_by_brand'] = test_get_events(brand_id)
         print()
     
     # Test 4: GET /api/ministries (with and without brand_id)
     results['ministries_all'] = test_get_ministries()
     print()
-    if brand_id:
+    
+    # Test brand-specific ministries
+    if ndm_id and faith_id:
+        results['ndm_ministries'] = test_get_ministries(ndm_id, "Nehemiah David Ministries", 4)
+        print()
+        results['faith_ministries'] = test_get_ministries(faith_id, "Faith Centre", 4)
+        print()
+        
+        # Test content uniqueness between brands
+        results['brand_content_uniqueness'] = test_brand_content_uniqueness(ndm_id, faith_id)
+        print()
+    elif brand_id:
         results['ministries_by_brand'] = test_get_ministries(brand_id)
         print()
     
