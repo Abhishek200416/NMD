@@ -893,7 +893,7 @@ async def get_analytics_overview(brand_id: Optional[str] = None, admin = Depends
 
 # ========== MEMBER USER ROUTES ==========
 
-@api_router.post("/users/register", response_model=User)
+@api_router.post("/users/register", response_model=UserRegisterResponse)
 async def register_user(user_data: UserCreate):
     # Check if user already exists
     existing = await db.users.find_one({"email": user_data.email})
@@ -912,7 +912,7 @@ async def register_user(user_data: UserCreate):
     await db.users.insert_one(doc)
     
     token = create_access_token({"email": user.email, "role": "member"})
-    return {"token": token, "user": user}
+    return UserRegisterResponse(token=token, user=user)
 
 @api_router.post("/users/login")
 async def login_user(login_data: UserLogin):
