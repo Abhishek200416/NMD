@@ -145,7 +145,7 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, admin, login, logout }}>
+    <AuthContext.Provider value={{ authToken, admin, login, logout, memberToken, memberUser, memberLogin, memberLogout }}>
       <BrandContext.Provider value={{ brands, currentBrand, switchBrand }}>
         <div className="App">
           <BrowserRouter>
@@ -156,6 +156,9 @@ function App() {
                   <AdminDashboard />
                 </ProtectedRoute>
               } />
+              <Route path="/member/login" element={<UserLogin />} />
+              <Route path="/member/register" element={<UserRegister />} />
+              <Route path="/member/dashboard" element={<MemberDashboard />} />
               <Route path="/*" element={
                 <>
                   <Header />
@@ -170,6 +173,9 @@ function App() {
                     <Route path="/prayer-wall" element={<PrayerWall />} />
                     <Route path="/gallery" element={<Gallery />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/giving" element={<Giving />} />
+                    <Route path="/giving/success" element={<Giving />} />
+                    <Route path="/watch-live" element={<WatchLive />} />
                   </Routes>
                   <Footer />
                 </>
