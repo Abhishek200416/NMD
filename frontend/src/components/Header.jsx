@@ -100,25 +100,92 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  data-testid={`nav-${link.label.toLowerCase()}`}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 text-base whitespace-nowrap ${
-                    isActive(link.path)
-                      ? "bg-gray-900 text-white shadow-sm"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navLinks.map((link, index) => {
+                if (link.dropdown) {
+                  return (
+                    <DropdownMenu key={index}>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="font-medium">
+                          {link.label}
+                          <ChevronDown size={16} className="ml-1" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        {link.dropdown.map((item) => (
+                          <DropdownMenuItem key={item.path} onClick={() => navigate(item.path)}>
+                            {item.label}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  );
+                }
+                
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 text-base whitespace-nowrap ${
+                      link.highlight
+                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-md"
+                        : isActive(link.path)
+                        ? "bg-gray-900 text-white shadow-sm"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
-            {/* Brand Switcher & Mobile Menu */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Right Side Actions */}
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              {/* Social Media Links */}
+              <div className="hidden md:flex items-center space-x-2">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:text-blue-600 transition">
+                  <Facebook size={18} />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:text-pink-600 transition">
+                  <Instagram size={18} />
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:text-red-600 transition">
+                  <Youtube size={18} />
+                </a>
+              </div>
+
+              {/* User Menu */}
+              {memberUser ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <User size={16} />
+                      <span className="hidden sm:inline">{memberUser.name.split(' ')[0]}</span>
+                      <ChevronDown size={14} />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => navigate('/member/dashboard')}>
+                      Dashboard
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => { memberLogout(); navigate('/'); }}>
+                      <LogOut size={14} className="mr-2" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => navigate('/member/login')}
+                  className="hidden sm:flex gap-1"
+                >
+                  <User size={16} />
+                  Login
+                </Button>
+              )}
               {brands.length > 1 && (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
