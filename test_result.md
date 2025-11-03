@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Update this application to make it more responsive and user-friendly across all devices (mobile, tablet, desktop)"
+user_problem_statement: "Modernize church platform with: 1) Member authentication & portal, 2) Stripe payment integration for giving (tithes, offerings, events, ministries), 3) Live streaming & sermon library with YouTube, 4) Enhanced header with dropdown menus and social media, 5) Better imagery and modern design inspired by top church websites"
 
 backend:
   - task: "GET /api/brands endpoint"
