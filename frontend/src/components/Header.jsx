@@ -170,10 +170,10 @@ const Header = () => {
               {memberUser ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="hidden sm:flex gap-1 text-black text-xs relative z-50">
-                      <User size={14} />
+                    <Button variant="outline" size="sm" className="hidden sm:flex gap-2 text-black text-sm relative z-50">
+                      <User size={16} />
                       <span className="hidden lg:inline">{memberUser.name.split(' ')[0]}</span>
-                      <ChevronDown size={12} />
+                      <ChevronDown size={14} />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="z-[60]">
@@ -191,16 +191,16 @@ const Header = () => {
                   variant="outline" 
                   size="sm" 
                   onClick={() => navigate('/member/login')}
-                  className="hidden sm:flex gap-1 text-black text-xs relative z-50 whitespace-nowrap"
+                  className="hidden sm:flex gap-2 text-black text-sm relative z-50 whitespace-nowrap"
                 >
-                  <User size={14} />
+                  <User size={16} />
                   <span className="hidden lg:inline">Login</span>
                 </Button>
               )}
 
               {/* Hamburger Menu Button */}
               <button
-                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors text-black relative z-50 min-h-[44px] min-w-[44px] flex items-center justify-center flex-shrink-0"
+                className="lg:hidden p-2.5 rounded-lg hover:bg-gray-100 transition-colors text-black relative z-50 min-h-[44px] min-w-[44px] flex items-center justify-center flex-shrink-0"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 data-testid="mobile-menu-toggle"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
