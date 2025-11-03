@@ -162,7 +162,7 @@ const Header = () => {
         data-testid="mobile-menu"
       >
         <div className="container mx-auto px-4 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
-          {navLinks.map((link, index) => (
+          {mobileNavLinks.map((link, index) => (
             <Link
               key={link.path}
               to={link.path}
