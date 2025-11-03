@@ -226,7 +226,7 @@ const Header = () => {
               className={`block px-4 py-3 font-medium rounded-lg transition-all duration-200 ${
                 isActive(link.path)
                   ? "bg-gray-900 text-white"
-                  : "text-gray-600 hover:bg-gray-100"
+                  : "text-black hover:bg-gray-100"
               } ${mobileMenuOpen ? 'animate-slideIn' : ''}`}
             >
               {link.label}
