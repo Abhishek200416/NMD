@@ -77,12 +77,12 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+          <div className="grid grid-cols-3 items-center h-16 sm:h-20 gap-2">
             {/* Left Section: Logo + Brand Switcher */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 justify-start">
               <Link 
                 to="/" 
-                className="flex items-center space-x-3 transition-transform hover:scale-105" 
+                className="flex items-center space-x-2 transition-transform hover:scale-105 flex-shrink-0" 
                 data-testid="header-logo"
               >
                 {currentBrand.logo_url ? (
@@ -93,7 +93,7 @@ const Header = () => {
                   />
                 ) : (
                   <div 
-                    className="text-xl sm:text-2xl font-bold text-black whitespace-nowrap" 
+                    className="text-lg sm:text-xl font-bold text-black whitespace-nowrap" 
                   >
                     {currentBrand.name}
                   </div>
@@ -105,7 +105,8 @@ const Header = () => {
                 <button
                   onClick={handleBrandToggle}
                   data-testid="brand-switcher"
-                  className="hidden md:flex items-center px-3 py-1.5 text-sm font-medium text-black border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap"
+                  className="hidden md:flex items-center px-2 py-1.5 text-xs font-medium text-black border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap max-w-[150px] truncate"
+                  title={currentBrand.name}
                 >
                   {currentBrand.name}
                 </button>
@@ -113,12 +114,12 @@ const Header = () => {
             </div>
 
             {/* Center Section: Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            <nav className="hidden lg:flex items-center justify-center space-x-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-3 py-2 rounded-lg font-medium transition-all duration-200 text-sm whitespace-nowrap ${
+                  className={`px-2 py-2 rounded-lg font-medium transition-all duration-200 text-xs whitespace-nowrap ${
                     link.highlight
                       ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-md"
                       : isActive(link.path)
