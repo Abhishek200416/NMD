@@ -213,6 +213,56 @@ async def seed_database():
     else:
         print("ℹ️  Faith Centre Brand already exists")
     
+    # Create Giving Categories for both brands
+    print("\n💰 Creating Giving Categories...")
+    categories_exist = await db.giving_categories.find_one({})
+    if not categories_exist:
+        # Get brand IDs
+        ndm_brand = await db.brands.find_one({"domain": "nehemiahdavid.com"})
+        faith_brand = await db.brands.find_one({"domain": "faithcentre.com"})
+        
+        categories = []
+        for brand_id in [ndm_brand["id"], faith_brand["id"]]:
+            categories.extend([
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "Tithes & Offerings",
+                    "description": "Give your tithes and offerings to support the work of the church",
+                    "brand_id": brand_id,
+                    "is_active": True,
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "Building Fund",
+                    "description": "Support our building and facilities expansion",
+                    "brand_id": brand_id,
+                    "is_active": True,
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "Missions",
+                    "description": "Support our global missions and outreach programs",
+                    "brand_id": brand_id,
+                    "is_active": True,
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": str(uuid.uuid4()),
+                    "name": "Special Projects",
+                    "description": "Give towards special projects and initiatives",
+                    "brand_id": brand_id,
+                    "is_active": True,
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                }
+            ])
+        
+        await db.giving_categories.insert_many(categories)
+        print(f"  ✅ Added {len(categories)} giving categories")
+    else:
+        print("ℹ️  Giving categories already exist")
+    
     client.close()
     print("\n✨ Database seeding completed!")
     print("\n📝 Login credentials:")
