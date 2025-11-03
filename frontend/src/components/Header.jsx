@@ -200,7 +200,7 @@ const Header = () => {
 
               {/* Hamburger Menu Button */}
               <button
-                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors text-black relative z-50 min-h-[40px] min-w-[40px] flex items-center justify-center flex-shrink-0"
+                className="lg:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors text-white relative z-50 min-h-[40px] min-w-[40px] flex items-center justify-center flex-shrink-0"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 data-testid="mobile-menu-toggle"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
