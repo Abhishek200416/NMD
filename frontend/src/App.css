@@ -306,17 +306,19 @@ textarea:focus-visible {
   margin-bottom: 0.5rem;
   font-weight: 500;
   color: #333;
+  font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 .form-input,
 .form-textarea,
 .form-select {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
+  padding: clamp(0.625rem, 2vw, 0.75rem);
+  border: 2px solid #ddd;
   border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  transition: all 0.3s ease;
+  min-height: 44px; /* Touch-friendly */
 }
 
 .form-input:focus,
@@ -324,6 +326,28 @@ textarea:focus-visible {
 .form-select:focus {
   outline: none;
   border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-input:hover,
+.form-textarea:hover,
+.form-select:hover {
+  border-color: #bbb;
+}
+
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+  border-color: #ef4444;
+}
+
+.form-error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .form-textarea {
