@@ -105,10 +105,24 @@ const Messages = () => {
           <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               {selectedSermon.media_type === "video" ? (
-                <video controls className="w-full rounded-lg mb-4" autoPlay>
-                  <source src={selectedSermon.media_url} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                selectedSermon.media_url.includes('youtube.com') || selectedSermon.media_url.includes('youtu.be') ? (
+                  <div className="aspect-video mb-4">
+                    <iframe
+                      src={selectedSermon.media_url.includes('embed') 
+                        ? selectedSermon.media_url 
+                        : `https://www.youtube.com/embed/${selectedSermon.media_url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=))([^&\?]+)/)?.[1]}`}
+                      className="w-full h-full rounded-lg"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={selectedSermon.title}
+                    />
+                  </div>
+                ) : (
+                  <video controls className="w-full rounded-lg mb-4" autoPlay>
+                    <source src={selectedSermon.media_url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )
               ) : (
                 <audio controls className="w-full mb-4" autoPlay>
                   <source src={selectedSermon.media_url} type="audio/mp3" />
