@@ -20,13 +20,15 @@ const MembersManager = () => {
   });
 
   useEffect(() => {
-    loadMembers();
-  }, [brandId]);
+    if (currentBrand && authToken) {
+      loadMembers();
+    }
+  }, [currentBrand, authToken]);
 
   const loadMembers = async () => {
     try {
       const response = await axios.get(
-        `${API}/users?brand_id=${brandId}`,
+        `${API}/users?brand_id=${currentBrand.id}`,
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
       setMembers(response.data);
