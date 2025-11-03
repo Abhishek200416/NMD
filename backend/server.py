@@ -318,6 +318,14 @@ class UserUpdate(BaseModel):
     phone: Optional[str] = None
     email: Optional[EmailStr] = None
 
+class UserRegisterResponse(BaseModel):
+    token: str
+    user: User
+
+class UserLoginResponse(BaseModel):
+    token: str
+    user: User
+
 # ========== GIVING/PAYMENT MODELS ==========
 
 class GivingCategory(BaseModel):
