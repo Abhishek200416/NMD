@@ -141,7 +141,7 @@ const Header = () => {
                   href="https://facebook.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-1.5 text-black hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all relative z-50"
+                  className="p-1.5 text-gray-300 hover:text-blue-400 hover:bg-gray-800 rounded-lg transition-all relative z-50"
                   aria-label="Facebook"
                 >
                   <Facebook size={16} />
@@ -150,7 +150,7 @@ const Header = () => {
                   href="https://instagram.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-1.5 text-black hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-all relative z-50"
+                  className="p-1.5 text-gray-300 hover:text-pink-400 hover:bg-gray-800 rounded-lg transition-all relative z-50"
                   aria-label="Instagram"
                 >
                   <Instagram size={16} />
@@ -159,7 +159,7 @@ const Header = () => {
                   href="https://youtube.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-1.5 text-black hover:text-red-600 hover:bg-red-50 rounded-lg transition-all relative z-50"
+                  className="p-1.5 text-gray-300 hover:text-red-400 hover:bg-gray-800 rounded-lg transition-all relative z-50"
                   aria-label="YouTube"
                 >
                   <Youtube size={16} />
@@ -170,7 +170,7 @@ const Header = () => {
               {memberUser ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="hidden sm:flex gap-1.5 text-black text-xs relative z-50 px-2 sm:px-3">
+                    <Button variant="outline" size="sm" className="hidden sm:flex gap-1.5 text-white border-gray-700 hover:bg-gray-800 text-xs relative z-50 px-2 sm:px-3">
                       <User size={14} />
                       <span className="hidden md:inline">{memberUser.name.split(' ')[0]}</span>
                       <ChevronDown size={12} />
@@ -191,7 +191,7 @@ const Header = () => {
                   variant="outline" 
                   size="sm" 
                   onClick={() => navigate('/member/login')}
-                  className="hidden sm:flex gap-1.5 text-black text-xs relative z-50 whitespace-nowrap px-2 sm:px-3"
+                  className="hidden sm:flex gap-1.5 text-white border-gray-700 hover:bg-gray-800 text-xs relative z-50 whitespace-nowrap px-2 sm:px-3"
                 >
                   <User size={14} />
                   <span className="hidden md:inline">Login</span>
