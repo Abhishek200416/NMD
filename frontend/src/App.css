@@ -215,20 +215,50 @@ h4 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
 /* Responsive */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 70vh;
-  }
-  
-  .hero-content h1 {
-    font-size: 2rem;
+    min-height: 60vh;
   }
   
   .card-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  
-  .section {
-    padding: 2rem 0;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* Smooth Transitions */
+a, button, input, textarea, select {
+  transition: all 0.3s ease;
+}
+
+/* Focus States for Accessibility */
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible, 
+textarea:focus-visible {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Fade In Animation */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Admin Styles */
