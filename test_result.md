@@ -207,6 +207,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "MAJOR HEADER FIX based on user feedback: 1) Changed from sticky to fixed positioning for proper header sticking when scrolling, 2) Added spacer div to prevent content overlap, 3) Increased all click target sizes to minimum 44x44px for better touch accessibility, 4) Improved brand switcher visibility with gradient background, 5) Enhanced hamburger menu button size (24px icon in 44px container), 6) Added z-index management (z-50 for header, z-48 for mobile menu, z-45 for overlay), 7) Improved mobile menu with social media icons, 8) Better spacing and padding throughout, 9) Changed layout from grid to flexbox for better control, 10) All navigation links now have proper z-50 to ensure clickability"
+      - working: true
+        agent: "main"
+        comment: "FIXED LONG BRAND NAME OVERFLOW: 1) Brand name now truncates with ellipsis (...) instead of pushing elements off screen, 2) Set max-width constraints (50% on mobile, 40% on tablet, none on desktop), 3) Made login button flex-shrink-0 to always stay visible, 4) Reduced font sizes responsively (sm->base->lg->xl), 5) Optimized gap spacing (1-2-3 based on screen size), 6) All header elements now properly contained within viewport on all devices, 7) Text left-aligned in brand area as requested"
         
   - task: "Enhanced Footer with better mobile responsiveness"
     implemented: true
