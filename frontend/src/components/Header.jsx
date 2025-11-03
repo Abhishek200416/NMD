@@ -34,6 +34,14 @@ const Header = () => {
     { path: "/about", label: "About" },
     { path: "/events", label: "Events" },
     { path: "/ministries", label: "Ministries" },
+    { path: "/contact", label: "Contact" },
+  ];
+  
+  const mobileNavLinks = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
+    { path: "/events", label: "Events" },
+    { path: "/ministries", label: "Ministries" },
     { path: "/messages", label: "Messages" },
     { path: "/testimonials", label: "Testimonials" },
     { path: "/prayer-wall", label: "Prayer" },
