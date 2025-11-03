@@ -77,9 +77,9 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-3">
-            {/* Left Section: Logo - Full brand name visible */}
-            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-16 sm:h-20 gap-4">
+            {/* Left Section: Logo + Brand Switcher - Fixed width area for balance */}
+            <div className="flex items-center gap-2 sm:gap-3 justify-start">
               <Link 
                 to="/" 
                 className="flex items-center space-x-2 transition-transform hover:scale-105 relative z-50" 
@@ -114,8 +114,8 @@ const Header = () => {
               )}
             </div>
 
-            {/* Center Section: Navigation - Desktop */}
-            <nav className="hidden lg:flex items-center justify-center gap-1 flex-1 mx-auto">
+            {/* Center Section: Navigation - Desktop - Centered */}
+            <nav className="hidden lg:flex items-center justify-center gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -133,8 +133,8 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Right Side Actions */}
-            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+            {/* Right Side Actions - Equal width to left for balance */}
+            <div className="flex items-center gap-1 sm:gap-2 justify-end">
               {/* Social Media Links - Desktop */}
               <div className="hidden xl:flex items-center gap-1">
                 <a 
