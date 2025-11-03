@@ -231,13 +231,24 @@ h4 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
   
   .card-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.75rem;
+  }
+  
+  .section {
+    padding: clamp(2rem, 6vw, 3rem) 0;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .card-grid {
+    gap: 2.5rem;
   }
 }
 
