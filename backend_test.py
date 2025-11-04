@@ -1099,8 +1099,8 @@ def test_foundation_donate(foundation_id, brand_id):
 
 # ========== YOUTUBE INTEGRATION TESTS ==========
 
-def test_youtube_channel():
-    """Test GET /api/youtube/channel/@faithcenter_in - Should return array of sermon videos with categories"""
+def test_youtube_faith_center_channel():
+    """Test GET /api/youtube/channel/@faithcenter_in - Should return 8 videos with all required fields"""
     print("🔍 Testing GET /api/youtube/channel/@faithcenter_in...")
     
     try:
@@ -1114,46 +1114,263 @@ def test_youtube_channel():
             if isinstance(videos, list):
                 print(f"   Videos Count: {len(videos)}")
                 
-                if len(videos) > 0:
-                    print("   ✅ YouTube integration returning videos")
+                # Verify we have exactly 8 videos as requested
+                if len(videos) == 8:
+                    print("   ✅ Correct number of videos (8)")
                     
-                    # Verify video structure
-                    sample_video = videos[0]
-                    required_fields = ['id', 'videoId', 'title', 'thumbnail', 'publishedAt', 'description', 'category']
+                    # Verify all videos have required fields
+                    required_fields = ['id', 'videoId', 'title', 'thumbnail', 'publishedAt', 'description', 'category', 'duration', 'views']
+                    all_videos_valid = True
                     
-                    all_fields_present = True
-                    for field in required_fields:
-                        if field not in sample_video:
-                            print(f"   ❌ Missing field '{field}' in video object")
-                            all_fields_present = False
+                    for i, video in enumerate(videos):
+                        print(f"   🔍 Verifying Video {i+1}: {video.get('title', 'No title')[:50]}...")
+                        
+                        for field in required_fields:
+                            if field not in video:
+                                print(f"   ❌ Missing field '{field}' in video {i+1}")
+                                all_videos_valid = False
+                            elif not video[field]:  # Check for empty values
+                                print(f"   ❌ Empty field '{field}' in video {i+1}")
+                                all_videos_valid = False
+                    
+                    if all_videos_valid:
+                        print("   ✅ All videos have required fields")
+                        
+                        # Check categories
+                        categories = set(video.get('category', 'Unknown') for video in videos)
+                        print(f"   Video Categories: {list(categories)}")
+                        
+                        # Verify expected categories for Faith Center
+                        expected_categories = {"Sunday Services", "Bible Study", "Youth Services", "Special Events", "Community"}
+                        found_categories = categories.intersection(expected_categories)
+                        
+                        if len(found_categories) >= 3:  # Should have at least 3 of the expected categories
+                            print(f"   ✅ Found expected categories: {list(found_categories)}")
+                            
+                            # Verify video IDs are unique
+                            video_ids = [video.get('videoId') for video in videos]
+                            unique_ids = set(video_ids)
+                            
+                            if len(unique_ids) == len(video_ids):
+                                print("   ✅ All video IDs are unique")
+                                
+                                # Verify thumbnail URLs are valid
+                                all_thumbnails_valid = True
+                                for video in videos:
+                                    thumbnail = video.get('thumbnail', '')
+                                    if not thumbnail.startswith('http'):
+                                        print(f"   ❌ Invalid thumbnail URL: {thumbnail}")
+                                        all_thumbnails_valid = False
+                                
+                                if all_thumbnails_valid:
+                                    print("   ✅ All thumbnail URLs are valid")
+                                    
+                                    # Verify dates are in ISO format
+                                    all_dates_valid = True
+                                    for video in videos:
+                                        date_str = video.get('publishedAt', '')
+                                        if not date_str.endswith('Z') or 'T' not in date_str:
+                                            print(f"   ❌ Invalid date format: {date_str}")
+                                            all_dates_valid = False
+                                    
+                                    if all_dates_valid:
+                                        print("   ✅ All dates are in ISO format")
+                                        return True
+                                    else:
+                                        print("   ❌ Some dates are not in ISO format")
+                                        return False
+                                else:
+                                    print("   ❌ Some thumbnail URLs are invalid")
+                                    return False
+                            else:
+                                print(f"   ❌ Duplicate video IDs found: {len(video_ids)} total, {len(unique_ids)} unique")
+                                return False
                         else:
-                            print(f"   ✅ Field '{field}': {str(sample_video[field])[:50]}...")
-                    
-                    # Check categories
-                    categories = set(video.get('category', 'Unknown') for video in videos)
-                    print(f"   Video Categories: {list(categories)}")
-                    
-                    # Verify we have different categories
-                    if len(categories) > 1:
-                        print("   ✅ Multiple video categories found")
+                            print(f"   ❌ Expected categories not found. Found: {list(categories)}")
+                            return False
                     else:
-                        print("   ⚠️  Only one category found")
-                    
-                    if all_fields_present:
-                        print("   ✅ All required video fields present")
-                        return True
-                    else:
-                        print("   ❌ Some required video fields missing")
+                        print("   ❌ Some videos missing required fields")
                         return False
                 else:
-                    print("   ⚠️  Empty videos list")
-                    return True  # Empty list is acceptable
+                    print(f"   ❌ Expected 8 videos, found {len(videos)}")
+                    return False
             else:
                 print("   ❌ Response is not a list")
                 return False
         else:
             print(f"   ❌ Failed with status {response.status_code}")
             print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_youtube_nehemiah_david_channel():
+    """Test GET /api/youtube/channel/@nehemiahdavid - Should return 10 videos with all required fields"""
+    print("🔍 Testing GET /api/youtube/channel/@nehemiahdavid...")
+    
+    try:
+        response = requests.get(f"{BACKEND_URL}/youtube/channel/@nehemiahdavid", timeout=10)
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            videos = response.json()
+            print(f"   Response Type: {type(videos)}")
+            
+            if isinstance(videos, list):
+                print(f"   Videos Count: {len(videos)}")
+                
+                # Verify we have exactly 10 videos as requested
+                if len(videos) == 10:
+                    print("   ✅ Correct number of videos (10)")
+                    
+                    # Verify all videos have required fields
+                    required_fields = ['id', 'videoId', 'title', 'thumbnail', 'publishedAt', 'description', 'category', 'duration', 'views']
+                    all_videos_valid = True
+                    
+                    for i, video in enumerate(videos):
+                        print(f"   🔍 Verifying Video {i+1}: {video.get('title', 'No title')[:50]}...")
+                        
+                        for field in required_fields:
+                            if field not in video:
+                                print(f"   ❌ Missing field '{field}' in video {i+1}")
+                                all_videos_valid = False
+                            elif not video[field]:  # Check for empty values
+                                print(f"   ❌ Empty field '{field}' in video {i+1}")
+                                all_videos_valid = False
+                    
+                    if all_videos_valid:
+                        print("   ✅ All videos have required fields")
+                        
+                        # Check categories
+                        categories = set(video.get('category', 'Unknown') for video in videos)
+                        print(f"   Video Categories: {list(categories)}")
+                        
+                        # Verify expected categories for Nehemiah David
+                        expected_categories = {"Sunday Services", "Bible Study", "Youth Services", "Special Events", "Ministry Training", "Prayer & Worship"}
+                        found_categories = categories.intersection(expected_categories)
+                        
+                        if len(found_categories) >= 4:  # Should have at least 4 of the expected categories
+                            print(f"   ✅ Found expected categories: {list(found_categories)}")
+                            
+                            # Verify video IDs are unique
+                            video_ids = [video.get('videoId') for video in videos]
+                            unique_ids = set(video_ids)
+                            
+                            if len(unique_ids) == len(video_ids):
+                                print("   ✅ All video IDs are unique")
+                                
+                                # Verify thumbnail URLs are valid
+                                all_thumbnails_valid = True
+                                for video in videos:
+                                    thumbnail = video.get('thumbnail', '')
+                                    if not thumbnail.startswith('http'):
+                                        print(f"   ❌ Invalid thumbnail URL: {thumbnail}")
+                                        all_thumbnails_valid = False
+                                
+                                if all_thumbnails_valid:
+                                    print("   ✅ All thumbnail URLs are valid")
+                                    
+                                    # Verify dates are in ISO format
+                                    all_dates_valid = True
+                                    for video in videos:
+                                        date_str = video.get('publishedAt', '')
+                                        if not date_str.endswith('Z') or 'T' not in date_str:
+                                            print(f"   ❌ Invalid date format: {date_str}")
+                                            all_dates_valid = False
+                                    
+                                    if all_dates_valid:
+                                        print("   ✅ All dates are in ISO format")
+                                        return True
+                                    else:
+                                        print("   ❌ Some dates are not in ISO format")
+                                        return False
+                                else:
+                                    print("   ❌ Some thumbnail URLs are invalid")
+                                    return False
+                            else:
+                                print(f"   ❌ Duplicate video IDs found: {len(video_ids)} total, {len(unique_ids)} unique")
+                                return False
+                        else:
+                            print(f"   ❌ Expected categories not found. Found: {list(categories)}")
+                            return False
+                    else:
+                        print("   ❌ Some videos missing required fields")
+                        return False
+                else:
+                    print(f"   ❌ Expected 10 videos, found {len(videos)}")
+                    return False
+            else:
+                print("   ❌ Response is not a list")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
+def test_youtube_channels_uniqueness():
+    """Test that both YouTube channels return different content"""
+    print("🔍 Testing YouTube channels content uniqueness...")
+    
+    try:
+        # Get videos from both channels
+        faith_response = requests.get(f"{BACKEND_URL}/youtube/channel/@faithcenter_in", timeout=10)
+        nehemiah_response = requests.get(f"{BACKEND_URL}/youtube/channel/@nehemiahdavid", timeout=10)
+        
+        if faith_response.status_code == 200 and nehemiah_response.status_code == 200:
+            faith_videos = faith_response.json()
+            nehemiah_videos = nehemiah_response.json()
+            
+            if isinstance(faith_videos, list) and isinstance(nehemiah_videos, list):
+                # Check video ID uniqueness between channels
+                faith_video_ids = set(video.get('videoId') for video in faith_videos)
+                nehemiah_video_ids = set(video.get('videoId') for video in nehemiah_videos)
+                
+                overlap_ids = faith_video_ids.intersection(nehemiah_video_ids)
+                
+                if not overlap_ids:
+                    print("   ✅ All video IDs are unique between channels")
+                    
+                    # Check title uniqueness
+                    faith_titles = set(video.get('title') for video in faith_videos)
+                    nehemiah_titles = set(video.get('title') for video in nehemiah_videos)
+                    
+                    overlap_titles = faith_titles.intersection(nehemiah_titles)
+                    
+                    if not overlap_titles:
+                        print("   ✅ All video titles are unique between channels")
+                        
+                        # Verify different content themes
+                        faith_categories = set(video.get('category') for video in faith_videos)
+                        nehemiah_categories = set(video.get('category') for video in nehemiah_videos)
+                        
+                        print(f"   Faith Center categories: {list(faith_categories)}")
+                        print(f"   Nehemiah David categories: {list(nehemiah_categories)}")
+                        
+                        # Should have some different categories
+                        unique_to_nehemiah = nehemiah_categories - faith_categories
+                        if unique_to_nehemiah:
+                            print(f"   ✅ Nehemiah David has unique categories: {list(unique_to_nehemiah)}")
+                            return True
+                        else:
+                            print("   ⚠️  No unique categories found for Nehemiah David")
+                            return True  # Still pass as content is different
+                    else:
+                        print(f"   ❌ Overlapping video titles: {list(overlap_titles)}")
+                        return False
+                else:
+                    print(f"   ❌ Overlapping video IDs: {list(overlap_ids)}")
+                    return False
+            else:
+                print("   ❌ One or both responses are not lists")
+                return False
+        else:
+            print(f"   ❌ Failed to get both channels. Faith: {faith_response.status_code}, Nehemiah: {nehemiah_response.status_code}")
             return False
             
     except Exception as e:
