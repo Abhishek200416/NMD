@@ -100,8 +100,8 @@ const Header = () => {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 border-b transition-all duration-300 ${
-          scrolled ? 'border-purple-700/50 shadow-xl shadow-purple-500/20' : 'border-purple-800/30 shadow-lg'
+        className={`fixed top-0 left-0 right-0 z-50 bg-black border-b transition-all duration-300 ${
+          scrolled ? 'border-gray-800 shadow-xl' : 'border-gray-900 shadow-lg'
         }`}
       >
         <div className="container mx-auto px-3 sm:px-6 lg:px-8">
@@ -113,7 +113,7 @@ const Header = () => {
                 className="flex items-center space-x-1 sm:space-x-2 transition-all hover:scale-105 relative z-50 flex-shrink-0 group" 
                 data-testid="header-logo"
               >
-                <div className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white whitespace-nowrap truncate max-w-[150px] sm:max-w-[200px] md:max-w-none group-hover:text-purple-300 transition-colors">
+                <div className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white whitespace-nowrap truncate max-w-[150px] sm:max-w-[200px] md:max-w-none group-hover:text-purple-400 transition-colors">
                   {currentBrand.name}
                 </div>
               </Link>
@@ -188,7 +188,7 @@ const Header = () => {
               {memberUser ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="hidden sm:flex gap-1.5 text-white border-purple-700 hover:bg-white/10 text-xs relative z-50 px-2 sm:px-3 hover:scale-105 transition-transform">
+                    <Button variant="outline" size="sm" className="hidden sm:flex gap-1.5 text-white border-gray-700 hover:bg-white/10 text-xs relative z-50 px-2 sm:px-3 hover:scale-105 transition-transform">
                       <User size={14} />
                       <span className="hidden md:inline">{memberUser.name.split(' ')[0]}</span>
                       <ChevronDown size={12} />
@@ -209,7 +209,7 @@ const Header = () => {
                   variant="outline" 
                   size="sm" 
                   onClick={() => navigate('/member/login')}
-                  className="hidden sm:flex gap-1.5 text-white border-purple-700 hover:bg-white/10 text-xs relative z-50 whitespace-nowrap px-2 sm:px-3 hover:scale-105 transition-transform"
+                  className="hidden sm:flex gap-1.5 text-white border-gray-700 hover:bg-white/10 text-xs relative z-50 whitespace-nowrap px-2 sm:px-3 hover:scale-105 transition-transform"
                 >
                   <User size={14} />
                   <span className="hidden md:inline">Login</span>
@@ -245,7 +245,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <nav
-        className={`fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-gradient-to-b from-slate-900 to-purple-900 z-[48] lg:hidden border-b border-purple-700/50 shadow-2xl transition-all duration-300 ease-out ${
+        className={`fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-gradient-to-b from-black to-gray-900 z-[48] lg:hidden border-b border-gray-800 shadow-2xl transition-all duration-300 ease-out ${
           mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
         }`}
         data-testid="mobile-menu"
@@ -254,7 +254,7 @@ const Header = () => {
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar">
           {/* Brand Switcher in Mobile Menu */}
           {brands.length > 1 && (
-            <div className="mb-4 pb-4 border-b border-purple-700/50">
+            <div className="mb-4 pb-4 border-b border-gray-800">
               <button
                 onClick={handleBrandToggle}
                 className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg"
@@ -266,7 +266,7 @@ const Header = () => {
           )}
 
           {/* Social Media in Mobile Menu */}
-          <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-purple-700/50 xl:hidden">
+          <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-gray-800 xl:hidden">
             <a 
               href="https://facebook.com" 
               target="_blank" 
@@ -315,7 +315,7 @@ const Header = () => {
 
           {/* User Actions in Mobile Menu */}
           {!memberUser && (
-            <div className="pt-4 mt-4 border-t border-purple-700/50">
+            <div className="pt-4 mt-4 border-t border-gray-800">
               <Button 
                 size="lg"
                 variant="outline" 
@@ -323,7 +323,7 @@ const Header = () => {
                   setMobileMenuOpen(false);
                   navigate('/member/login');
                 }}
-                className="w-full gap-2 text-white border-purple-600 hover:bg-white/10 min-h-[48px]"
+                className="w-full gap-2 text-white border-gray-700 hover:bg-white/10 min-h-[48px]"
               >
                 <User size={18} />
                 Member Login
