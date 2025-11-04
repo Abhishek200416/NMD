@@ -113,7 +113,7 @@ const Header = () => {
                 className="flex items-center space-x-1 sm:space-x-2 transition-all hover:scale-105 relative z-50 flex-shrink-0 group" 
                 data-testid="header-logo"
               >
-                <div className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white whitespace-nowrap truncate max-w-[150px] sm:max-w-[200px] md:max-w-none group-hover:text-purple-400 transition-colors">
+                <div className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-white whitespace-normal sm:whitespace-nowrap leading-tight group-hover:text-purple-400 transition-colors max-w-[120px] sm:max-w-none">
                   {currentBrand.name}
                 </div>
               </Link>
