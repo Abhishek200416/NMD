@@ -402,6 +402,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Enhanced hero section with WHITE text using drop shadows and text shadows for visibility, improved service times display with multiple services shown vertically, larger buttons with better hover effects, improved responsive design"
+      - working: "NA"
+        agent: "main"
+        comment: "MAJOR DESIGN OVERHAUL: 1) Changed entire color scheme from warm amber/orange/yellow to cool blues/purples (Deep Purples & Blues theme), 2) Updated Header with gradient from slate-900 via purple-900, all buttons now blue-to-purple gradients, 3) Added 'New Here? Welcome Home!' section with church references and 3 cards (Join Community, Grow in Faith, Make Impact) with Matthew 18:20 scripture, 4) Enhanced hero text with stronger white color and multiple shadows for perfect visibility, 5) Added 30 church/ministry gallery images to seed_data.py, 6) Reduced section padding from 2.5-4rem to 2-3rem to minimize empty spaces, 7) Added dynamic animations (fadeInUp, bounceIn, slideIn, shimmer), 8) Updated all focus states and scrollbars to purple theme, 9) All service time icons now purple/blue instead of red/blue, 10) Made Foundations link conditional - only shows for Nehemiah David Ministries, hidden for Faith Centre"
         
   - task: "Reduced empty spaces and improved layout"
     implemented: true
