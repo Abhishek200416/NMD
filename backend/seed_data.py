@@ -57,12 +57,24 @@ ndm_events = [
     {
         "id": str(uuid.uuid4()),
         "brand_id": ndm_id,
+        "title": "REVIVE - 5 Day Revival Conference",
+        "description": "Join us for a powerful 5-day revival experience! Experience renewed faith, powerful worship, and life-changing messages. December 3-7, 2025. Don't miss this transformative event!",
+        "date": "2025-12-03",
+        "time": "6:00 PM - 9:00 PM Daily",
+        "location": "Main Sanctuary",
+        "image_url": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80",
+        "is_free": True,
+        "created_at": datetime.utcnow().isoformat()
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "brand_id": ndm_id,
         "title": "Sunday Worship Service",
         "description": "Join us for an uplifting worship experience with powerful praise and teaching from God's Word.",
         "date": (datetime.utcnow() + timedelta(days=7)).isoformat(),
         "time": "10:00 AM - 12:00 PM",
         "location": "Main Sanctuary",
-        "image_url": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800",
+        "image_url": "https://images.unsplash.com/photo-1477281765962-ef34e8bb0967?w=800&q=80",
         "is_free": True,
         "created_at": datetime.utcnow().isoformat()
     },
@@ -74,7 +86,7 @@ ndm_events = [
         "date": (datetime.utcnow() + timedelta(days=12)).isoformat(),
         "time": "6:00 PM - 8:00 PM",
         "location": "Youth Center",
-        "image_url": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800",
+        "image_url": "https://images.unsplash.com/photo-1610070835951-156b6921281d?w=800&q=80",
         "is_free": True,
         "created_at": datetime.utcnow().isoformat()
     },
@@ -86,7 +98,7 @@ ndm_events = [
         "date": (datetime.utcnow() + timedelta(days=20)).isoformat(),
         "time": "9:00 AM - 2:00 PM",
         "location": "Community Center",
-        "image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800",
+        "image_url": "https://images.unsplash.com/photo-1621112904887-419379ce6824?w=800&q=80",
         "is_free": True,
         "created_at": datetime.utcnow().isoformat()
     }
