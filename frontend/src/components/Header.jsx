@@ -119,7 +119,7 @@ const Header = () => {
                 <button
                   onClick={handleBrandToggle}
                   data-testid="brand-switcher"
-                  className="hidden lg:flex items-center gap-1.5 px-3 py-2 text-xs lg:text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg whitespace-nowrap relative z-50"
+                  className="hidden lg:flex items-center gap-1.5 px-3 py-2 text-xs lg:text-sm font-medium text-white bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all shadow-md hover:shadow-lg whitespace-nowrap relative z-50"
                   title={`Switch brand`}
                 >
                   <span className="max-w-[100px] truncate">{currentBrand.name}</span>
