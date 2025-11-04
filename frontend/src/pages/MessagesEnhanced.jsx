@@ -224,7 +224,9 @@ const MessagesEnhanced = () => {
               onClick={() => setActiveTab("sermons")}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform ${
                 activeTab === "sermons"
-                  ? `bg-gradient-to-r from-${brandColor}-600 to-${brandColor}-700 text-white shadow-lg scale-105`
+                  ? brandColor === "red"
+                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg scale-105"
+                    : "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg scale-105"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105"
               }`}
             >
@@ -235,7 +237,9 @@ const MessagesEnhanced = () => {
               onClick={() => setActiveTab("live")}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform ${
                 activeTab === "live"
-                  ? `bg-gradient-to-r from-${brandColor}-600 to-${brandColor}-700 text-white shadow-lg scale-105`
+                  ? brandColor === "red"
+                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg scale-105"
+                    : "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg scale-105"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105"
               }`}
             >
