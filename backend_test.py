@@ -1616,7 +1616,7 @@ def main():
         print("🎉 ALL YOUTUBE INTEGRATION TESTS PASSED!")
         print("✅ Both channels return correct number of videos with all required fields")
         print("✅ Video IDs are in valid YouTube format (11 characters)")
-        print("✅ Thumbnail URLs are valid YouTube CDN URLs")
+        print("✅ No thumbnail URLs in response (thumbnails loaded from YouTube CDN)")
         print("✅ Categories are properly set for both channels")
         print("✅ Both channels have unique video content")
         return 0
