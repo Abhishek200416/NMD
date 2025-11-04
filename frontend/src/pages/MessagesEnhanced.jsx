@@ -531,12 +531,8 @@ const MessagesEnhanced = () => {
               <div className="text-center mt-12">
                 <Button 
                   size="lg"
-                  onClick={() => openYoutubeChannel(activeChannelTab)}
-                  className={`transition-all duration-300 hover:scale-105 ${
-                    activeChannelTab === "faithcenter" 
-                      ? "bg-red-600 hover:bg-red-700" 
-                      : "bg-blue-600 hover:bg-blue-700"
-                  }`}
+                  onClick={openYoutubeChannel}
+                  className={`bg-${brandColor}-600 hover:bg-${brandColor}-700 transition-all duration-300 hover:scale-105`}
                 >
                   <Youtube size={24} className="mr-2" />
                   View All {filteredVideos.length}+ Videos on YouTube
@@ -545,7 +541,8 @@ const MessagesEnhanced = () => {
             </>
           )}
         </div>
-      </section>
+        </section>
+      )}
 
       {/* Video Player Modal */}
       {selectedVideo && (
