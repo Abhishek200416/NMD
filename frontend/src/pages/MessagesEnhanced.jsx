@@ -504,11 +504,17 @@ const MessagesEnhanced = () => {
 
                     {/* Content */}
                     <div className="p-5">
-                      <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 bg-${brandColor}-100 text-${brandColor}-700`}>
+                      <div className={brandColor === "red"
+                        ? "inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 bg-red-100 text-red-700"
+                        : "inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 bg-blue-100 text-blue-700"
+                      }>
                         {video.category}
                       </div>
                       
-                      <h3 className={`text-lg font-bold mb-2 line-clamp-2 group-hover:text-${brandColor}-600 transition-colors duration-300`}>
+                      <h3 className={brandColor === "red"
+                        ? "text-lg font-bold mb-2 line-clamp-2 group-hover:text-red-600 transition-colors duration-300"
+                        : "text-lg font-bold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300"
+                      }>
                         {video.title}
                       </h3>
                       
