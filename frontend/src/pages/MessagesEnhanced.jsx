@@ -204,7 +204,10 @@ const MessagesEnhanced = () => {
             <Button 
               size="lg"
               onClick={openYoutubeChannel}
-              className={`bg-${brandColor}-600 hover:bg-${brandColor}-700 transition-all duration-300 hover:scale-105`}
+              className={brandColor === "red" 
+                ? "bg-red-600 hover:bg-red-700 transition-all duration-300 hover:scale-105"
+                : "bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:scale-105"
+              }
             >
               <Youtube size={20} className="mr-2" />
               Visit YouTube Channel
