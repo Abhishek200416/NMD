@@ -15,6 +15,7 @@ const API = `${BACKEND_URL}/api`;
 // Pages
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 import Home from "./pages/EnhancedHome";
 import About from "./pages/About";
 import Events from "./pages/Events";
