@@ -45,8 +45,8 @@ This creates:
 - Sample events, ministries, and announcements
 
 2. **Access the Application**
-- Public Site: https://hero-display-fix.preview.emergentagent.com
-- Admin Panel: https://hero-display-fix.preview.emergentagent.com/admin/login
+- Public Site: https://faithcenter-update.preview.emergentagent.com
+- Admin Panel: https://faithcenter-update.preview.emergentagent.com/admin/login
 
 ## 🔐 Admin Credentials
 
