@@ -209,15 +209,18 @@ backend:
         
   - task: "GET /api/events/{event_id}/attendees endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created endpoint for admins to view all attendees for a specific event"
+      - working: true
+        agent: "testing"
+        comment: "✅ EVENT ATTENDEES API WORKING: 1) GET /api/events/{event_id}/attendees requires admin authentication and returns 200 status, 2) Successfully retrieves list of attendees for specific event (tested with 3 registered attendees), 3) Returns proper JSON array with attendee details including name, email, phone, guests, notes, 4) Admin authentication properly enforced - endpoint requires valid admin token. Event attendees viewing functionality fully operational for admins."
         
   - task: "GET /api/attendees endpoint"
     implemented: true
