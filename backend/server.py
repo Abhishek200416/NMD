@@ -102,6 +102,27 @@ class EventCreate(BaseModel):
     image_url: Optional[str] = None
     brand_id: str
 
+class EventAttendee(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    event_id: str
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    guests: int = 1
+    notes: Optional[str] = None
+    brand_id: str
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class EventAttendeeCreate(BaseModel):
+    event_id: str
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    guests: int = 1
+    notes: Optional[str] = None
+    brand_id: str
+
 class Ministry(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
