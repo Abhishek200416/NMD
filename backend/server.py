@@ -851,56 +851,116 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "fc2",
+                    "videoId": "ToQZD74z6vs",
+                    "title": "Faith Center Live | October 12th, 2025 - The Ten Best Ways Part 6",
+                    "publishedAt": "2025-10-12T10:00:00Z",
+                    "description": "Part 6 of our teaching series on the ten best ways to grow in your faith and relationship with God.",
+                    "category": "Sunday Services",
+                    "duration": "68:45",
+                    "views": "5.8K"
+                },
+                {
+                    "id": "fc3",
+                    "videoId": "x5CvVMJj2Tg",
+                    "title": "Annual Faith Conference 2025 | Day 1",
+                    "publishedAt": "2025-10-02T09:00:00Z",
+                    "description": "Day 1 of our Annual Faith Conference 2025 featuring worship and powerful teachings. A transformative gathering of believers.",
+                    "category": "Special Events",
+                    "duration": "189:18",
+                    "views": "15.3K"
+                },
+                {
+                    "id": "fc4",
+                    "videoId": "SI_X6LX8G3o",
+                    "title": "How to Hear God's Voice - Festival of Miracles",
+                    "publishedAt": "2025-09-26T18:30:00Z",
+                    "description": "Special message on recognizing and hearing God's voice in your life. Part of our Festival of Miracles series.",
+                    "category": "Special Events",
+                    "duration": "62:30",
+                    "views": "9.2K"
+                },
+                {
+                    "id": "fc5",
+                    "videoId": "vJh6kAyEMs0",
+                    "title": "Faith Center Live | September 14th, 2025 - The Ten Best Ways Part 2",
+                    "publishedAt": "2025-09-14T10:00:00Z",
+                    "description": "Part 2 of our teaching series on practical ways to strengthen your walk with Christ.",
+                    "category": "Sunday Services",
+                    "duration": "71:20",
+                    "views": "6.4K"
+                },
+                {
+                    "id": "fc6",
                     "videoId": "c61bjEJgjXA",
                     "title": "God's Hand Brings Miracles | Full Sermon",
                     "publishedAt": "2025-09-07T10:00:00Z",
                     "description": "Full sermon by Pastor Nehemiah David on the miraculous hand of God working in our lives today.",
                     "category": "Sunday Services",
                     "duration": "62:15",
-                    "views": "8.5K"
+                    "views": "11.5K"
                 },
                 {
-                    "id": "fc3",
+                    "id": "fc7",
+                    "videoId": "peUhOXXFxwQ",
+                    "title": "ANNUAL FAITH CONFERENCE 2025 Day 2 - Testimonies & Miracles",
+                    "publishedAt": "2025-09-07T14:00:00Z",
+                    "description": "Day 2 of Annual Faith Conference with amazing testimonies of God's miraculous power and transformative work.",
+                    "category": "Special Events",
+                    "duration": "240:00",
+                    "views": "18.7K"
+                },
+                {
+                    "id": "fc8",
+                    "videoId": "FqI3wT57qzk",
+                    "title": "Faith Center Live | August 10th, 2025 - First Sunday with Pastor A.J. Swoboda",
+                    "publishedAt": "2025-08-10T10:00:00Z",
+                    "description": "Historic first Sunday service with Lead Pastor A.J. Swoboda. A new season of faith and growth.",
+                    "category": "Sunday Services",
+                    "duration": "65:40",
+                    "views": "8.9K"
+                },
+                {
+                    "id": "fc9",
                     "videoId": "4rV2K5S76qc",
                     "title": "Favour and Grace of God | Full Sermon",
                     "publishedAt": "2025-04-28T10:00:00Z",
                     "description": "Full sermon on God's favour and grace. Understanding how to walk in divine favour and experience God's unmerited grace.",
                     "category": "Sunday Services",
                     "duration": "58:45",
-                    "views": "6.7K"
+                    "views": "7.2K"
                 },
                 {
-                    "id": "fc4",
-                    "videoId": "x5CvVMJj2Tg",
-                    "title": "Annual Faith Conference 2025 | Day 1",
-                    "publishedAt": "2025-03-15T09:00:00Z",
-                    "description": "Conference sessions featuring various speakers and teachings. A powerful gathering of faith and inspiration.",
+                    "id": "fc10",
+                    "videoId": "zWZIZ2Zu1Us",
+                    "title": "Men's Gathering - A Life Unaffected by the World",
+                    "publishedAt": "2025-03-16T14:00:00Z",
+                    "description": "Special men's gathering focusing on living a life rooted in faith, not worldly standards.",
                     "category": "Special Events",
-                    "duration": "120:00",
-                    "views": "12.3K"
+                    "duration": "54:30",
+                    "views": "4.6K"
                 },
                 {
-                    "id": "fc5",
-                    "videoId": "FqI3wT57qzk",
-                    "title": "Sunday Worship - Walking in Victory",
-                    "publishedAt": "2025-02-16T10:00:00Z",
-                    "description": "Join us for an inspiring Sunday worship service about living victoriously through Christ.",
-                    "category": "Sunday Services",
-                    "duration": "52:30",
-                    "views": "4.8K"
+                    "id": "fc11",
+                    "videoId": "aU21rNmbShk",
+                    "title": "Bible Study w/ Ps. Nehemiah David | January 31, 2025",
+                    "publishedAt": "2025-01-31T19:00:00Z",
+                    "description": "Weekly Bible study session with Pastor Nehemiah David. Exploring God's Word together.",
+                    "category": "Bible Study",
+                    "duration": "52:15",
+                    "views": "3.8K"
                 },
                 {
-                    "id": "fc6",
+                    "id": "fc12",
                     "videoId": "G3jgHbDB4TU",
                     "title": "Prayer Meeting - Seeking His Presence",
                     "publishedAt": "2025-01-22T18:30:00Z",
                     "description": "A powerful prayer meeting focused on seeking God's presence and interceding for our community.",
-                    "category": "Special Events",
+                    "category": "Prayer & Worship",
                     "duration": "45:20",
                     "views": "2.9K"
                 },
                 {
-                    "id": "fc7",
+                    "id": "fc13",
                     "videoId": "ZxLpEQ_4tqY",
                     "title": "Youth Service - Purpose in Christ",
                     "publishedAt": "2025-01-12T18:00:00Z",
@@ -910,7 +970,7 @@ async def get_youtube_videos(channel_handle: str):
                     "views": "5.4K"
                 },
                 {
-                    "id": "fc8",
+                    "id": "fc14",
                     "videoId": "FNVf6cLYR0s",
                     "title": "Community Outreach - Love in Action",
                     "publishedAt": "2025-01-08T14:00:00Z",
@@ -918,6 +978,16 @@ async def get_youtube_videos(channel_handle: str):
                     "category": "Community",
                     "duration": "32:45",
                     "views": "3.1K"
+                },
+                {
+                    "id": "fc15",
+                    "videoId": "UpzRmMVSEmY",
+                    "title": "Real Talk Kim - Full Sermon",
+                    "publishedAt": "2024-11-04T10:00:00Z",
+                    "description": "Guest speaker Real Talk Kim delivers a powerful message of truth and transformation.",
+                    "category": "Special Events",
+                    "duration": "53:00",
+                    "views": "6.7K"
                 }
             ]
         elif channel_handle == "nehemiahdavid":
