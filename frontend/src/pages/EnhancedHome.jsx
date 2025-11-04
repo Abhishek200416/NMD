@@ -429,8 +429,8 @@ const EnhancedHome = () => {
               {events.map((event, index) => (
                 <div 
                   key={event.id} 
-                  className="card group animate-on-scroll" 
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="card group" 
+                  style={{ animation: `fadeInUp 0.6s ease-out ${index * 0.1}s backwards` }}
                 >
                   {event.image_url && (
                     <div className="image-hover-zoom relative">
