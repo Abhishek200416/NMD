@@ -319,6 +319,29 @@ const EnhancedHome = () => {
             </div>
           )}
 
+          {/* Countdown Timer */}
+          <div className="bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-md text-white rounded-xl p-4 sm:p-6 mb-6 inline-block max-w-full border border-white/30 shadow-2xl transition-all duration-300 hover:shadow-3xl" style={{animation: 'fadeInUp 0.8s ease-out 0.7s backwards'}}>
+            <h3 className="text-lg sm:text-xl font-bold mb-4 text-center">Next Service In:</h3>
+            <div className="grid grid-cols-4 gap-2 sm:gap-4 text-center">
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold">{countdown.days}</div>
+                <div className="text-xs sm:text-sm opacity-90">Days</div>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold">{countdown.hours}</div>
+                <div className="text-xs sm:text-sm opacity-90">Hours</div>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold">{countdown.minutes}</div>
+                <div className="text-xs sm:text-sm opacity-90">Minutes</div>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 sm:p-3">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold">{countdown.seconds}</div>
+                <div className="text-xs sm:text-sm opacity-90">Seconds</div>
+              </div>
+            </div>
+          </div>
+
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center px-4 sm:px-0" style={{animation: 'fadeInUp 0.8s ease-out 0.8s backwards'}}>
             <Button 
               size="lg" 
