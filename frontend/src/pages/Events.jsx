@@ -241,6 +241,116 @@ const Events = () => {
           )}
         </div>
       </section>
+
+      {/* Registration Modal */}
+      {showRegistrationModal && selectedEvent && (
+        <>
+          <div 
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" 
+            onClick={() => setShowRegistrationModal(false)}
+          />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <div className="bg-white rounded-2xl max-w-md w-full p-6 pointer-events-auto shadow-2xl max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">Register for Event</h3>
+                <button 
+                  onClick={() => setShowRegistrationModal(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              
+              <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                <h4 className="font-semibold text-lg mb-1">{selectedEvent.title}</h4>
+                <p className="text-sm text-gray-600 flex items-center">
+                  <Calendar size={14} className="mr-1" />
+                  {new Date(selectedEvent.date).toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    month: 'long', 
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}
+                </p>
+                {selectedEvent.time && (
+                  <p className="text-sm text-gray-600 flex items-center mt-1">
+                    <Clock size={14} className="mr-1" />
+                    {selectedEvent.time}
+                  </p>
+                )}
+              </div>
+
+              <form onSubmit={handleRegistrationSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="reg-name">Full Name *</Label>
+                  <Input
+                    id="reg-name"
+                    value={registrationData.name}
+                    onChange={(e) => setRegistrationData({ ...registrationData, name: e.target.value })}
+                    required
+                    placeholder="John Doe"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="reg-email">Email *</Label>
+                  <Input
+                    id="reg-email"
+                    type="email"
+                    value={registrationData.email}
+                    onChange={(e) => setRegistrationData({ ...registrationData, email: e.target.value })}
+                    required
+                    placeholder="john@example.com"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="reg-phone">Phone Number</Label>
+                  <Input
+                    id="reg-phone"
+                    type="tel"
+                    value={registrationData.phone}
+                    onChange={(e) => setRegistrationData({ ...registrationData, phone: e.target.value })}
+                    placeholder="+1 234 567 8900"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="reg-guests">Number of Guests</Label>
+                  <Input
+                    id="reg-guests"
+                    type="number"
+                    min="1"
+                    max="10"
+                    value={registrationData.guests}
+                    onChange={(e) => setRegistrationData({ ...registrationData, guests: parseInt(e.target.value) })}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="reg-notes">Additional Notes (Optional)</Label>
+                  <Textarea
+                    id="reg-notes"
+                    rows={3}
+                    value={registrationData.notes}
+                    onChange={(e) => setRegistrationData({ ...registrationData, notes: e.target.value })}
+                    placeholder="Any special requirements or questions..."
+                  />
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <Button type="submit" className="flex-1">
+                    Complete Registration
+                  </Button>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setShowRegistrationModal(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
