@@ -272,7 +272,7 @@ const EnhancedHome = () => {
   return (
     <div className="fade-in">
       {/* Enhanced Hero Section with Parallax Effect */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
+      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
         {currentBrand.hero_video_url ? (
           <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40">
             <source src={currentBrand.hero_video_url} type="video/mp4" />
