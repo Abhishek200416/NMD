@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 import { useBrand, API } from "@/App";
 import axios from "axios";
-import { Play, Calendar, User } from "lucide-react";
+import { Play, Calendar, User, ExternalLink, Youtube, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Messages = () => {
   const { currentBrand } = useBrand();
   const [sermons, setSermons] = useState([]);
+  const [youtubeVideos, setYoutubeVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSermon, setSelectedSermon] = useState(null);
+  const [activeTab, setActiveTab] = useState("youtube"); // "youtube" or "database"
 
   useEffect(() => {
     if (currentBrand) {
       loadSermons();
+      loadYoutubeVideos();
     }
   }, [currentBrand]);
 
@@ -22,82 +25,270 @@ const Messages = () => {
       setSermons(response.data.sort((a, b) => new Date(b.date) - new Date(a.date)));
     } catch (error) {
       console.error("Error loading sermons:", error);
+    }
+  };
+
+  const loadYoutubeVideos = async () => {
+    setLoading(true);
+    try {
+      // Fetch from YouTube channel @faithcenter_in using backend proxy
+      const response = await axios.get(`${API}/youtube/channel/@faithcenter_in`);
+      setYoutubeVideos(response.data);
+    } catch (error) {
+      console.error("Error loading YouTube videos:", error);
+      // Fallback: Load mock data for demonstration
+      setYoutubeVideos([
+        {
+          id: "1",
+          title: "Sunday Service - Latest Message",
+          videoId: "dQw4w9WgXcQ",
+          thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+          publishedAt: new Date().toISOString(),
+          description: "Join us for our latest Sunday service message.",
+          category: "Sunday Services"
+        }
+      ]);
     } finally {
       setLoading(false);
     }
   };
 
+  const openYoutubeVideo = (videoId) => {
+    window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+  };
+
+  // Group videos by category
+  const groupedVideos = youtubeVideos.reduce((acc, video) => {
+    const category = video.category || "Other Messages";
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(video);
+    return acc;
+  }, {});
+
   if (!currentBrand) return null;
 
   return (
-    <div>
-      {/* Header */}
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
-        <div className="container text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6" data-testid="messages-page-title">
-            Messages
+    <div className="transition-all duration-500">
+      {/* Hero Header */}
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div className="absolute inset-0 w-full h-full">
+          <img 
+            src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920" 
+            alt="Messages" 
+            className="w-full h-full object-cover opacity-60 transition-opacity duration-700" 
+          />
+        </div>
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60 transition-all duration-500" />
+        
+        <div className="relative z-10 text-center text-white max-w-4xl px-4 sm:px-6">
+          <h1 
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white transition-all duration-500" 
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.2s backwards', 
+              textShadow: '1px 1px 3px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.3)', 
+              color: '#FFFFFF'
+            }}
+            data-testid="messages-page-title"
+          >
+            Messages & Sermons
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            Watch and listen to our latest messages and sermons
+          <p 
+            className="text-lg sm:text-xl max-w-2xl mx-auto text-white transition-all duration-500" 
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.4s backwards', 
+              textShadow: '1px 1px 2px rgba(0,0,0,0.4)', 
+              color: '#FFFFFF'
+            }}
+          >
+            Watch and listen to our latest messages and sermons from our YouTube channel
           </p>
         </div>
       </section>
 
-      {/* Sermons Grid */}
-      <section className="section bg-white">
+      {/* Tab Navigation */}
+      <section className="bg-white border-b border-gray-200">
         <div className="container">
-          {loading ? (
-            <div className="text-center py-12">Loading messages...</div>
-          ) : sermons.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No messages available at this time.</p>
-            </div>
-          ) : (
-            <div className="card-grid">
-              {sermons.map((sermon) => (
-                <div
-                  key={sermon.id}
-                  className="card cursor-pointer"
-                  onClick={() => setSelectedSermon(sermon)}
-                  data-testid={`sermon-card-${sermon.id}`}
-                >
-                  {sermon.thumbnail_url ? (
-                    <div className="relative">
-                      <img src={sermon.thumbnail_url} alt={sermon.title} className="card-image" />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                          <Play size={24} className="text-gray-900 ml-1" />
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                      <Play size={48} className="text-gray-600" />
-                    </div>
-                  )}
-                  <div className="card-content">
-                    <h3 className="text-xl font-semibold mb-2">{sermon.title}</h3>
-                    <div className="flex items-center text-gray-600 text-sm mb-2">
-                      <User size={14} className="mr-2" />
-                      {sermon.speaker}
-                    </div>
-                    <div className="flex items-center text-gray-600 text-sm mb-3">
-                      <Calendar size={14} className="mr-2" />
-                      {new Date(sermon.date).toLocaleDateString()}
-                    </div>
-                    <p className="text-gray-700 text-sm line-clamp-2">{sermon.description}</p>
-                    <div className="mt-3">
-                      <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
-                        {sermon.media_type === "video" ? "Video" : "Audio"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="flex gap-4 py-4">
+            <button
+              onClick={() => setActiveTab("youtube")}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                activeTab === "youtube"
+                  ? "bg-red-600 text-white shadow-lg"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              <Youtube className="inline mr-2" size={20} />
+              YouTube Channel
+            </button>
+            <button
+              onClick={() => setActiveTab("database")}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                activeTab === "database"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              <Play className="inline mr-2" size={20} />
+              Archive
+            </button>
+          </div>
         </div>
       </section>
+
+      {/* YouTube Videos Tab */}
+      {activeTab === "youtube" && (
+        <section className="section bg-white">
+          <div className="container">
+            {loading ? (
+              <div className="text-center py-12">
+                <Loader2 className="animate-spin h-12 w-12 mx-auto mb-4 text-gray-600" />
+                <p className="text-gray-600">Loading videos from YouTube...</p>
+              </div>
+            ) : Object.keys(groupedVideos).length === 0 ? (
+              <div className="text-center py-12">
+                <Youtube size={64} className="mx-auto mb-4 text-gray-400" />
+                <p className="text-gray-500 text-lg mb-4">No videos available at this time.</p>
+                <Button 
+                  onClick={() => window.open('https://youtube.com/@faithcenter_in', '_blank')}
+                  className="transition-all duration-300 hover:scale-105"
+                >
+                  <ExternalLink size={16} className="mr-2" />
+                  Visit Our YouTube Channel
+                </Button>
+              </div>
+            ) : (
+              <>
+                {Object.entries(groupedVideos).map(([category, videos]) => (
+                  <div key={category} className="mb-12">
+                    <h2 className="text-2xl sm:text-3xl font-bold mb-6">{category}</h2>
+                    <div className="card-grid">
+                      {videos.map((video, index) => (
+                        <div
+                          key={video.id || video.videoId}
+                          className="card group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                          onClick={() => openYoutubeVideo(video.videoId)}
+                          style={{ animationDelay: `${index * 100}ms` }}
+                        >
+                          <div className="relative overflow-hidden">
+                            <img 
+                              src={video.thumbnail || `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} 
+                              alt={video.title} 
+                              className="card-image group-hover:scale-110 transition-transform duration-500"
+                              onError={(e) => {
+                                e.target.src = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
+                              }}
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-all duration-300">
+                              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <Play size={24} className="text-white ml-1" fill="white" />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="card-content">
+                            <h3 className="text-lg sm:text-xl font-semibold mb-2 line-clamp-2">{video.title}</h3>
+                            <div className="flex items-center text-gray-600 text-sm mb-3">
+                              <Calendar size={14} className="mr-2" />
+                              {new Date(video.publishedAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                              })}
+                            </div>
+                            <p className="text-gray-700 text-sm line-clamp-2 mb-3">{video.description}</p>
+                            <Button 
+                              size="sm" 
+                              className="w-full bg-red-600 hover:bg-red-700 transition-all duration-300 hover:scale-105"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openYoutubeVideo(video.videoId);
+                              }}
+                            >
+                              <ExternalLink size={14} className="mr-2" />
+                              Watch on YouTube
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Link to Full Channel */}
+                <div className="text-center py-8">
+                  <Button 
+                    size="lg"
+                    onClick={() => window.open('https://youtube.com/@faithcenter_in', '_blank')}
+                    className="bg-red-600 hover:bg-red-700 transition-all duration-300 hover:scale-105"
+                  >
+                    <Youtube size={20} className="mr-2" />
+                    View All Videos on YouTube
+                  </Button>
+                </div>
+              </>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Database Sermons Tab */}
+      {activeTab === "database" && (
+        <section className="section bg-white">
+          <div className="container">
+            {sermons.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">No archived messages available at this time.</p>
+              </div>
+            ) : (
+              <div className="card-grid">
+                {sermons.map((sermon, index) => (
+                  <div
+                    key={sermon.id}
+                    className="card cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                    onClick={() => setSelectedSermon(sermon)}
+                    data-testid={`sermon-card-${sermon.id}`}
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    {sermon.thumbnail_url ? (
+                      <div className="relative overflow-hidden">
+                        <img src={sermon.thumbnail_url} alt={sermon.title} className="card-image transition-transform duration-500 hover:scale-110" />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                            <Play size={24} className="text-gray-900 ml-1" />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                        <Play size={48} className="text-gray-600" />
+                      </div>
+                    )}
+                    <div className="card-content">
+                      <h3 className="text-xl font-semibold mb-2 line-clamp-2">{sermon.title}</h3>
+                      <div className="flex items-center text-gray-600 text-sm mb-2">
+                        <User size={14} className="mr-2" />
+                        {sermon.speaker}
+                      </div>
+                      <div className="flex items-center text-gray-600 text-sm mb-3">
+                        <Calendar size={14} className="mr-2" />
+                        {new Date(sermon.date).toLocaleDateString()}
+                      </div>
+                      <p className="text-gray-700 text-sm line-clamp-2">{sermon.description}</p>
+                      <div className="mt-3">
+                        <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                          {sermon.media_type === "video" ? "Video" : "Audio"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Sermon Player Modal */}
       {selectedSermon && (
