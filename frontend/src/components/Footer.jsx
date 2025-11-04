@@ -145,6 +145,15 @@ const Footer = () => {
               >
                 <Youtube size={24} />
               </a>
+              <a 
+                href="https://wa.me/919876543210" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-green-400 transition-all hover:scale-110" 
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={24} />
+              </a>
             </div>
           </div>
         </div>
