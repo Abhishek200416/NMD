@@ -335,27 +335,24 @@ const EnhancedHome = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="section bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+      <section className="section bg-white border-y border-gray-200">
         <div className="container">
-          <div 
-            ref={statsRef} 
-            className={`grid grid-cols-2 lg:grid-cols-4 gap-8 ${statsVisible ? 'animate-scale' : 'opacity-0'}`}
-          >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="stat-number text-white mb-2">500+</div>
-              <div className="text-lg sm:text-xl font-medium">Active Members</div>
+              <div className="stat-number text-blue-600 mb-2">500+</div>
+              <div className="text-lg sm:text-xl font-medium text-gray-700">Active Members</div>
             </div>
             <div className="text-center">
-              <div className="stat-number text-white mb-2">15</div>
-              <div className="text-lg sm:text-xl font-medium">Years Serving</div>
+              <div className="stat-number text-purple-600 mb-2">15</div>
+              <div className="text-lg sm:text-xl font-medium text-gray-700">Years Serving</div>
             </div>
             <div className="text-center">
-              <div className="stat-number text-white mb-2">20+</div>
-              <div className="text-lg sm:text-xl font-medium">Ministries</div>
+              <div className="stat-number text-blue-600 mb-2">20+</div>
+              <div className="text-lg sm:text-xl font-medium text-gray-700">Ministries</div>
             </div>
             <div className="text-center">
-              <div className="stat-number text-white mb-2">1000+</div>
-              <div className="text-lg sm:text-xl font-medium">Lives Changed</div>
+              <div className="stat-number text-purple-600 mb-2">1000+</div>
+              <div className="text-lg sm:text-xl font-medium text-gray-700">Lives Changed</div>
             </div>
           </div>
         </div>
