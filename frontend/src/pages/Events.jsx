@@ -24,6 +24,15 @@ const Events = () => {
   const { currentBrand } = useBrand();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [registrationData, setRegistrationData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    guests: 1,
+    notes: ""
+  });
 
   useEffect(() => {
     if (currentBrand) {
