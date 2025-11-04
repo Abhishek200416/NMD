@@ -188,6 +188,7 @@ function App() {
                     <Route path="/foundations" element={<Foundations />} />
                   </Routes>
                   <Footer />
+                  <WhatsAppButton phoneNumber="+919876543210" message="Hello! I'd like to know more about your church." />
                 </>
               } />
             </Routes>
