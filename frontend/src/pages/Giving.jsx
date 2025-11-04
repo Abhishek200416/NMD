@@ -215,7 +215,7 @@ const Giving = () => {
                       onClick={() => setAmount(amt.toString())}
                       className={`py-3 rounded-lg border-2 transition-all font-semibold ${
                         amount === amt.toString()
-                          ? 'border-blue-600 bg-blue-50 text-blue-900'
+                          ? 'border-amber-600 bg-amber-50 text-amber-900'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
