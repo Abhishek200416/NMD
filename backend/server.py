@@ -1340,6 +1340,62 @@ async def delete_live_stream(stream_id: str, admin = Depends(get_current_admin))
         raise HTTPException(status_code=404, detail="Live stream not found")
     return {"message": "Live stream deleted"}
 
+
+# ========== FOUNDATION ROUTES ==========
+
+@api_router.get("/foundations", response_model=List[Foundation])
+async def get_foundations(brand_id: Optional[str] = None, is_active: Optional[bool] = None):
+    query = {}
+    if brand_id:
+        query["brand_id"] = brand_id
+    if is_active is not None:
+        query["is_active"] = is_active
+    
+    foundations = await db.foundations.find(query, {"_id": 0}).sort("created_at", -1).to_list(100)
+    return foundations
+
+@api_router.get("/foundations/{foundation_id}", response_model=Foundation)
+async def get_foundation(foundation_id: str):
+    foundation = await db.foundations.find_one({"id": foundation_id}, {"_id": 0})
+    if not foundation:
+        raise HTTPException(status_code=404, detail="Foundation not found")
+    return foundation
+
+@api_router.post("/foundations", response_model=Foundation)
+async def create_foundation(foundation: FoundationCreate, admin = Depends(get_current_admin)):
+    foundation_dict = foundation.model_dump()
+    foundation_obj = Foundation(**foundation_dict)
+    await db.foundations.insert_one(foundation_obj.model_dump())
+    return foundation_obj
+
+@api_router.post("/foundations/donate")
+async def donate_to_foundation(donation: FoundationDonationCreate):
+    # Verify foundation exists
+    foundation = await db.foundations.find_one({"id": donation.foundation_id}, {"_id": 0})
+    if not foundation:
+        raise HTTPException(status_code=404, detail="Foundation not found")
+    
+    # Create donation record
+    donation_dict = donation.model_dump()
+    donation_obj = FoundationDonation(**donation_dict, payment_status="completed")
+    await db.foundation_donations.insert_one(donation_obj.model_dump())
+    
+    # Update foundation raised amount
+    await db.foundations.update_one(
+        {"id": donation.foundation_id},
+        {"$inc": {"raised_amount": donation.amount}}
+    )
+    
+    return donation_obj
+
+@api_router.get("/foundations/{foundation_id}/donations")
+async def get_foundation_donations(foundation_id: str, admin = Depends(get_current_admin)):
+    donations = await db.foundation_donations.find(
+        {"foundation_id": foundation_id}, 
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(1000)
+    return donations
+
 # Include router
 app.include_router(api_router)
 
