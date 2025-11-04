@@ -268,25 +268,37 @@ const MessagesEnhanced = () => {
                 {/* Countdown Timer */}
                 <div className="grid grid-cols-4 gap-4 mb-8">
                   <div className="text-center">
-                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                    <div className={brandColor === "red" 
+                      ? "bg-gradient-to-br from-red-500 to-red-600 text-white rounded-lg p-4 mb-2"
+                      : "bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-4 mb-2"
+                    }>
                       <div className="text-4xl font-bold">{countdown.days}</div>
                     </div>
                     <div className="text-sm text-gray-600 font-medium">Days</div>
                   </div>
                   <div className="text-center">
-                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                    <div className={brandColor === "red" 
+                      ? "bg-gradient-to-br from-red-500 to-red-600 text-white rounded-lg p-4 mb-2"
+                      : "bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-4 mb-2"
+                    }>
                       <div className="text-4xl font-bold">{countdown.hours}</div>
                     </div>
                     <div className="text-sm text-gray-600 font-medium">Hours</div>
                   </div>
                   <div className="text-center">
-                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                    <div className={brandColor === "red" 
+                      ? "bg-gradient-to-br from-red-500 to-red-600 text-white rounded-lg p-4 mb-2"
+                      : "bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-4 mb-2"
+                    }>
                       <div className="text-4xl font-bold">{countdown.minutes}</div>
                     </div>
                     <div className="text-sm text-gray-600 font-medium">Minutes</div>
                   </div>
                   <div className="text-center">
-                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                    <div className={brandColor === "red" 
+                      ? "bg-gradient-to-br from-red-500 to-red-600 text-white rounded-lg p-4 mb-2"
+                      : "bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-4 mb-2"
+                    }>
                       <div className="text-4xl font-bold">{countdown.seconds}</div>
                     </div>
                     <div className="text-sm text-gray-600 font-medium">Seconds</div>
@@ -297,7 +309,10 @@ const MessagesEnhanced = () => {
                   <Button 
                     size="lg"
                     onClick={openYoutubeChannel}
-                    className={`bg-${brandColor}-600 hover:bg-${brandColor}-700 transition-all duration-300 hover:scale-105`}
+                    className={brandColor === "red"
+                      ? "bg-red-600 hover:bg-red-700 transition-all duration-300 hover:scale-105"
+                      : "bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:scale-105"
+                    }
                   >
                     <Youtube size={20} className="mr-2" />
                     Watch Live on YouTube
