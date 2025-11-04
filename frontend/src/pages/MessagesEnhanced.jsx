@@ -243,62 +243,160 @@ const MessagesEnhanced = () => {
         </div>
       </section>
 
-      {/* Search and Filter Bar */}
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="container py-4">
-          <div className="flex flex-col sm:flex-row gap-4">
-            {/* Search Bar */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                placeholder="Search videos..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  <X size={20} />
-                </button>
-              )}
-            </div>
+      {/* Live Stream Tab Content */}
+      {activeTab === "live" && (
+        <section className="section bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              {/* Countdown Card */}
+              <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8" style={{ animation: 'fadeInUp 0.6s ease-out' }}>
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full mb-4">
+                    <Radio className="text-white" size={40} />
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-2">Next Service</h2>
+                  <p className="text-xl text-gray-600">{countdown.nextService}</p>
+                </div>
 
-            {/* Category Filter */}
-            <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-all duration-300 transform hover:scale-105 ${
-                    selectedCategory === category
-                      ? activeChannelTab === "faithcenter"
-                        ? "bg-red-600 text-white shadow-lg"
-                        : "bg-blue-600 text-white shadow-lg"
-                      : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  {category === "all" ? "All Videos" : category}
-                </button>
-              ))}
+                {/* Countdown Timer */}
+                <div className="grid grid-cols-4 gap-4 mb-8">
+                  <div className="text-center">
+                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                      <div className="text-4xl font-bold">{countdown.days}</div>
+                    </div>
+                    <div className="text-sm text-gray-600 font-medium">Days</div>
+                  </div>
+                  <div className="text-center">
+                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                      <div className="text-4xl font-bold">{countdown.hours}</div>
+                    </div>
+                    <div className="text-sm text-gray-600 font-medium">Hours</div>
+                  </div>
+                  <div className="text-center">
+                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                      <div className="text-4xl font-bold">{countdown.minutes}</div>
+                    </div>
+                    <div className="text-sm text-gray-600 font-medium">Minutes</div>
+                  </div>
+                  <div className="text-center">
+                    <div className={`bg-gradient-to-br from-${brandColor}-500 to-${brandColor}-600 text-white rounded-lg p-4 mb-2`}>
+                      <div className="text-4xl font-bold">{countdown.seconds}</div>
+                    </div>
+                    <div className="text-sm text-gray-600 font-medium">Seconds</div>
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <Button 
+                    size="lg"
+                    onClick={openYoutubeChannel}
+                    className={`bg-${brandColor}-600 hover:bg-${brandColor}-700 transition-all duration-300 hover:scale-105`}
+                  >
+                    <Youtube size={20} className="mr-2" />
+                    Watch Live on YouTube
+                  </Button>
+                </div>
+              </div>
+
+              {/* Service Schedule */}
+              <div className="bg-white rounded-2xl shadow-xl p-8" style={{ animation: 'fadeInUp 0.6s ease-out 0.2s backwards' }}>
+                <h3 className="text-2xl font-bold mb-6 flex items-center">
+                  <Clock className="mr-3" size={28} />
+                  Service Schedule
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div>
+                      <div className="font-semibold text-lg">Morning Service</div>
+                      <div className="text-gray-600">Daily</div>
+                    </div>
+                    <div className={`text-2xl font-bold text-${brandColor}-600`}>7:00 AM</div>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div>
+                      <div className="font-semibold text-lg">Main Service</div>
+                      <div className="text-gray-600">Sunday</div>
+                    </div>
+                    <div className={`text-2xl font-bold text-${brandColor}-600`}>10:00 AM</div>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div>
+                      <div className="font-semibold text-lg">Evening Service</div>
+                      <div className="text-gray-600">Monday - Saturday</div>
+                    </div>
+                    <div className={`text-2xl font-bold text-${brandColor}-600`}>6:30 PM</div>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div>
+                      <div className="font-semibold text-lg">Friday Service</div>
+                      <div className="text-gray-600">Friday</div>
+                    </div>
+                    <div className={`text-2xl font-bold text-${brandColor}-600`}>7:00 PM</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
+      )}
 
-          {/* Results count */}
-          {(searchQuery || selectedCategory !== "all") && (
-            <div className="mt-3 text-sm text-gray-600">
-              {filteredVideos.length} video{filteredVideos.length !== 1 ? 's' : ''} found
-              {searchQuery && ` for "${searchQuery}"`}
+      {/* Sermons Tab - Search and Filter Bar */}
+      {activeTab === "sermons" && (
+        <section className="bg-gray-50 border-b border-gray-200">
+          <div className="container py-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              {/* Search Bar */}
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <input
+                  type="text"
+                  placeholder="Search videos..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    <X size={20} />
+                  </button>
+                )}
+              </div>
+
+              {/* Category Filter */}
+              <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-all duration-300 transform hover:scale-105 ${
+                      selectedCategory === category
+                        ? `bg-${brandColor}-600 text-white shadow-lg`
+                        : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                    }`}
+                  >
+                    {category === "all" ? "All Videos" : category}
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
-        </div>
-      </section>
+
+            {/* Results count */}
+            {(searchQuery || selectedCategory !== "all") && (
+              <div className="mt-3 text-sm text-gray-600">
+                {filteredVideos.length} video{filteredVideos.length !== 1 ? 's' : ''} found
+                {searchQuery && ` for "${searchQuery}"`}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Videos Section */}
-      <section className="section bg-white">
+      {activeTab === "sermons" && (
+        <section className="section bg-white">
         <div className="container">
           {loading ? (
             <div className="text-center py-20">
