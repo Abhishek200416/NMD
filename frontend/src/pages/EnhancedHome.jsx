@@ -599,18 +599,18 @@ const EnhancedHome = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="section bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="section bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 border-t-4 border-amber-500" style={{marginTop: '4rem'}}>
         <div className="container text-center max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white" style={{textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)', color: '#FFFFFF'}}>
             Ready to Take the Next Step?
           </h2>
-          <p className="text-xl mb-8 text-gray-100">
+          <p className="text-lg sm:text-xl mb-8 text-white" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.8)', color: '#FFFFFF'}}>
             Whether you're new to faith or looking to grow deeper, we're here for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="rounded-full bg-white text-blue-600 hover:bg-gray-100 transform hover:scale-105 transition-all text-lg px-8"
+              className="rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700 transform hover:scale-105 transition-all text-lg px-8 shadow-xl"
               onClick={() => navigate("/contact")}
             >
               Get Connected
@@ -618,7 +618,7 @@ const EnhancedHome = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="rounded-full border-2 border-white text-white hover:bg-white hover:text-blue-600 transform hover:scale-105 transition-all text-lg px-8"
+              className="rounded-full border-2 border-amber-600 text-amber-900 bg-white hover:bg-amber-50 transform hover:scale-105 transition-all text-lg px-8 font-semibold"
               onClick={() => navigate("/prayer-wall")}
             >
               Request Prayer
