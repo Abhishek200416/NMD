@@ -152,32 +152,32 @@ const Home = () => {
       <section className="section relative overflow-hidden bg-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
         <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white animate-fadeInUp" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
+          <div className="max-w-4xl mx-auto text-center py-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900 animate-fadeInUp">
               New Here? Welcome Home! 🏠
             </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fadeIn" style={{ animationDelay: '0.2s', textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed animate-fadeIn" style={{ animationDelay: '0.2s' }}>
               "For where two or three gather in my name, there am I with them." - Matthew 18:20
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 animate-fadeIn border border-purple-100" style={{ animationDelay: '0.3s' }}>
                 <div className="text-4xl mb-3">👥</div>
-                <h3 className="text-xl font-bold mb-2 text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Join Our Community</h3>
-                <p className="text-white/80 text-sm" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Join Our Community</h3>
+                <p className="text-gray-700 text-sm">
                   Experience fellowship with believers who care about you and your spiritual journey
                 </p>
               </div>
-              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 animate-fadeIn border border-blue-100" style={{ animationDelay: '0.4s' }}>
                 <div className="text-4xl mb-3">📖</div>
-                <h3 className="text-xl font-bold mb-2 text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Grow in Faith</h3>
-                <p className="text-white/80 text-sm" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Grow in Faith</h3>
+                <p className="text-gray-700 text-sm">
                   Discover God's Word through powerful preaching, Bible studies, and prayer groups
                 </p>
               </div>
-              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30 animate-fadeIn" style={{ animationDelay: '0.5s' }}>
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-xl transition-all hover:scale-105 animate-fadeIn border border-purple-100" style={{ animationDelay: '0.5s' }}>
                 <div className="text-4xl mb-3">❤️</div>
-                <h3 className="text-xl font-bold mb-2 text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Make an Impact</h3>
-                <p className="text-white/80 text-sm" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">Make an Impact</h3>
+                <p className="text-gray-700 text-sm">
                   Serve alongside us to reach our community and share God's love with those in need
                 </p>
               </div>
@@ -185,7 +185,7 @@ const Home = () => {
             <Button 
               size="lg"
               onClick={() => navigate("/about")}
-              className="rounded-full px-10 py-7 text-lg font-semibold bg-white text-purple-900 hover:bg-gray-100 hover:scale-110 transition-all shadow-2xl animate-fadeIn"
+              className="rounded-full px-10 py-7 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 hover:scale-110 transition-all shadow-2xl animate-fadeIn"
               style={{ animationDelay: '0.6s' }}
             >
               Learn More About Us
