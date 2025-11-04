@@ -1015,7 +1015,7 @@ async def get_youtube_videos(channel_handle: str):
                 {
                     "id": "nd3",
                     "videoId": "nDx_qJpAtd4",
-                    "title": "Nehemiah Sermon Series | Steps to Rebuild",
+                    "title": "Nehemiah Sermon Series | Steps to Rebuild Faith",
                     "publishedAt": "2025-09-10T10:00:00Z",
                     "description": "Part of a series on the mission and faith of Nehemiah, focusing on steps to rebuild faith and recognize God's open doors.",
                     "category": "Sunday Services",
@@ -1024,18 +1024,58 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd4",
+                    "videoId": "CwTXjaR2g_U",
+                    "title": "God's Hand Brings Miracles | September 7, 2025 Full Sermon",
+                    "publishedAt": "2025-09-07T10:00:00Z",
+                    "description": "Witness the miraculous power of God's hand. A powerful message on God's supernatural intervention in our lives.",
+                    "category": "Sunday Services",
+                    "duration": "64:30",
+                    "views": "10.5K"
+                },
+                {
+                    "id": "nd5",
+                    "videoId": "X_XUN97FoAE",
+                    "title": "Partake in Jesus - Step into Restoration | August 3, 2025 Full Sermon",
+                    "publishedAt": "2025-08-03T10:00:00Z",
+                    "description": "A powerful message on restoration through Christ. Understanding how to partake in Jesus and experience complete healing.",
+                    "category": "Sunday Services",
+                    "duration": "68:15",
+                    "views": "9.8K"
+                },
+                {
+                    "id": "nd6",
+                    "videoId": "7b7W4WtVDtg",
+                    "title": "I am doing a TERRIBLE THING | August 17, 2025 Full Sermon",
+                    "publishedAt": "2025-08-17T10:00:00Z",
+                    "description": "A convicting message on self-examination and repentance. Turning away from things that hinder our walk with God.",
+                    "category": "Sunday Services",
+                    "duration": "59:40",
+                    "views": "7.9K"
+                },
+                {
+                    "id": "nd7",
                     "videoId": "mT0VK8c9NU4",
-                    "title": "A Life Unaffected by the World",
+                    "title": "A Life Unaffected by the World | Full Sermon",
                     "publishedAt": "2025-03-16T10:00:00Z",
                     "description": "Living a life that is not influenced by worldly standards but rooted in God's truth and principles.",
                     "category": "Sunday Services",
                     "duration": "52:30",
-                    "views": "9.3K"
+                    "views": "11.3K"
                 },
                 {
-                    "id": "nd5",
+                    "id": "nd8",
+                    "videoId": "9rHa_2VIhIQ",
+                    "title": "Secure your Territory | March 9, 2025 Full Sermon",
+                    "publishedAt": "2025-03-09T10:00:00Z",
+                    "description": "A message on spiritual warfare and securing what God has given you. Standing firm in faith.",
+                    "category": "Sunday Services",
+                    "duration": "56:20",
+                    "views": "8.7K"
+                },
+                {
+                    "id": "nd9",
                     "videoId": "7LCYOWo85ZY",
-                    "title": "Building Consistency in Prayer",
+                    "title": "Building Consistency in Prayer | February 2, 2025",
                     "publishedAt": "2025-02-02T10:00:00Z",
                     "description": "Practical teaching on developing a consistent and powerful prayer life that transforms your walk with God.",
                     "category": "Prayer & Worship",
@@ -1043,54 +1083,84 @@ async def get_youtube_videos(channel_handle: str):
                     "views": "5.6K"
                 },
                 {
-                    "id": "nd6",
-                    "videoId": "9rHa_2VIhIQ",
-                    "title": "REVIVE Conference - Opening Night",
-                    "publishedAt": "2025-01-20T19:00:00Z",
-                    "description": "The powerful opening night of REVIVE - 5 Day Revival Conference. A move of God's Spirit!",
-                    "category": "Special Events",
-                    "duration": "78:30",
-                    "views": "15.4K"
-                },
-                {
-                    "id": "nd7",
-                    "videoId": "1Pu1ZQW_g5Y",
-                    "title": "Youth Gathering - Identity in Christ",
-                    "publishedAt": "2025-01-15T18:30:00Z",
-                    "description": "A message for the youth about discovering their true identity and purpose in Christ Jesus.",
-                    "category": "Youth Services",
-                    "duration": "45:15",
-                    "views": "6.1K"
-                },
-                {
-                    "id": "nd8",
-                    "videoId": "bNmhuBbR5tk",
-                    "title": "Ministry Training - Effective Evangelism",
-                    "publishedAt": "2025-01-10T14:00:00Z",
-                    "description": "Equipping the saints for ministry work. Practical training on sharing the Gospel effectively.",
-                    "category": "Ministry Training",
-                    "duration": "37:50",
-                    "views": "3.8K"
-                },
-                {
-                    "id": "nd9",
-                    "videoId": "M7lc1UVf-VE",
-                    "title": "Sunday Service - Living in Victory",
-                    "publishedAt": "2025-01-05T10:00:00Z",
-                    "description": "How to live in the victory that Christ has already won for us. Walking in triumph!",
-                    "category": "Sunday Services",
-                    "duration": "49:15",
-                    "views": "7.1K"
-                },
-                {
                     "id": "nd10",
-                    "videoId": "ZZ5LpwO-An4",
-                    "title": "Prayer & Fasting - Breakthrough Session",
-                    "publishedAt": "2025-01-03T06:00:00Z",
-                    "description": "Join us for an early morning prayer and fasting session. Seeking God's face together.",
-                    "category": "Prayer & Worship",
-                    "duration": "64:30",
-                    "views": "4.3K"
+                    "videoId": "aU21rNmbShk",
+                    "title": "Bible Study w/ Ps. Nehemiah David | January 31, 2025",
+                    "publishedAt": "2025-01-31T19:00:00Z",
+                    "description": "Weekly Bible study session with Pastor Nehemiah David. Exploring God's Word together with practical application.",
+                    "category": "Bible Study",
+                    "duration": "52:15",
+                    "views": "4.2K"
+                },
+                {
+                    "id": "nd11",
+                    "videoId": "x1Nc7Tk-bjA",
+                    "title": "Assignment, Ability & Priority | December 22, 2024 Full Sermon",
+                    "publishedAt": "2024-12-22T10:00:00Z",
+                    "description": "Understanding your God-given assignment, walking in your abilities, and setting right priorities in life.",
+                    "category": "Sunday Services",
+                    "duration": "61:45",
+                    "views": "9.4K"
+                },
+                {
+                    "id": "nd12",
+                    "videoId": "1Pu1ZQW_g5Y",
+                    "title": "What does the Grace of God do? | May 7, 2024",
+                    "publishedAt": "2024-05-07T10:00:00Z",
+                    "description": "A deep dive into understanding God's grace and its transformative power in the believer's life.",
+                    "category": "Bible Study",
+                    "duration": "54:30",
+                    "views": "7.8K"
+                },
+                {
+                    "id": "nd13",
+                    "videoId": "oQktWgYzME8",
+                    "title": "365 Bible Verses Everyone Should Know - Nehemiah 1:4",
+                    "publishedAt": "2024-01-04T08:00:00Z",
+                    "description": "Daily devotional series exploring essential Bible verses. Today: Nehemiah 1:4 on prayer and fasting.",
+                    "category": "Bible Study",
+                    "duration": "12:30",
+                    "views": "2.9K"
+                },
+                {
+                    "id": "nd14",
+                    "videoId": "31U2OGhylAs",
+                    "title": "EXCEEDING GREATNESS | Part 1",
+                    "publishedAt": "2024-11-15T10:00:00Z",
+                    "description": "First part of powerful teaching series on the exceeding greatness of God's power available to believers.",
+                    "category": "Ministry Training",
+                    "duration": "47:20",
+                    "views": "6.5K"
+                },
+                {
+                    "id": "nd15",
+                    "videoId": "J03uAKirX_8",
+                    "title": "Sowing into the Spirit - Part 2",
+                    "publishedAt": "2024-10-20T10:00:00Z",
+                    "description": "Continuation of teaching on spiritual sowing and reaping. Understanding the law of sowing and reaping in the Spirit.",
+                    "category": "Bible Study",
+                    "duration": "51:40",
+                    "views": "5.3K"
+                },
+                {
+                    "id": "nd16",
+                    "videoId": "sevnilB-BfA",
+                    "title": "Pentecost Sunday | Faith Center Live Experience",
+                    "publishedAt": "2024-06-09T10:00:00Z",
+                    "description": "Celebrating Pentecost Sunday with powerful worship and a message on the Holy Spirit's power.",
+                    "category": "Special Events",
+                    "duration": "72:15",
+                    "views": "13.2K"
+                },
+                {
+                    "id": "nd17",
+                    "videoId": "lIQl5xkU9jM",
+                    "title": "Double Honor for Shame - Part 1",
+                    "publishedAt": "2024-04-14T10:00:00Z",
+                    "description": "First part of powerful series on God's restoration. Instead of shame, God gives double honor and blessing.",
+                    "category": "Sunday Services",
+                    "duration": "58:50",
+                    "views": "8.1K"
                 }
             ]
         else:
