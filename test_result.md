@@ -306,6 +306,55 @@ frontend:
         comment: "Added skeleton loading, improved volunteer form modal with backdrop blur, better form layout (grid for name/email), sticky modal header, responsive button order, smooth animations, image hover scale effect on cards"
         
   - task: "Contact form with validation and error states"
+
+  - task: "Event registration modal and functionality"
+    implemented: true
+    working: "NA"
+    file: "src/pages/Events.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added event registration modal with form fields for name, email, phone, guests, and notes. Form submits to POST /api/events/{event_id}/register endpoint"
+        
+  - task: "Admin Attendees Manager page"
+    implemented: true
+    working: "NA"
+    file: "src/pages/admin/AttendeesManager.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created comprehensive admin page to view all event registrations with stats cards, event filtering, and detailed attendee table showing name, event, contact info, guests, and registration date"
+        
+  - task: "Updated hero section with white text and improved styling"
+    implemented: true
+    working: "NA"
+    file: "src/pages/Home.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Enhanced hero section with WHITE text using drop shadows and text shadows for visibility, improved service times display with multiple services shown vertically, larger buttons with better hover effects, improved responsive design"
+        
+  - task: "Reduced empty spaces and improved layout"
+    implemented: true
+    working: "NA"
+    file: "src/App.css"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Optimized section padding, reduced card grid padding, adjusted container max-width to 1400px for better content density while maintaining readability"
+
     implemented: true
     working: true
     file: "src/pages/Contact.jsx"
