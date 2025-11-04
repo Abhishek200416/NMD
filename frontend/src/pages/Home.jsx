@@ -95,13 +95,13 @@ const Home = () => {
         ) : null}
         <div className="hero-overlay" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.7))' }} />
         <div className="hero-content">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white drop-shadow-2xl" data-testid="hero-title" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white drop-shadow-2xl animate-fadeInUp" data-testid="hero-title" style={{ textShadow: '3px 3px 8px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.7)' }}>
             {currentBrand.tagline || `Welcome to ${currentBrand.name}`}
           </h1>
           {currentBrand.service_times && (
-            <div className="bg-white/95 backdrop-blur-md text-gray-900 rounded-xl p-5 sm:p-7 mb-6 sm:mb-8 inline-block max-w-full shadow-2xl border-2 border-white/50">
+            <div className="bg-white/95 backdrop-blur-md text-gray-900 rounded-xl p-5 sm:p-7 mb-6 sm:mb-8 inline-block max-w-full shadow-2xl border-2 border-white/50 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
               <div className="flex items-start space-x-3 sm:space-x-4 mb-4">
-                <Clock size={24} className="sm:w-7 sm:h-7 flex-shrink-0 text-blue-600 mt-1" />
+                <Clock size={24} className="sm:w-7 sm:h-7 flex-shrink-0 text-purple-600 mt-1" />
                 <div className="text-left">
                   <p className="font-bold text-lg sm:text-xl mb-2 text-gray-900">Service Times</p>
                   <div className="space-y-1.5 text-sm sm:text-base">
@@ -113,16 +113,16 @@ const Home = () => {
               </div>
               {currentBrand.location && (
                 <div className="flex items-start space-x-3 sm:space-x-4 pt-4 border-t-2 border-gray-200">
-                  <MapPin size={24} className="sm:w-7 sm:h-7 flex-shrink-0 text-red-600 mt-1" />
+                  <MapPin size={24} className="sm:w-7 sm:h-7 flex-shrink-0 text-blue-600 mt-1" />
                   <p className="text-xs sm:text-sm text-gray-700 break-words">{currentBrand.location}</p>
                 </div>
               )}
             </div>
           )}
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 justify-center px-4 sm:px-0">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 justify-center px-4 sm:px-0 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
             <Button 
               size="lg" 
-              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-2xl hover:scale-105 transition-transform" 
+              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-2xl hover:scale-110 transition-all hover:shadow-purple-500/50 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" 
               onClick={() => navigate("/watch-live")} 
               data-testid="cta-join-sunday"
             >
@@ -131,11 +131,57 @@ const Home = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="rounded-full bg-white/95 backdrop-blur-sm border-2 border-white text-gray-900 hover:bg-white hover:scale-105 transition-transform w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-2xl font-semibold" 
+              className="rounded-full bg-white/95 backdrop-blur-sm border-2 border-white text-gray-900 hover:bg-white hover:scale-110 transition-all w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-2xl font-semibold" 
               onClick={() => navigate("/giving")} 
               data-testid="cta-learn-more"
             >
               Give Online
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* New Here Section - Welcoming visitors */}
+      <section className="section relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
+        <div className="container relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white animate-fadeInUp" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
+              New Here? Welcome Home! 🏠
+            </h2>
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fadeIn" style={{ animationDelay: '0.2s', textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>
+              "For where two or three gather in my name, there am I with them." - Matthew 18:20
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+                <div className="text-4xl mb-3">👥</div>
+                <h3 className="text-xl font-bold mb-2 text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Join Our Community</h3>
+                <p className="text-white/80 text-sm" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+                  Experience fellowship with believers who care about you and your spiritual journey
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+                <div className="text-4xl mb-3">📖</div>
+                <h3 className="text-xl font-bold mb-2 text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Grow in Faith</h3>
+                <p className="text-white/80 text-sm" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+                  Discover God's Word through powerful preaching, Bible studies, and prayer groups
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/30 animate-fadeIn" style={{ animationDelay: '0.5s' }}>
+                <div className="text-4xl mb-3">❤️</div>
+                <h3 className="text-xl font-bold mb-2 text-white" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Make an Impact</h3>
+                <p className="text-white/80 text-sm" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+                  Serve alongside us to reach our community and share God's love with those in need
+                </p>
+              </div>
+            </div>
+            <Button 
+              size="lg"
+              onClick={() => navigate("/about")}
+              className="rounded-full px-10 py-7 text-lg font-semibold bg-white text-purple-900 hover:bg-gray-100 hover:scale-110 transition-all shadow-2xl animate-fadeIn"
+              style={{ animationDelay: '0.6s' }}
+            >
+              Learn More About Us
             </Button>
           </div>
         </div>
