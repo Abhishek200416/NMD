@@ -45,8 +45,8 @@ This creates:
 - Sample events, ministries, and announcements
 
 2. **Access the Application**
-- Public Site: https://worship-videos.preview.emergentagent.com
-- Admin Panel: https://worship-videos.preview.emergentagent.com/admin/login
+- Public Site: https://faithvid-platform.preview.emergentagent.com
+- Admin Panel: https://faithvid-platform.preview.emergentagent.com/admin/login
 
 ## 🔐 Admin Credentials
 
