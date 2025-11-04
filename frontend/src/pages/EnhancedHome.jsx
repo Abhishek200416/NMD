@@ -303,30 +303,6 @@ const EnhancedHome = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="section bg-white border-y border-gray-200 transition-all duration-500">
-        <div className="container">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center transition-all duration-300 hover:scale-105">
-              <div className="stat-number text-blue-600 mb-2">500+</div>
-              <div className="text-lg sm:text-xl font-medium text-gray-700">Active Members</div>
-            </div>
-            <div className="text-center transition-all duration-300 hover:scale-105">
-              <div className="stat-number text-purple-600 mb-2">15</div>
-              <div className="text-lg sm:text-xl font-medium text-gray-700">Years Serving</div>
-            </div>
-            <div className="text-center transition-all duration-300 hover:scale-105">
-              <div className="stat-number text-blue-600 mb-2">20+</div>
-              <div className="text-lg sm:text-xl font-medium text-gray-700">Ministries</div>
-            </div>
-            <div className="text-center transition-all duration-300 hover:scale-105">
-              <div className="stat-number text-purple-600 mb-2">1000+</div>
-              <div className="text-lg sm:text-xl font-medium text-gray-700">Lives Changed</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Mission & Vision Section */}
       <section className="section bg-white">
         <div className="container max-w-6xl">
