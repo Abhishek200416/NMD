@@ -490,8 +490,9 @@ a:focus-visible,
 button:focus-visible, 
 input:focus-visible, 
 textarea:focus-visible {
-  outline: 2px solid #4a90e2;
+  outline: 2px solid #8b5cf6;
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
 }
 
 /* Loading States */
