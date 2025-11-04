@@ -393,11 +393,11 @@ frontend:
         
   - task: "Updated hero section with white text and improved styling"
     implemented: true
-    working: "NA"
-    file: "src/pages/Home.jsx"
+    working: true
+    file: "src/pages/EnhancedHome.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -405,6 +405,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "MAJOR DESIGN OVERHAUL: 1) Changed entire color scheme from warm amber/orange/yellow to cool blues/purples (Deep Purples & Blues theme), 2) Updated Header with gradient from slate-900 via purple-900, all buttons now blue-to-purple gradients, 3) Added 'New Here? Welcome Home!' section with church references and 3 cards (Join Community, Grow in Faith, Make Impact) with Matthew 18:20 scripture, 4) Enhanced hero text with stronger white color and multiple shadows for perfect visibility, 5) Added 30 church/ministry gallery images to seed_data.py, 6) Reduced section padding from 2.5-4rem to 2-3rem to minimize empty spaces, 7) Added dynamic animations (fadeInUp, bounceIn, slideIn, shimmer), 8) Updated all focus states and scrollbars to purple theme, 9) All service time icons now purple/blue instead of red/blue, 10) Made Foundations link conditional - only shows for Nehemiah David Ministries, hidden for Faith Centre"
+      - working: true
+        agent: "main"
+        comment: "HOMEPAGE HERO & STATS SECTION FIXES: 1) Changed hero background image to bright cathedral interior (https://images.unsplash.com/photo-1551634979-443bd43773cf) with better lighting and visibility, 2) Updated hero height from min-h-[75vh] to min-h-screen for better full-screen fit, 3) Increased hero image opacity from 0.5 to 0.6 for better visibility, 4) Strengthened hero text white color (#FFFFFF) with enhanced text shadows for maximum visibility on all backgrounds, 5) Removed countdown timer to reduce hero section height, 6) Made service times box more compact with white/95 background, 7) Made buttons more compact (reduced from py-6 to py-4/py-5), 8) FIXED STATS SECTION: Changed from blue-purple gradient to WHITE background with border-y border-gray-200, 9) Stats now always visible (removed opacity-0 and scroll animation dependency), 10) Stats numbers now use blue-600 and purple-600 colors for visibility on white background, 11) Stats text changed to text-gray-700 for better readability, 12) Database reseeded with new hero images for both brands. Hero section now fits on screen without excessive scrolling, text is clearly white and visible, and stats section displays properly with white background and colored numbers."
         
   - task: "Reduced empty spaces and improved layout"
     implemented: true
