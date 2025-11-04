@@ -1558,285 +1558,47 @@ def main():
     print(f"Test Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 80)
     
-    results = {}
-    brand_id = None
-    ndm_id = None
-    faith_id = None
-    admin_token = None
-    user_token = None
-    user_id = None
-    category_id = None
-    session_id = None
+    # Track test results
+    results = []
     
-    # ========== BASIC SETUP TESTS ==========
-    print("\n🏗️  BASIC SETUP TESTS")
-    print("-" * 40)
+    print("\n🔍 TESTING MESSAGES PAGE YOUTUBE INTEGRATION BACKEND")
+    print("=" * 60)
+    print("Testing the two YouTube channel endpoints as requested:")
+    print("1. GET /api/youtube/channel/@faithcenter_in - should return exactly 8 videos")
+    print("2. GET /api/youtube/channel/@nehemiahdavid - should return exactly 10 videos")
+    print("=" * 60)
     
-    # Test 1: GET /api/brands - Enhanced brand testing
-    success, ndm_id, faith_id = test_get_brands()
-    results['brands'] = success
-    print()
+    # Test 1: Faith Center YouTube Channel
+    print("\n" + "=" * 50)
+    print("🎥 TESTING FAITH CENTER YOUTUBE CHANNEL")
+    print("=" * 50)
     
-    # Use NMD as default brand_id for other tests
-    if ndm_id:
-        brand_id = ndm_id
-    elif faith_id:
-        brand_id = faith_id
-    else:
-        brand_id = "test-brand-id"
-        print(f"⚠️  Using default brand_id: {brand_id}")
+    faith_youtube_success = test_youtube_faith_center_channel()
+    results.append(("GET /api/youtube/channel/@faithcenter_in", faith_youtube_success))
     
-    # Test 2: Admin Login
-    success, admin_token = test_admin_login()
-    results['admin_login'] = success
-    print()
+    # Test 2: Nehemiah David YouTube Channel
+    print("\n" + "=" * 50)
+    print("🎥 TESTING NEHEMIAH DAVID YOUTUBE CHANNEL")
+    print("=" * 50)
     
-    # ========== LEGACY API TESTS ==========
-    print("\n📋 LEGACY API TESTS")
-    print("-" * 40)
+    nehemiah_youtube_success = test_youtube_nehemiah_david_channel()
+    results.append(("GET /api/youtube/channel/@nehemiahdavid", nehemiah_youtube_success))
     
-    # Test 3: GET /api/events (with and without brand_id)
-    results['events_all'] = test_get_events()
-    print()
+    # Test 3: Content Uniqueness Between Channels
+    print("\n" + "=" * 50)
+    print("🔍 TESTING YOUTUBE CHANNELS CONTENT UNIQUENESS")
+    print("=" * 50)
     
-    # Test brand-specific events
-    if ndm_id and faith_id:
-        results['ndm_events'] = test_get_events(ndm_id, "Nehemiah David Ministries", 3)
-        print()
-        results['faith_events'] = test_get_events(faith_id, "Faith Centre", 3)
-        print()
-    elif brand_id:
-        results['events_by_brand'] = test_get_events(brand_id)
-        print()
+    youtube_uniqueness_success = test_youtube_channels_uniqueness()
+    results.append(("YouTube Channels Content Uniqueness", youtube_uniqueness_success))
     
-    # Test 4: GET /api/ministries (with and without brand_id)
-    results['ministries_all'] = test_get_ministries()
-    print()
+    # Test 4: Video ID Format Validation
+    print("\n" + "=" * 50)
+    print("🔍 TESTING VIDEO ID FORMAT VALIDATION")
+    print("=" * 50)
     
-    # Test brand-specific ministries
-    if ndm_id and faith_id:
-        results['ndm_ministries'] = test_get_ministries(ndm_id, "Nehemiah David Ministries", 4)
-        print()
-        results['faith_ministries'] = test_get_ministries(faith_id, "Faith Centre", 4)
-        print()
-        
-        # Test content uniqueness between brands
-        results['brand_content_uniqueness'] = test_brand_content_uniqueness(ndm_id, faith_id)
-        print()
-    elif brand_id:
-        results['ministries_by_brand'] = test_get_ministries(brand_id)
-        print()
-    
-    # Test 5: GET /api/announcements (with and without brand_id)
-    results['announcements_all'] = test_get_announcements()
-    print()
-    if brand_id:
-        results['announcements_by_brand'] = test_get_announcements(brand_id)
-        print()
-    
-    # Test 6: POST /api/contact
-    results['contact_post'] = test_post_contact(brand_id)
-    print()
-    
-    # Test 7: POST /api/subscribers
-    results['subscribers_post'] = test_post_subscribers(brand_id)
-    print()
-    
-    # ========== NEW MEMBER AUTHENTICATION TESTS ==========
-    print("\n👥 MEMBER AUTHENTICATION TESTS")
-    print("-" * 40)
-    
-    # Test 8: User Registration
-    success, user_token, user_id, test_email = test_user_register(brand_id)
-    results['user_register'] = success
-    print()
-    
-    # Test 9: User Login
-    if success and user_id and test_email:  # Only test login if registration worked
-        success, login_token = test_user_login(test_email)
-        results['user_login'] = success
-        if success and login_token:
-            user_token = login_token  # Use login token for subsequent tests
-        print()
-    else:
-        results['user_login'] = False
-        print("⏭️  Skipping user login test (registration failed)")
-        print()
-    
-    # Test 10: Get Current User Info
-    if user_token:
-        results['user_me'] = test_get_current_user(user_token)
-        print()
-    else:
-        results['user_me'] = False
-        print("⏭️  Skipping user/me test (no user token)")
-        print()
-    
-    # Test 11: Get All Users (Admin)
-    if admin_token:
-        results['users_get_all'] = test_get_all_users(admin_token, brand_id)
-        print()
-    else:
-        results['users_get_all'] = False
-        print("⏭️  Skipping get all users test (no admin token)")
-        print()
-    
-    # Test 12: Admin Create User
-    if admin_token:
-        success, created_user_id = test_create_user_by_admin(admin_token, brand_id)
-        results['admin_create_user'] = success
-        print()
-        
-        # Test 13: Toggle User Status
-        if success and created_user_id:
-            results['toggle_user_status'] = test_toggle_user_status(admin_token, created_user_id)
-            print()
-        else:
-            results['toggle_user_status'] = False
-            print("⏭️  Skipping toggle user status test (user creation failed)")
-            print()
-    else:
-        results['admin_create_user'] = False
-        results['toggle_user_status'] = False
-        print("⏭️  Skipping admin user tests (no admin token)")
-        print()
-    
-    # ========== GIVING CATEGORY TESTS ==========
-    print("\n💰 GIVING CATEGORY TESTS")
-    print("-" * 40)
-    
-    # Test 14: Get Giving Categories
-    success, category_id = test_get_giving_categories(brand_id)
-    results['giving_categories_get'] = success
-    print()
-    
-    # Test 15: Create Giving Category (Admin)
-    if admin_token:
-        success, new_category_id = test_create_giving_category(admin_token, brand_id)
-        results['giving_categories_create'] = success
-        if success and new_category_id:
-            category_id = new_category_id  # Use newly created category for payment tests
-        print()
-    else:
-        results['giving_categories_create'] = False
-        print("⏭️  Skipping create giving category test (no admin token)")
-        print()
-    
-    # ========== STRIPE PAYMENT TESTS ==========
-    print("\n💳 STRIPE PAYMENT TESTS")
-    print("-" * 40)
-    
-    # Test 16: Create Checkout Session
-    success, session_id = test_create_checkout_session(brand_id, category_id)
-    results['payments_create_checkout'] = success
-    print()
-    
-    # Test 17: Get Payment Status
-    if session_id:
-        results['payments_get_status'] = test_get_payment_status(session_id)
-        print()
-    else:
-        results['payments_get_status'] = False
-        print("⏭️  Skipping payment status test (no session_id)")
-        print()
-    
-    # Test 18: Get Payment History (User)
-    if user_token:
-        results['payments_history'] = test_get_payment_history(user_token)
-        print()
-    else:
-        results['payments_history'] = False
-        print("⏭️  Skipping payment history test (no user token)")
-        print()
-    
-    # Test 19: Get All Transactions (Admin)
-    if admin_token:
-        results['payments_transactions'] = test_get_all_transactions(admin_token)
-        print()
-    else:
-        results['payments_transactions'] = False
-        print("⏭️  Skipping all transactions test (no admin token)")
-        print()
-    
-    # ========== FOUNDATIONS TESTS ==========
-    print("\n🏛️  FOUNDATIONS TESTS")
-    print("-" * 40)
-    
-    # Test 20: Get Foundations for Nehemiah David Ministries
-    if ndm_id:
-        success, foundations_data = test_get_foundations(ndm_id)
-        results['foundations_get'] = success
-        print()
-        
-        # Test 21: Get specific foundation by ID
-        if success and foundations_data and len(foundations_data) > 0:
-            foundation_id = foundations_data[0].get('id')
-            if foundation_id:
-                success, foundation_detail = test_get_foundation_by_id(foundation_id)
-                results['foundation_get_by_id'] = success
-                print()
-                
-                # Test 22: Foundation donation
-                if success:
-                    results['foundation_donate'] = test_foundation_donate(foundation_id, ndm_id)
-                    print()
-                else:
-                    results['foundation_donate'] = False
-                    print("⏭️  Skipping foundation donation test (get by ID failed)")
-                    print()
-            else:
-                results['foundation_get_by_id'] = False
-                results['foundation_donate'] = False
-                print("⏭️  Skipping foundation by ID and donation tests (no foundation ID)")
-                print()
-        else:
-            results['foundation_get_by_id'] = False
-            results['foundation_donate'] = False
-            print("⏭️  Skipping foundation by ID and donation tests (get foundations failed)")
-            print()
-    else:
-        results['foundations_get'] = False
-        results['foundation_get_by_id'] = False
-        results['foundation_donate'] = False
-        print("⏭️  Skipping all foundation tests (no Nehemiah David Ministries brand ID)")
-        print()
-    
-    # ========== YOUTUBE INTEGRATION TESTS ==========
-    print("\n📹 YOUTUBE INTEGRATION TESTS")
-    print("-" * 40)
-    
-    # Test 23: Faith Center YouTube Channel (@faithcenter_in)
-    results['youtube_faith_center'] = test_youtube_faith_center_channel()
-    print()
-    
-    # Test 24: Nehemiah David YouTube Channel (@nehemiahdavid)
-    results['youtube_nehemiah_david'] = test_youtube_nehemiah_david_channel()
-    print()
-    
-    # Test 25: YouTube Channels Content Uniqueness
-    results['youtube_channels_uniqueness'] = test_youtube_channels_uniqueness()
-    print()
-    
-    # ========== LIVE STREAM TESTS ==========
-    print("\n📺 LIVE STREAM TESTS")
-    print("-" * 40)
-    
-    # Test 26: Get Live Streams
-    results['live_streams_get'] = test_get_live_streams(brand_id)
-    print()
-    
-    # Test 27: Get Active Stream
-    results['live_streams_active'] = test_get_active_stream(brand_id)
-    print()
-    
-    # Test 28: Create Live Stream (Admin)
-    if admin_token:
-        results['live_streams_create'] = test_create_live_stream(admin_token, brand_id)
-        print()
-    else:
-        results['live_streams_create'] = False
-        print("⏭️  Skipping create live stream test (no admin token)")
-        print()
+    video_id_validation_success = test_video_id_format_validation()
+    results.append(("Video ID Format Validation", video_id_validation_success))
     
     # ========== SUMMARY ==========
     print("=" * 80)
