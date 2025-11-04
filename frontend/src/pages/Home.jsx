@@ -93,32 +93,36 @@ const Home = () => {
         ) : currentBrand.hero_image_url ? (
           <img src={currentBrand.hero_image_url} alt="Hero" className="hero-video" />
         ) : null}
-        <div className="hero-overlay" />
+        <div className="hero-overlay" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.7))' }} />
         <div className="hero-content">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6" data-testid="hero-title">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white drop-shadow-2xl" data-testid="hero-title" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
             {currentBrand.tagline || `Welcome to ${currentBrand.name}`}
           </h1>
           {currentBrand.service_times && (
-            <div className="bg-white/90 backdrop-blur-sm text-gray-900 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 inline-block max-w-full">
-              <div className="flex items-center justify-center space-x-2 sm:space-x-3">
-                <Clock size={20} className="sm:w-6 sm:h-6 flex-shrink-0" />
+            <div className="bg-white/95 backdrop-blur-md text-gray-900 rounded-xl p-5 sm:p-7 mb-6 sm:mb-8 inline-block max-w-full shadow-2xl border-2 border-white/50">
+              <div className="flex items-start space-x-3 sm:space-x-4 mb-4">
+                <Clock size={24} className="sm:w-7 sm:h-7 flex-shrink-0 text-blue-600 mt-1" />
                 <div className="text-left">
-                  <p className="font-semibold text-base sm:text-lg">Service Times</p>
-                  <p className="text-sm sm:text-base">{currentBrand.service_times}</p>
+                  <p className="font-bold text-lg sm:text-xl mb-2 text-gray-900">Service Times</p>
+                  <div className="space-y-1.5 text-sm sm:text-base">
+                    {currentBrand.service_times.split('|').map((time, idx) => (
+                      <p key={idx} className="text-gray-700 leading-relaxed">{time.trim()}</p>
+                    ))}
+                  </div>
                 </div>
               </div>
               {currentBrand.location && (
-                <div className="flex items-center justify-center space-x-2 sm:space-x-3 mt-3 pt-3 border-t">
-                  <MapPin size={20} className="sm:w-6 sm:h-6 flex-shrink-0" />
-                  <p className="text-xs sm:text-sm break-words">{currentBrand.location}</p>
+                <div className="flex items-start space-x-3 sm:space-x-4 pt-4 border-t-2 border-gray-200">
+                  <MapPin size={24} className="sm:w-7 sm:h-7 flex-shrink-0 text-red-600 mt-1" />
+                  <p className="text-xs sm:text-sm text-gray-700 break-words">{currentBrand.location}</p>
                 </div>
               )}
             </div>
           )}
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center px-4 sm:px-0">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 justify-center px-4 sm:px-0">
             <Button 
               size="lg" 
-              className="rounded-full w-full sm:w-auto" 
+              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-2xl hover:scale-105 transition-transform" 
               onClick={() => navigate("/watch-live")} 
               data-testid="cta-join-sunday"
             >
@@ -127,7 +131,7 @@ const Home = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="rounded-full bg-white/20 backdrop-blur-sm border-white text-white hover:bg-white hover:text-gray-900 w-full sm:w-auto" 
+              className="rounded-full bg-white/95 backdrop-blur-sm border-2 border-white text-gray-900 hover:bg-white hover:scale-105 transition-transform w-full sm:w-auto text-base sm:text-lg px-8 py-6 shadow-2xl font-semibold" 
               onClick={() => navigate("/giving")} 
               data-testid="cta-learn-more"
             >
