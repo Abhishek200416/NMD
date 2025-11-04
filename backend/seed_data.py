@@ -43,7 +43,7 @@ fc_brand = {
     "logo_url": "https://nehemiahdavid.com/images/logo.svg",
     "hero_image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920",
     "hero_video_url": "",
-    "location": "Amaravathi Rd, above Yousta, Gorantla, Guntur, Andhra Pradesh 522034",
+    "location": "123 Faith Street, Community Center, Vijayawada, Andhra Pradesh 520001",
     "service_times": "Morning: 7:00 AM - 9:00 AM | Service: 10:00 AM - 12:00 PM | Evening (Online): 6:30 PM - 8:30 PM | Friday: 7:00 PM - 9:00 PM",
     "primary_color": "#1a1a1a",
     "secondary_color": "#4a90e2",
