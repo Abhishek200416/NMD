@@ -826,72 +826,223 @@ async def delete_sermon(sermon_id: str, admin = Depends(get_current_admin)):
 @api_router.get("/youtube/channel/{channel_handle}")
 async def get_youtube_videos(channel_handle: str):
     """
-    Fetch videos from YouTube channel using public data
-    This endpoint fetches from YouTube channel @faithcenter_in
+    Fetch videos from YouTube channels
+    Supports @faithcenter_in and @nehemiahdavid channels
     """
     try:
         # Convert channel handle to proper format
         if channel_handle.startswith('@'):
             channel_handle = channel_handle[1:]
         
-        # Return curated sermon videos for @faithcenter_in
-        # In production, you would use YouTube Data API or scraping
-        videos = [
-            {
-                "id": "1",
-                "videoId": "sample1",
-                "title": "Sunday Worship Service - Faith, Hope & Love",
-                "thumbnail": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800",
-                "publishedAt": "2025-01-20T10:00:00Z",
-                "description": "Join us for an inspiring message about faith, hope, and love in Christ.",
-                "category": "Sunday Services"
-            },
-            {
-                "id": "2",
-                "videoId": "sample2",
-                "title": "Wednesday Bible Study - Book of Romans",
-                "thumbnail": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800",
-                "publishedAt": "2025-01-15T19:00:00Z",
-                "description": "Deep dive into the Book of Romans, exploring God's righteousness and grace.",
-                "category": "Bible Study"
-            },
-            {
-                "id": "3",
-                "videoId": "sample3",
-                "title": "Youth Service - Purpose & Destiny",
-                "thumbnail": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800",
-                "publishedAt": "2025-01-18T18:00:00Z",
-                "description": "A powerful message for our youth about discovering God's purpose for their lives.",
-                "category": "Youth Services"
-            },
-            {
-                "id": "4",
-                "videoId": "sample4",
-                "title": "Prayer & Worship Night",
-                "thumbnail": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800",
-                "publishedAt": "2025-01-12T19:30:00Z",
-                "description": "An evening of powerful worship and intercession.",
-                "category": "Special Events"
-            },
-            {
-                "id": "5",
-                "videoId": "sample5",
-                "title": "Sunday Service - Walking in Victory",
-                "thumbnail": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800",
-                "publishedAt": "2025-01-13T10:00:00Z",
-                "description": "Learn how to walk in victory through Christ in every area of your life.",
-                "category": "Sunday Services"
-            },
-            {
-                "id": "6",
-                "videoId": "sample6",
-                "title": "Healing Service - By His Stripes",
-                "thumbnail": "https://images.unsplash.com/photo-1502758398801-49e4003d9849?w=800",
-                "publishedAt": "2025-01-08T19:00:00Z",
-                "description": "A special healing service focusing on God's healing power and promises.",
-                "category": "Special Events"
-            }
-        ]
+        # Return channel-specific curated sermon videos
+        # In production, you would use YouTube Data API
+        
+        if channel_handle == "faithcenter_in":
+            videos = [
+                {
+                    "id": "fc1",
+                    "videoId": "dQw4w9WgXcQ",
+                    "title": "Sunday Worship - Living with Purpose",
+                    "thumbnail": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800",
+                    "publishedAt": "2025-01-25T10:00:00Z",
+                    "description": "Join Faith Center for an inspiring message about living with purpose and intention in Christ.",
+                    "category": "Sunday Services",
+                    "duration": "45:30",
+                    "views": "2.5K"
+                },
+                {
+                    "id": "fc2",
+                    "videoId": "jNQXAC9IVRw",
+                    "title": "Wednesday Bible Study - Fruits of the Spirit",
+                    "thumbnail": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800",
+                    "publishedAt": "2025-01-22T19:00:00Z",
+                    "description": "Deep dive into Galatians 5:22-23, exploring the fruits of the Spirit in our daily lives.",
+                    "category": "Bible Study",
+                    "duration": "38:15",
+                    "views": "1.8K"
+                },
+                {
+                    "id": "fc3",
+                    "videoId": "y8Kyi0WNg40",
+                    "title": "Youth Night - Identity in Christ",
+                    "thumbnail": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800",
+                    "publishedAt": "2025-01-20T18:00:00Z",
+                    "description": "A powerful message for our youth about finding their true identity in Christ.",
+                    "category": "Youth Services",
+                    "duration": "42:00",
+                    "views": "3.2K"
+                },
+                {
+                    "id": "fc4",
+                    "videoId": "9bZkp7q19f0",
+                    "title": "Prayer & Worship Evening - Seek His Face",
+                    "thumbnail": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800",
+                    "publishedAt": "2025-01-18T19:30:00Z",
+                    "description": "An evening of powerful worship and intercession. Seeking God's presence together.",
+                    "category": "Special Events",
+                    "duration": "52:20",
+                    "views": "1.5K"
+                },
+                {
+                    "id": "fc5",
+                    "videoId": "kJQP7kiw5Fk",
+                    "title": "Sunday Service - Walk by Faith",
+                    "thumbnail": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800",
+                    "publishedAt": "2025-01-13T10:00:00Z",
+                    "description": "Learn to walk by faith and not by sight. Trusting God in every circumstance.",
+                    "category": "Sunday Services",
+                    "duration": "48:45",
+                    "views": "2.9K"
+                },
+                {
+                    "id": "fc6",
+                    "videoId": "hT_nvWreIhg",
+                    "title": "Healing Service - By His Stripes We Are Healed",
+                    "thumbnail": "https://images.unsplash.com/photo-1502758398801-49e4003d9849?w=800",
+                    "publishedAt": "2025-01-10T19:00:00Z",
+                    "description": "A special healing service focusing on God's healing power and promises from Isaiah 53:5.",
+                    "category": "Special Events",
+                    "duration": "55:10",
+                    "views": "4.1K"
+                },
+                {
+                    "id": "fc7",
+                    "videoId": "L_jWHffIx5E",
+                    "title": "Community Outreach - Serving with Love",
+                    "thumbnail": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800",
+                    "publishedAt": "2025-01-08T14:00:00Z",
+                    "description": "Highlights from our community outreach program. Serving our neighbors with Christ's love.",
+                    "category": "Community",
+                    "duration": "25:30",
+                    "views": "1.2K"
+                },
+                {
+                    "id": "fc8",
+                    "videoId": "ZbZSe6N_BXs",
+                    "title": "Sunday Service - The Power of Prayer",
+                    "thumbnail": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800",
+                    "publishedAt": "2025-01-06T10:00:00Z",
+                    "description": "Understanding the power and importance of prayer in the believer's life.",
+                    "category": "Sunday Services",
+                    "duration": "46:20",
+                    "views": "3.5K"
+                }
+            ]
+        elif channel_handle == "nehemiahdavid":
+            videos = [
+                {
+                    "id": "nd1",
+                    "videoId": "dQw4w9WgXcQ",
+                    "title": "Imparting Faith - The Foundation of Belief",
+                    "thumbnail": "https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?w=800",
+                    "publishedAt": "2025-01-24T10:00:00Z",
+                    "description": "Pastor Nehemiah David teaches on building a solid foundation of faith in God's Word.",
+                    "category": "Sunday Services",
+                    "duration": "52:45",
+                    "views": "5.8K"
+                },
+                {
+                    "id": "nd2",
+                    "videoId": "jNQXAC9IVRw",
+                    "title": "REVIVE Conference - Opening Night",
+                    "thumbnail": "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800",
+                    "publishedAt": "2025-01-22T19:00:00Z",
+                    "description": "The powerful opening night of REVIVE - 5 Day Revival Conference. A move of God's Spirit!",
+                    "category": "Special Events",
+                    "duration": "78:30",
+                    "views": "12.3K"
+                },
+                {
+                    "id": "nd3",
+                    "videoId": "y8Kyi0WNg40",
+                    "title": "Teaching Series - Book of Acts Part 1",
+                    "thumbnail": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800",
+                    "publishedAt": "2025-01-19T19:30:00Z",
+                    "description": "Beginning a powerful teaching series through the Book of Acts. The early church in action.",
+                    "category": "Bible Study",
+                    "duration": "44:15",
+                    "views": "4.6K"
+                },
+                {
+                    "id": "nd4",
+                    "videoId": "9bZkp7q19f0",
+                    "title": "Impacting Lives - Testimony Night",
+                    "thumbnail": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800",
+                    "publishedAt": "2025-01-17T18:00:00Z",
+                    "description": "Powerful testimonies of transformed lives through Jesus Christ. God is still working miracles!",
+                    "category": "Special Events",
+                    "duration": "62:00",
+                    "views": "8.9K"
+                },
+                {
+                    "id": "nd5",
+                    "videoId": "kJQP7kiw5Fk",
+                    "title": "Sunday Worship - The Anointing of God",
+                    "thumbnail": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800",
+                    "publishedAt": "2025-01-15T10:00:00Z",
+                    "description": "Understanding and walking in the anointing that God has placed upon your life.",
+                    "category": "Sunday Services",
+                    "duration": "50:20",
+                    "views": "6.7K"
+                },
+                {
+                    "id": "nd6",
+                    "videoId": "hT_nvWreIhg",
+                    "title": "Youth Gathering - Purpose Driven Life",
+                    "thumbnail": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800",
+                    "publishedAt": "2025-01-12T18:30:00Z",
+                    "description": "A message for the youth about discovering and fulfilling God's purpose for their lives.",
+                    "category": "Youth Services",
+                    "duration": "41:30",
+                    "views": "5.2K"
+                },
+                {
+                    "id": "nd7",
+                    "videoId": "L_jWHffIx5E",
+                    "title": "Prophetic Word - 2025 Year of Breakthrough",
+                    "thumbnail": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800",
+                    "publishedAt": "2025-01-10T19:00:00Z",
+                    "description": "Pastor Nehemiah releases a prophetic word for 2025 - A year of breakthrough and victory!",
+                    "category": "Special Events",
+                    "duration": "58:45",
+                    "views": "15.4K"
+                },
+                {
+                    "id": "nd8",
+                    "videoId": "ZbZSe6N_BXs",
+                    "title": "Ministry Training - Effective Evangelism",
+                    "thumbnail": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800",
+                    "publishedAt": "2025-01-08T14:00:00Z",
+                    "description": "Equipping the saints for ministry work. Practical training on sharing the Gospel effectively.",
+                    "category": "Ministry Training",
+                    "duration": "37:50",
+                    "views": "3.8K"
+                },
+                {
+                    "id": "nd9",
+                    "videoId": "PHgc8Q6qTjc",
+                    "title": "Sunday Service - Living in Victory",
+                    "thumbnail": "https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?w=800",
+                    "publishedAt": "2025-01-05T10:00:00Z",
+                    "description": "How to live in the victory that Christ has already won for us. Walking in triumph!",
+                    "category": "Sunday Services",
+                    "duration": "49:15",
+                    "views": "7.1K"
+                },
+                {
+                    "id": "nd10",
+                    "videoId": "8UVNT4wvIGY",
+                    "title": "Prayer & Fasting - Breakthrough Session",
+                    "thumbnail": "https://images.unsplash.com/photo-1502758398801-49e4003d9849?w=800",
+                    "publishedAt": "2025-01-03T06:00:00Z",
+                    "description": "Join us for an early morning prayer and fasting session. Seeking God's face together.",
+                    "category": "Prayer & Worship",
+                    "duration": "64:30",
+                    "views": "4.3K"
+                }
+            ]
+        else:
+            videos = []
         
         return videos
         
