@@ -1,0 +1,516 @@
+import { useState, useEffect, useMemo } from "react";
+import { useBrand, API } from "@/App";
+import axios from "axios";
+import { Play, Calendar, ExternalLink, Youtube, Loader2, Search, X, Eye, Filter } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
+
+const MessagesEnhanced = () => {
+  const { currentBrand } = useBrand();
+  const [faithCenterVideos, setFaithCenterVideos] = useState([]);
+  const [nehemiahVideos, setNehemiahVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [activeChannelTab, setActiveChannelTab] = useState("faithcenter");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  useEffect(() => {
+    loadAllYoutubeVideos();
+  }, []);
+
+  const loadAllYoutubeVideos = async () => {
+    setLoading(true);
+    try {
+      const [faithResponse, nehemiahResponse] = await Promise.all([
+        axios.get(`${API}/youtube/channel/@faithcenter_in`),
+        axios.get(`${API}/youtube/channel/@nehemiahdavid`)
+      ]);
+      
+      setFaithCenterVideos(faithResponse.data);
+      setNehemiahVideos(nehemiahResponse.data);
+    } catch (error) {
+      console.error("Error loading YouTube videos:", error);
+      setFaithCenterVideos([]);
+      setNehemiahVideos([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const openYoutubeVideo = (videoId) => {
+    window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+  };
+
+  const openYoutubeChannel = (channel) => {
+    const channelUrl = channel === "faithcenter" 
+      ? "https://youtube.com/@faithcenter_in"
+      : "https://youtube.com/@nehemiahdavid";
+    window.open(channelUrl, '_blank');
+  };
+
+  const currentVideos = activeChannelTab === "faithcenter" ? faithCenterVideos : nehemiahVideos;
+  
+  const filteredVideos = useMemo(() => {
+    let videos = currentVideos;
+    
+    if (selectedCategory !== "all") {
+      videos = videos.filter(v => v.category === selectedCategory);
+    }
+    
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      videos = videos.filter(v => 
+        v.title.toLowerCase().includes(query) ||
+        v.description.toLowerCase().includes(query)
+      );
+    }
+    
+    return videos;
+  }, [currentVideos, selectedCategory, searchQuery]);
+
+  const categories = useMemo(() => {
+    const cats = new Set(currentVideos.map(v => v.category));
+    return ["all", ...Array.from(cats)];
+  }, [currentVideos]);
+
+  if (!currentBrand) return null;
+
+  const channelName = activeChannelTab === "faithcenter" ? "Faith Center" : "Nehemiah David Ministries";
+  const channelHandle = activeChannelTab === "faithcenter" ? "@faithcenter_in" : "@nehemiahdavid";
+
+  return (
+    <div className="transition-all duration-500">
+      <SEO 
+        title="Messages & Sermons - Watch Online"
+        description="Watch inspiring sermons and messages from Faith Center and Nehemiah David Ministries. Life-changing biblical teaching available online."
+        image="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1200"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "VideoGallery",
+          "name": "Church Messages & Sermons",
+          "description": "Watch inspiring sermons and messages online",
+          "url": window.location.href
+        }}
+      />
+
+      {/* Hero Header */}
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div className="absolute inset-0 w-full h-full">
+          <img 
+            src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920" 
+            alt="Messages" 
+            className="w-full h-full object-cover opacity-60 transition-opacity duration-700" 
+          />
+        </div>
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60 transition-all duration-500" />
+        
+        <div className="relative z-10 text-center text-white max-w-4xl px-4 sm:px-6">
+          <h1 
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white transition-all duration-500" 
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.2s backwards', 
+              textShadow: '2px 2px 8px rgba(0,0,0,0.7), 0 0 20px rgba(0,0,0,0.5)', 
+              color: '#FFFFFF'
+            }}
+          >
+            Messages & Sermons
+          </h1>
+          <p 
+            className="text-lg sm:text-xl max-w-2xl mx-auto text-white transition-all duration-500 mb-6" 
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.4s backwards', 
+              textShadow: '1px 1px 4px rgba(0,0,0,0.6)', 
+              color: '#FFFFFF'
+            }}
+          >
+            Watch and listen to inspiring messages from Faith Center & Nehemiah David Ministries
+          </p>
+          <div className="flex gap-4 justify-center" style={{ animation: 'fadeInUp 0.8s ease-out 0.6s backwards' }}>
+            <Button 
+              size="lg"
+              onClick={() => openYoutubeChannel("faithcenter")}
+              className="bg-red-600 hover:bg-red-700 transition-all duration-300 hover:scale-105"
+            >
+              <Youtube size={20} className="mr-2" />
+              Faith Center Channel
+            </Button>
+            <Button 
+              size="lg"
+              onClick={() => openYoutubeChannel("nehemiah")}
+              className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:scale-105"
+            >
+              <Youtube size={20} className="mr-2" />
+              NMD Channel
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Channel Tab Navigation */}
+      <section className="bg-white border-b border-gray-200 sticky top-16 z-40 shadow-sm">
+        <div className="container">
+          <div className="flex flex-wrap gap-3 py-4">
+            <button
+              onClick={() => {
+                setActiveChannelTab("faithcenter");
+                setSearchQuery("");
+                setSelectedCategory("all");
+              }}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform ${
+                activeChannelTab === "faithcenter"
+                  ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg scale-105"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105"
+              }`}
+            >
+              <Youtube className="inline mr-2" size={20} />
+              Faith Center
+            </button>
+            <button
+              onClick={() => {
+                setActiveChannelTab("nehemiah");
+                setSearchQuery("");
+                setSelectedCategory("all");
+              }}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform ${
+                activeChannelTab === "nehemiah"
+                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg scale-105"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105"
+              }`}
+            >
+              <Youtube className="inline mr-2" size={20} />
+              Nehemiah David
+            </button>
+            <div className="ml-auto">
+              <Button
+                size="lg"
+                onClick={() => openYoutubeChannel(activeChannelTab)}
+                className={`transition-all duration-300 hover:scale-105 ${
+                  activeChannelTab === "faithcenter" 
+                    ? "bg-red-600 hover:bg-red-700" 
+                    : "bg-blue-600 hover:bg-blue-700"
+                }`}
+              >
+                <ExternalLink size={18} className="mr-2" />
+                Visit {channelName} on YouTube
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Search and Filter Bar */}
+      <section className="bg-gray-50 border-b border-gray-200">
+        <div className="container py-4">
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* Search Bar */}
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <input
+                type="text"
+                placeholder="Search videos..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <X size={20} />
+                </button>
+              )}
+            </div>
+
+            {/* Category Filter */}
+            <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-all duration-300 transform hover:scale-105 ${
+                    selectedCategory === category
+                      ? activeChannelTab === "faithcenter"
+                        ? "bg-red-600 text-white shadow-lg"
+                        : "bg-blue-600 text-white shadow-lg"
+                      : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                  }`}
+                >
+                  {category === "all" ? "All Videos" : category}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Results count */}
+          {(searchQuery || selectedCategory !== "all") && (
+            <div className="mt-3 text-sm text-gray-600">
+              {filteredVideos.length} video{filteredVideos.length !== 1 ? 's' : ''} found
+              {searchQuery && ` for "${searchQuery}"`}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Videos Section */}
+      <section className="section bg-white">
+        <div className="container">
+          {loading ? (
+            <div className="text-center py-20">
+              <Loader2 className="animate-spin h-16 w-16 mx-auto mb-4 text-gray-600" />
+              <p className="text-gray-600 text-lg">Loading videos from YouTube...</p>
+            </div>
+          ) : filteredVideos.length === 0 ? (
+            <div className="text-center py-20">
+              <Youtube size={80} className="mx-auto mb-6 text-gray-400" />
+              <p className="text-gray-500 text-xl mb-6">
+                {searchQuery || selectedCategory !== "all" 
+                  ? "No videos found matching your search" 
+                  : "No videos available at this time"}
+              </p>
+              <Button 
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedCategory("all");
+                }}
+                className="transition-all duration-300 hover:scale-105"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          ) : (
+            <>
+              <div className="mb-8">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-2">{channelName}</h2>
+                <p className="text-gray-600 text-lg">{channelHandle}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredVideos.map((video, index) => (
+                  <div
+                    key={video.id}
+                    className="group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden"
+                    style={{ 
+                      animation: 'fadeInUp 0.6s ease-out backwards',
+                      animationDelay: `${index * 0.1}s`
+                    }}
+                  >
+                    {/* Thumbnail */}
+                    <div 
+                      className="relative overflow-hidden aspect-video"
+                      onClick={() => setSelectedVideo(video)}
+                    >
+                      <img 
+                        src={video.thumbnail || `https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} 
+                        alt={video.title} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        onError={(e) => {
+                          e.target.src = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
+                        }}
+                      />
+                      
+                      {/* Play button overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-all duration-300">
+                        <div className={`w-20 h-20 ${activeChannelTab === "faithcenter" ? "bg-red-600" : "bg-blue-600"} rounded-full flex items-center justify-center group-hover:scale-125 transition-transform duration-300 shadow-2xl`}>
+                          <Play size={32} className="text-white ml-1" fill="white" />
+                        </div>
+                      </div>
+
+                      {/* Duration badge */}
+                      {video.duration && (
+                        <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                          {video.duration}
+                        </div>
+                      )}
+
+                      {/* Views badge */}
+                      {video.views && (
+                        <div className="absolute top-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded flex items-center gap-1">
+                          <Eye size={12} />
+                          {video.views}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-5">
+                      <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
+                        activeChannelTab === "faithcenter" 
+                          ? "bg-red-100 text-red-700" 
+                          : "bg-blue-100 text-blue-700"
+                      }`}>
+                        {video.category}
+                      </div>
+                      
+                      <h3 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                        {video.title}
+                      </h3>
+                      
+                      <div className="flex items-center text-gray-500 text-sm mb-3">
+                        <Calendar size={14} className="mr-2" />
+                        {new Date(video.publishedAt).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </div>
+                      
+                      <p className="text-gray-700 text-sm line-clamp-2 mb-4">
+                        {video.description}
+                      </p>
+                      
+                      <div className="flex gap-2">
+                        <Button 
+                          size="sm" 
+                          className={`flex-1 transition-all duration-300 hover:scale-105 ${
+                            activeChannelTab === "faithcenter" 
+                              ? "bg-red-600 hover:bg-red-700" 
+                              : "bg-blue-600 hover:bg-blue-700"
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedVideo(video);
+                          }}
+                        >
+                          <Play size={14} className="mr-2" />
+                          Play
+                        </Button>
+                        <Button 
+                          size="sm"
+                          variant="outline"
+                          className="transition-all duration-300 hover:scale-105"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openYoutubeVideo(video.videoId);
+                          }}
+                        >
+                          <ExternalLink size={14} />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* View more on YouTube */}
+              <div className="text-center mt-12">
+                <Button 
+                  size="lg"
+                  onClick={() => openYoutubeChannel(activeChannelTab)}
+                  className={`transition-all duration-300 hover:scale-105 ${
+                    activeChannelTab === "faithcenter" 
+                      ? "bg-red-600 hover:bg-red-700" 
+                      : "bg-blue-600 hover:bg-blue-700"
+                  }`}
+                >
+                  <Youtube size={24} className="mr-2" />
+                  View All {filteredVideos.length}+ Videos on YouTube
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* Video Player Modal */}
+      {selectedVideo && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedVideo(null)}
+          style={{ animation: 'fadeIn 0.3s ease-out' }}
+        >
+          <div 
+            className="bg-white rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+            style={{ animation: 'slideInUp 0.4s ease-out' }}
+          >
+            {/* Video Player */}
+            <div className="relative aspect-video bg-black rounded-t-2xl overflow-hidden">
+              <iframe
+                src={`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1`}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={selectedVideo.title}
+              />
+            </div>
+
+            {/* Video Details */}
+            <div className="p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
+                    activeChannelTab === "faithcenter" 
+                      ? "bg-red-100 text-red-700" 
+                      : "bg-blue-100 text-blue-700"
+                  }`}>
+                    {selectedVideo.category}
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-2">{selectedVideo.title}</h2>
+                  <p className="text-gray-600 mb-4">{channelName}</p>
+                  <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center">
+                      <Calendar size={16} className="mr-2" />
+                      {new Date(selectedVideo.publishedAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </div>
+                    {selectedVideo.views && (
+                      <div className="flex items-center">
+                        <Eye size={16} className="mr-2" />
+                        {selectedVideo.views} views
+                      </div>
+                    )}
+                    {selectedVideo.duration && (
+                      <div>Duration: {selectedVideo.duration}</div>
+                    )}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSelectedVideo(null)}
+                  className="ml-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="border-t pt-4">
+                <p className="text-gray-700 whitespace-pre-line">{selectedVideo.description}</p>
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                <Button
+                  size="lg"
+                  onClick={() => openYoutubeVideo(selectedVideo.videoId)}
+                  className={`flex-1 transition-all duration-300 hover:scale-105 ${
+                    activeChannelTab === "faithcenter" 
+                      ? "bg-red-600 hover:bg-red-700" 
+                      : "bg-blue-600 hover:bg-blue-700"
+                  }`}
+                >
+                  <Youtube size={20} className="mr-2" />
+                  Watch on YouTube
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => openYoutubeChannel(activeChannelTab)}
+                  className="transition-all duration-300 hover:scale-105"
+                >
+                  <ExternalLink size={20} className="mr-2" />
+                  More Videos
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MessagesEnhanced;
