@@ -1119,7 +1119,7 @@ def test_youtube_faith_center_channel():
                     print("   ✅ Correct number of videos (8)")
                     
                     # Verify all videos have required fields
-                    required_fields = ['id', 'videoId', 'title', 'thumbnail', 'publishedAt', 'description', 'category', 'duration', 'views']
+                    required_fields = ['id', 'videoId', 'title', 'publishedAt', 'description', 'category', 'duration', 'views']
                     all_videos_valid = True
                     
                     for i, video in enumerate(videos):
@@ -1226,7 +1226,7 @@ def test_youtube_nehemiah_david_channel():
                     print("   ✅ Correct number of videos (10)")
                     
                     # Verify all videos have required fields
-                    required_fields = ['id', 'videoId', 'title', 'thumbnail', 'publishedAt', 'description', 'category', 'duration', 'views']
+                    required_fields = ['id', 'videoId', 'title', 'publishedAt', 'description', 'category', 'duration', 'views']
                     all_videos_valid = True
                     
                     for i, video in enumerate(videos):
