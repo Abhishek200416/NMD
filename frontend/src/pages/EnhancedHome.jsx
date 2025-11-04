@@ -341,7 +341,7 @@ const EnhancedHome = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="section bg-gradient-to-br from-blue-600 to-purple-700 text-white">
+      <section className="section bg-gradient-to-br from-amber-600 to-orange-600 text-white">
         <div className="container">
           <div 
             ref={statsRef} 
