@@ -234,6 +234,19 @@ const Header = () => {
         aria-label="Mobile navigation"
       >
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar">
+          {/* Brand Switcher in Mobile Menu */}
+          {brands.length > 1 && (
+            <div className="mb-4 pb-4 border-b border-gray-700">
+              <button
+                onClick={handleBrandToggle}
+                className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-md"
+              >
+                <span className="truncate">Switch to {brands.find(b => b.id !== currentBrand.id)?.name}</span>
+                <ChevronDown size={16} className="flex-shrink-0 ml-2" />
+              </button>
+            </div>
+          )}
+
           {/* Social Media in Mobile Menu */}
           <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-gray-700 xl:hidden">
             <a 
