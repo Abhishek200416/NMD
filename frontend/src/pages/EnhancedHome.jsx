@@ -404,7 +404,7 @@ const EnhancedHome = () => {
       <section className="section bg-gray-50">
         <div className="container">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-3">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
               Upcoming Events
             </h2>
             {!loading && events.length > 0 && (
