@@ -241,8 +241,8 @@ h4 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  padding: 2.5rem 0;
+  gap: clamp(1.5rem, 4vw, 2rem);
+  padding: 0;
 }
 
 .card {
