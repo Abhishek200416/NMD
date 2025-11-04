@@ -1097,6 +1097,69 @@ def test_foundation_donate(foundation_id, brand_id):
         print(f"   ❌ Exception: {str(e)}")
         return False
 
+# ========== YOUTUBE INTEGRATION TESTS ==========
+
+def test_youtube_channel():
+    """Test GET /api/youtube/channel/@faithcenter_in - Should return array of sermon videos with categories"""
+    print("🔍 Testing GET /api/youtube/channel/@faithcenter_in...")
+    
+    try:
+        response = requests.get(f"{BACKEND_URL}/youtube/channel/@faithcenter_in", timeout=10)
+        print(f"   Status Code: {response.status_code}")
+        
+        if response.status_code == 200:
+            videos = response.json()
+            print(f"   Response Type: {type(videos)}")
+            
+            if isinstance(videos, list):
+                print(f"   Videos Count: {len(videos)}")
+                
+                if len(videos) > 0:
+                    print("   ✅ YouTube integration returning videos")
+                    
+                    # Verify video structure
+                    sample_video = videos[0]
+                    required_fields = ['id', 'videoId', 'title', 'thumbnail', 'publishedAt', 'description', 'category']
+                    
+                    all_fields_present = True
+                    for field in required_fields:
+                        if field not in sample_video:
+                            print(f"   ❌ Missing field '{field}' in video object")
+                            all_fields_present = False
+                        else:
+                            print(f"   ✅ Field '{field}': {str(sample_video[field])[:50]}...")
+                    
+                    # Check categories
+                    categories = set(video.get('category', 'Unknown') for video in videos)
+                    print(f"   Video Categories: {list(categories)}")
+                    
+                    # Verify we have different categories
+                    if len(categories) > 1:
+                        print("   ✅ Multiple video categories found")
+                    else:
+                        print("   ⚠️  Only one category found")
+                    
+                    if all_fields_present:
+                        print("   ✅ All required video fields present")
+                        return True
+                    else:
+                        print("   ❌ Some required video fields missing")
+                        return False
+                else:
+                    print("   ⚠️  Empty videos list")
+                    return True  # Empty list is acceptable
+            else:
+                print("   ❌ Response is not a list")
+                return False
+        else:
+            print(f"   ❌ Failed with status {response.status_code}")
+            print(f"   Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print(f"   ❌ Exception: {str(e)}")
+        return False
+
 # ========== LIVE STREAM TESTS ==========
 
 def test_get_live_streams(brand_id):
