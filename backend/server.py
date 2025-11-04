@@ -932,7 +932,7 @@ async def get_youtube_videos(channel_handle: str):
             videos = [
                 {
                     "id": "nd1",
-                    "videoId": "dQw4w9WgXcQ",
+                    "videoId": "A1B2C3D4E5F",
                     "title": "Imparting Faith - The Foundation of Belief",
                     "thumbnail": "https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?w=800",
                     "publishedAt": "2025-01-24T10:00:00Z",
@@ -943,7 +943,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd2",
-                    "videoId": "jNQXAC9IVRw",
+                    "videoId": "B2C3D4E5F6G",
                     "title": "REVIVE Conference - Opening Night",
                     "thumbnail": "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800",
                     "publishedAt": "2025-01-22T19:00:00Z",
@@ -954,7 +954,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd3",
-                    "videoId": "y8Kyi0WNg40",
+                    "videoId": "C3D4E5F6G7H",
                     "title": "Teaching Series - Book of Acts Part 1",
                     "thumbnail": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800",
                     "publishedAt": "2025-01-19T19:30:00Z",
@@ -965,7 +965,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd4",
-                    "videoId": "9bZkp7q19f0",
+                    "videoId": "D4E5F6G7H8I",
                     "title": "Impacting Lives - Testimony Night",
                     "thumbnail": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800",
                     "publishedAt": "2025-01-17T18:00:00Z",
@@ -976,7 +976,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd5",
-                    "videoId": "kJQP7kiw5Fk",
+                    "videoId": "E5F6G7H8I9J",
                     "title": "Sunday Worship - The Anointing of God",
                     "thumbnail": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800",
                     "publishedAt": "2025-01-15T10:00:00Z",
@@ -987,7 +987,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd6",
-                    "videoId": "hT_nvWreIhg",
+                    "videoId": "F6G7H8I9J0K",
                     "title": "Youth Gathering - Purpose Driven Life",
                     "thumbnail": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800",
                     "publishedAt": "2025-01-12T18:30:00Z",
@@ -998,7 +998,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd7",
-                    "videoId": "L_jWHffIx5E",
+                    "videoId": "G7H8I9J0K1L",
                     "title": "Prophetic Word - 2025 Year of Breakthrough",
                     "thumbnail": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800",
                     "publishedAt": "2025-01-10T19:00:00Z",
@@ -1009,7 +1009,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd8",
-                    "videoId": "ZbZSe6N_BXs",
+                    "videoId": "H8I9J0K1L2M",
                     "title": "Ministry Training - Effective Evangelism",
                     "thumbnail": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800",
                     "publishedAt": "2025-01-08T14:00:00Z",
@@ -1020,7 +1020,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd9",
-                    "videoId": "PHgc8Q6qTjc",
+                    "videoId": "I9J0K1L2M3N",
                     "title": "Sunday Service - Living in Victory",
                     "thumbnail": "https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?w=800",
                     "publishedAt": "2025-01-05T10:00:00Z",
@@ -1031,7 +1031,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd10",
-                    "videoId": "8UVNT4wvIGY",
+                    "videoId": "J0K1L2M3N4O",
                     "title": "Prayer & Fasting - Breakthrough Session",
                     "thumbnail": "https://images.unsplash.com/photo-1502758398801-49e4003d9849?w=800",
                     "publishedAt": "2025-01-03T06:00:00Z",
