@@ -279,7 +279,7 @@ const Header = () => {
               style={{ animationDelay: `${index * 30}ms` }}
               className={`block px-4 py-3.5 font-medium rounded-lg transition-all duration-200 mb-2 min-h-[48px] flex items-center ${
                 isActive(link.path)
-                  ? "bg-blue-600 text-white shadow-md"
+                  ? "bg-amber-600 text-white shadow-md"
                   : "text-gray-200 hover:bg-gray-700 hover:text-white"
               } ${mobileMenuOpen ? 'animate-slideIn' : ''}`}
             >
