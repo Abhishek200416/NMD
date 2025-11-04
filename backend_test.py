@@ -1154,16 +1154,15 @@ def test_youtube_faith_center_channel():
                             if len(unique_ids) == len(video_ids):
                                 print("   ✅ All video IDs are unique")
                                 
-                                # Verify thumbnail URLs are valid
-                                all_thumbnails_valid = True
+                                # Verify no thumbnail URLs in response (as per requirement)
+                                has_thumbnails = False
                                 for video in videos:
-                                    thumbnail = video.get('thumbnail', '')
-                                    if not thumbnail.startswith('http'):
-                                        print(f"   ❌ Invalid thumbnail URL: {thumbnail}")
-                                        all_thumbnails_valid = False
+                                    if 'thumbnail' in video:
+                                        print(f"   ❌ Unexpected thumbnail field found in video: {video.get('title', 'Unknown')}")
+                                        has_thumbnails = True
                                 
-                                if all_thumbnails_valid:
-                                    print("   ✅ All thumbnail URLs are valid")
+                                if not has_thumbnails:
+                                    print("   ✅ No thumbnail URLs in response (as required)")
                                     
                                     # Verify dates are in ISO format
                                     all_dates_valid = True
@@ -1180,7 +1179,7 @@ def test_youtube_faith_center_channel():
                                         print("   ❌ Some dates are not in ISO format")
                                         return False
                                 else:
-                                    print("   ❌ Some thumbnail URLs are invalid")
+                                    print("   ❌ Unexpected thumbnail URLs found in response")
                                     return False
                             else:
                                 print(f"   ❌ Duplicate video IDs found: {len(video_ids)} total, {len(unique_ids)} unique")
@@ -1261,16 +1260,15 @@ def test_youtube_nehemiah_david_channel():
                             if len(unique_ids) == len(video_ids):
                                 print("   ✅ All video IDs are unique")
                                 
-                                # Verify thumbnail URLs are valid
-                                all_thumbnails_valid = True
+                                # Verify no thumbnail URLs in response (as per requirement)
+                                has_thumbnails = False
                                 for video in videos:
-                                    thumbnail = video.get('thumbnail', '')
-                                    if not thumbnail.startswith('http'):
-                                        print(f"   ❌ Invalid thumbnail URL: {thumbnail}")
-                                        all_thumbnails_valid = False
+                                    if 'thumbnail' in video:
+                                        print(f"   ❌ Unexpected thumbnail field found in video: {video.get('title', 'Unknown')}")
+                                        has_thumbnails = True
                                 
-                                if all_thumbnails_valid:
-                                    print("   ✅ All thumbnail URLs are valid")
+                                if not has_thumbnails:
+                                    print("   ✅ No thumbnail URLs in response (as required)")
                                     
                                     # Verify dates are in ISO format
                                     all_dates_valid = True
@@ -1287,7 +1285,7 @@ def test_youtube_nehemiah_david_channel():
                                         print("   ❌ Some dates are not in ISO format")
                                         return False
                                 else:
-                                    print("   ❌ Some thumbnail URLs are invalid")
+                                    print("   ❌ Unexpected thumbnail URLs found in response")
                                     return False
                             else:
                                 print(f"   ❌ Duplicate video IDs found: {len(video_ids)} total, {len(unique_ids)} unique")
