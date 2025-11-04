@@ -1,21 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useBrand, API } from "@/App";
 import axios from "axios";
-import { Play, Calendar, User, ExternalLink, Youtube, Loader2 } from "lucide-react";
+import { Play, Calendar, ExternalLink, Youtube, Loader2, Search, X, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
 
 const Messages = () => {
   const { currentBrand } = useBrand();
   const [sermons, setSermons] = useState([]);
-  const [youtubeVideos, setYoutubeVideos] = useState([]);
+  const [faithCenterVideos, setFaithCenterVideos] = useState([]);
+  const [nehemiahVideos, setNehemiahVideos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSermon, setSelectedSermon] = useState(null);
-  const [activeTab, setActiveTab] = useState("youtube"); // "youtube" or "database"
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [activeChannelTab, setActiveChannelTab] = useState("faithcenter"); // "faithcenter" or "nehemiah"
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
     if (currentBrand) {
       loadSermons();
-      loadYoutubeVideos();
+      loadAllYoutubeVideos();
     }
   }, [currentBrand]);
 
@@ -28,26 +32,21 @@ const Messages = () => {
     }
   };
 
-  const loadYoutubeVideos = async () => {
+  const loadAllYoutubeVideos = async () => {
     setLoading(true);
     try {
-      // Fetch from YouTube channel @faithcenter_in using backend proxy
-      const response = await axios.get(`${API}/youtube/channel/@faithcenter_in`);
-      setYoutubeVideos(response.data);
+      // Load videos from both channels
+      const [faithResponse, nehemiahResponse] = await Promise.all([
+        axios.get(`${API}/youtube/channel/@faithcenter_in`),
+        axios.get(`${API}/youtube/channel/@nehemiahdavid`)
+      ]);
+      
+      setFaithCenterVideos(faithResponse.data);
+      setNehemiahVideos(nehemiahResponse.data);
     } catch (error) {
       console.error("Error loading YouTube videos:", error);
-      // Fallback: Load mock data for demonstration
-      setYoutubeVideos([
-        {
-          id: "1",
-          title: "Sunday Service - Latest Message",
-          videoId: "dQw4w9WgXcQ",
-          thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-          publishedAt: new Date().toISOString(),
-          description: "Join us for our latest Sunday service message.",
-          category: "Sunday Services"
-        }
-      ]);
+      setFaithCenterVideos([]);
+      setNehemiahVideos([]);
     } finally {
       setLoading(false);
     }
@@ -57,15 +56,54 @@ const Messages = () => {
     window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
   };
 
-  // Group videos by category
-  const groupedVideos = youtubeVideos.reduce((acc, video) => {
-    const category = video.category || "Other Messages";
-    if (!acc[category]) {
-      acc[category] = [];
+  const openYoutubeChannel = (channel) => {
+    const channelUrl = channel === "faithcenter" 
+      ? "https://youtube.com/@faithcenter_in"
+      : "https://youtube.com/@nehemiahdavid";
+    window.open(channelUrl, '_blank');
+  };
+
+  // Get current channel videos
+  const currentVideos = activeChannelTab === "faithcenter" ? faithCenterVideos : nehemiahVideos;
+  
+  // Filter and search videos
+  const filteredVideos = useMemo(() => {
+    let videos = currentVideos;
+    
+    // Filter by category
+    if (selectedCategory !== "all") {
+      videos = videos.filter(v => v.category === selectedCategory);
     }
-    acc[category].push(video);
-    return acc;
-  }, {});
+    
+    // Search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      videos = videos.filter(v => 
+        v.title.toLowerCase().includes(query) ||
+        v.description.toLowerCase().includes(query)
+      );
+    }
+    
+    return videos;
+  }, [currentVideos, selectedCategory, searchQuery]);
+
+  // Get unique categories from current videos
+  const categories = useMemo(() => {
+    const cats = new Set(currentVideos.map(v => v.category));
+    return ["all", ...Array.from(cats)];
+  }, [currentVideos]);
+
+  // Group filtered videos by category
+  const groupedVideos = useMemo(() => {
+    return filteredVideos.reduce((acc, video) => {
+      const category = video.category || "Other Messages";
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(video);
+      return acc;
+    }, {});
+  }, [filteredVideos]);
 
   if (!currentBrand) return null;
 
