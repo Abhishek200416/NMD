@@ -390,12 +390,12 @@ def test_post_subscribers(brand_id=None):
 # ========== NEW MEMBER/USER AUTHENTICATION TESTS ==========
 
 def test_admin_login():
-    """Test admin login to get admin token"""
+    """Test admin login to get admin token - Updated credentials from review request"""
     print("🔍 Testing Admin Login...")
     
     login_data = {
-        "email": "admin@ndm.com",
-        "password": "admin123"
+        "email": "admin@faithcenter.com",
+        "password": "Admin@2025"
     }
     
     try:
