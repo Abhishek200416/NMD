@@ -1413,10 +1413,10 @@ def test_video_id_format_validation():
             
             if all_valid:
                 print("   ✅ All video IDs are in valid YouTube format (11 characters)")
-                print("   ✅ All thumbnail URLs are valid YouTube CDN URLs")
+                print("   ✅ No thumbnail URLs in response (as required)")
                 return True
             else:
-                print("   ❌ Some video IDs or thumbnail URLs are invalid")
+                print("   ❌ Some video IDs are invalid or unexpected thumbnail URLs found")
                 return False
         else:
             print(f"   ❌ Failed to get channels. Faith: {faith_response.status_code}, Nehemiah: {nehemiah_response.status_code}")
