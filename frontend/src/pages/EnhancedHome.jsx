@@ -272,56 +272,50 @@ const EnhancedHome = () => {
   return (
     <div className="fade-in">
       {/* Enhanced Hero Section with Parallax Effect */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {currentBrand.hero_video_url ? (
-          <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40">
+          <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-60">
             <source src={currentBrand.hero_video_url} type="video/mp4" />
           </video>
         ) : currentBrand.hero_image_url ? (
           <div className="absolute inset-0 w-full h-full">
-            <img src={currentBrand.hero_image_url} alt="Hero" className="w-full h-full object-cover opacity-50" />
+            <img src={currentBrand.hero_image_url} alt="Hero" className="w-full h-full object-cover opacity-60" />
           </div>
         ) : null}
         
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
         
         <div className="relative z-10 text-center text-white max-w-5xl px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6" style={{animation: 'fadeInUp 0.8s ease-out 0.2s backwards'}}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white" style={{animation: 'fadeInUp 0.8s ease-out 0.2s backwards', textShadow: '3px 3px 10px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8), 1px 1px 3px rgba(0,0,0,1)', color: '#FFFFFF'}}>
             {currentBrand.tagline || `Welcome to ${currentBrand.name}`}
           </h1>
           
-          <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto" style={{animation: 'fadeInUp 0.8s ease-out 0.4s backwards'}}>
+          <p className="text-base sm:text-lg md:text-xl mb-6 max-w-3xl mx-auto text-white" style={{animation: 'fadeInUp 0.8s ease-out 0.4s backwards', textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)', color: '#FFFFFF'}}>
             Join us as we grow together in faith, love, and community
           </p>
 
-          {/* Countdown to Next Service */}
-          <div className="mb-8" style={{animation: 'fadeInUp 0.8s ease-out 0.6s backwards'}}>
-            <h3 className="text-xl sm:text-2xl font-semibold mb-4">Next Service Begins In</h3>
-            <CountdownTimer targetDate={getNextServiceDate()} />
-          </div>
-
           {currentBrand.service_times && (
-            <div className="bg-white/10 backdrop-blur-md text-white rounded-2xl p-6 sm:p-8 mb-8 inline-block max-w-full border border-white/20" style={{animation: 'fadeInUp 0.8s ease-out 0.8s backwards'}}>
-              <div className="flex items-center justify-center space-x-3 mb-4">
-                <Clock size={24} />
+            <div className="bg-white/95 backdrop-blur-md text-gray-900 rounded-xl p-4 sm:p-5 mb-6 inline-block max-w-full border border-white/50 shadow-2xl" style={{animation: 'fadeInUp 0.8s ease-out 0.6s backwards'}}>
+              <div className="flex items-center justify-center space-x-3 mb-3">
+                <Clock size={20} className="text-purple-600" />
                 <div className="text-left">
-                  <p className="font-semibold text-lg sm:text-xl">Service Times</p>
-                  <p className="text-base sm:text-lg">{currentBrand.service_times}</p>
+                  <p className="font-semibold text-base sm:text-lg text-gray-900">Service Times</p>
+                  <p className="text-sm sm:text-base text-gray-700">{currentBrand.service_times}</p>
                 </div>
               </div>
               {currentBrand.location && (
-                <div className="flex items-center justify-center space-x-3 pt-4 border-t border-white/20">
-                  <MapPin size={24} className="flex-shrink-0" />
-                  <p className="text-sm sm:text-base">{currentBrand.location}</p>
+                <div className="flex items-center justify-center space-x-3 pt-3 border-t border-gray-200">
+                  <MapPin size={20} className="flex-shrink-0 text-blue-600" />
+                  <p className="text-xs sm:text-sm text-gray-700">{currentBrand.location}</p>
                 </div>
               )}
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center px-4 sm:px-0" style={{animation: 'fadeInUp 0.8s ease-out 1s backwards'}}>
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center px-4 sm:px-0" style={{animation: 'fadeInUp 0.8s ease-out 0.8s backwards'}}>
             <Button 
               size="lg" 
-              className="rounded-full w-full sm:w-auto text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all" 
+              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all text-white" 
               onClick={() => navigate("/watch-live")}
             >
               <Play className="mr-2" size={20} />
@@ -330,7 +324,7 @@ const EnhancedHome = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="rounded-full w-full sm:w-auto text-lg px-8 py-6 bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white hover:text-gray-900 shadow-2xl transform hover:scale-105 transition-all" 
+              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-5 bg-white/95 backdrop-blur-sm border-2 border-white text-gray-900 hover:bg-white hover:text-gray-900 shadow-2xl transform hover:scale-105 transition-all font-semibold" 
               onClick={() => navigate("/giving")}
             >
               <Heart className="mr-2" size={20} />
