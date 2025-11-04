@@ -829,19 +829,12 @@ async def get_youtube_videos(channel_handle: str):
     Fetch videos from YouTube channel using public data
     This endpoint fetches from YouTube channel @faithcenter_in
     """
-    import feedparser
-    import re
-    
     try:
         # Convert channel handle to proper format
         if channel_handle.startswith('@'):
             channel_handle = channel_handle[1:]
         
-        # Try to fetch from YouTube RSS feed (public, no API key needed)
-        # For @faithcenter_in, we'll construct the RSS URL
-        # Note: We need the channel ID for RSS feed
-        
-        # Fallback: Return curated sermon videos
+        # Return curated sermon videos for @faithcenter_in
         # In production, you would use YouTube Data API or scraping
         videos = [
             {
