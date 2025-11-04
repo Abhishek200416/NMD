@@ -599,18 +599,21 @@ const EnhancedHome = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="section bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 border-t-4 border-amber-500" style={{marginTop: '4rem'}}>
-        <div className="container text-center max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white" style={{textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)', color: '#FFFFFF'}}>
+      <section className="section relative overflow-hidden" style={{marginTop: '4rem', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}}>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'}}></div>
+        </div>
+        <div className="container text-center max-w-4xl relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" style={{color: '#FFFFFF', textShadow: '3px 3px 10px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.3)'}}>
             Ready to Take the Next Step?
           </h2>
-          <p className="text-lg sm:text-xl mb-8 text-white" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.8)', color: '#FFFFFF'}}>
+          <p className="text-lg sm:text-xl mb-8" style={{color: '#FFFFFF', textShadow: '2px 2px 6px rgba(0,0,0,0.4)'}}>
             Whether you're new to faith or looking to grow deeper, we're here for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700 transform hover:scale-105 transition-all text-lg px-8 shadow-xl"
+              className="rounded-full bg-white text-purple-600 hover:bg-gray-100 transform hover:scale-105 transition-all text-lg px-8 shadow-xl font-semibold"
               onClick={() => navigate("/contact")}
             >
               Get Connected
@@ -618,7 +621,7 @@ const EnhancedHome = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="rounded-full border-2 border-amber-600 text-amber-900 bg-white hover:bg-amber-50 transform hover:scale-105 transition-all text-lg px-8 font-semibold"
+              className="rounded-full border-2 border-white text-white hover:bg-white/20 transform hover:scale-105 transition-all text-lg px-8 font-semibold"
               onClick={() => navigate("/prayer-wall")}
             >
               Request Prayer
