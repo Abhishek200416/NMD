@@ -85,16 +85,21 @@ const Events = () => {
                     {upcomingEvents.map((event, index) => (
                       <div 
                         key={event.id} 
-                        className="card flex flex-col md:flex-row overflow-hidden hover:shadow-lg transition-all" 
+                        className="card flex flex-col md:flex-row overflow-hidden hover:shadow-2xl transition-all duration-300 group" 
                         data-testid={`event-detail-${event.id}`}
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
                         {event.image_url && (
-                          <img 
-                            src={event.image_url} 
-                            alt={event.title} 
-                            className="w-full md:w-64 h-48 md:h-auto object-cover" 
-                          />
+                          <div className="image-hover-zoom w-full md:w-64 h-48 md:h-auto relative">
+                            <img 
+                              src={event.image_url} 
+                              alt={event.title} 
+                              className="w-full h-full object-cover" 
+                            />
+                            <div className="gradient-overlay flex items-center justify-center">
+                              <Calendar className="text-white" size={48} />
+                            </div>
+                          </div>
                         )}
                         <div className="card-content flex-1">
                           <div className="flex flex-col sm:flex-row items-start justify-between mb-3 gap-2">
