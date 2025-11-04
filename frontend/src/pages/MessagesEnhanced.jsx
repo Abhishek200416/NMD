@@ -395,7 +395,9 @@ const MessagesEnhanced = () => {
                     onClick={() => setSelectedCategory(category)}
                     className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-all duration-300 transform hover:scale-105 ${
                       selectedCategory === category
-                        ? `bg-${brandColor}-600 text-white shadow-lg`
+                        ? brandColor === "red"
+                          ? "bg-red-600 text-white shadow-lg"
+                          : "bg-blue-600 text-white shadow-lg"
                         : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
                     }`}
                   >
