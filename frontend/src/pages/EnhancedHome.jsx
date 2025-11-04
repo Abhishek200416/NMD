@@ -16,45 +16,6 @@ const SkeletonCard = () => (
   </div>
 );
 
-// Countdown Timer Component
-const CountdownTimer = ({ targetDate }) => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const difference = new Date(targetDate) - new Date();
-      if (difference > 0) {
-        return {
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
-        };
-      }
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    };
-
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [targetDate]);
-
-  return (
-    <div className="flex justify-center gap-4 sm:gap-6 my-8">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="flex flex-col items-center">
-          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 sm:p-4 min-w-[60px] sm:min-w-[80px] shadow-lg">
-            <div className="text-2xl sm:text-4xl font-bold text-gray-900">{String(value).padStart(2, '0')}</div>
-          </div>
-          <div className="text-xs sm:text-sm text-white mt-2 font-medium capitalize">{unit}</div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 // Image Lightbox Component
 const Lightbox = ({ images, currentIndex, onClose, onNext, onPrev }) => {
   useEffect(() => {
@@ -68,10 +29,10 @@ const Lightbox = ({ images, currentIndex, onClose, onNext, onPrev }) => {
   }, [onClose, onNext, onPrev]);
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 transition-all duration-300">
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+        className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200 z-10"
         aria-label="Close"
       >
         <X size={32} />
@@ -79,7 +40,7 @@ const Lightbox = ({ images, currentIndex, onClose, onNext, onPrev }) => {
       
       <button
         onClick={onPrev}
-        className="absolute left-4 text-white hover:text-gray-300 transition-colors z-10"
+        className="absolute left-4 text-white hover:text-gray-300 transition-colors duration-200 z-10"
         aria-label="Previous"
       >
         <ChevronLeft size={48} />
@@ -88,12 +49,12 @@ const Lightbox = ({ images, currentIndex, onClose, onNext, onPrev }) => {
       <img
         src={images[currentIndex]}
         alt={`Gallery image ${currentIndex + 1}`}
-        className="max-w-full max-h-[90vh] object-contain"
+        className="max-w-full max-h-[90vh] object-contain transition-opacity duration-300"
       />
       
       <button
         onClick={onNext}
-        className="absolute right-4 text-white hover:text-gray-300 transition-colors z-10"
+        className="absolute right-4 text-white hover:text-gray-300 transition-colors duration-200 z-10"
         aria-label="Next"
       >
         <ChevronRight size={48} />
@@ -251,16 +212,6 @@ const EnhancedHome = () => {
     setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   };
 
-  // Calculate next service date (next Sunday at 10 AM)
-  const getNextServiceDate = () => {
-    const now = new Date();
-    const daysUntilSunday = (7 - now.getDay()) % 7 || 7;
-    const nextSunday = new Date(now);
-    nextSunday.setDate(now.getDate() + daysUntilSunday);
-    nextSunday.setHours(10, 0, 0, 0);
-    return nextSunday;
-  };
-
   if (!currentBrand) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -271,31 +222,49 @@ const EnhancedHome = () => {
 
   return (
     <div className="fade-in">
-      {/* Enhanced Hero Section with Parallax Effect */}
+      {/* Enhanced Hero Section - Updated with better image and reduced shadow */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {currentBrand.hero_video_url ? (
-          <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-60">
+          <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-700">
             <source src={currentBrand.hero_video_url} type="video/mp4" />
           </video>
-        ) : currentBrand.hero_image_url ? (
+        ) : (
           <div className="absolute inset-0 w-full h-full">
-            <img src={currentBrand.hero_image_url} alt="Hero" className="w-full h-full object-cover opacity-60" />
+            <img 
+              src={currentBrand.hero_image_url || "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920"} 
+              alt="Hero" 
+              className="w-full h-full object-cover opacity-60 transition-opacity duration-700" 
+            />
           </div>
-        ) : null}
+        )}
         
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60 transition-all duration-500" />
         
         <div className="relative z-10 text-center text-white max-w-5xl px-4 sm:px-6">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white" style={{animation: 'fadeInUp 0.8s ease-out 0.2s backwards', textShadow: '3px 3px 10px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8), 1px 1px 3px rgba(0,0,0,1)', color: '#FFFFFF'}}>
+          <h1 
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white transition-all duration-500" 
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.2s backwards', 
+              textShadow: '1px 1px 3px rgba(0,0,0,0.5), 0 0 10px rgba(0,0,0,0.3)', 
+              color: '#FFFFFF'
+            }}
+          >
             {currentBrand.tagline || `Welcome to ${currentBrand.name}`}
           </h1>
           
-          <p className="text-base sm:text-lg md:text-xl mb-6 max-w-3xl mx-auto text-white" style={{animation: 'fadeInUp 0.8s ease-out 0.4s backwards', textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)', color: '#FFFFFF'}}>
+          <p 
+            className="text-base sm:text-lg md:text-xl mb-6 max-w-3xl mx-auto text-white transition-all duration-500" 
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.4s backwards', 
+              textShadow: '1px 1px 2px rgba(0,0,0,0.4)', 
+              color: '#FFFFFF'
+            }}
+          >
             Join us as we grow together in faith, love, and community
           </p>
 
           {currentBrand.service_times && (
-            <div className="bg-white/95 backdrop-blur-md text-gray-900 rounded-xl p-4 sm:p-5 mb-6 inline-block max-w-full border border-white/50 shadow-2xl" style={{animation: 'fadeInUp 0.8s ease-out 0.6s backwards'}}>
+            <div className="bg-white/95 backdrop-blur-md text-gray-900 rounded-xl p-4 sm:p-5 mb-6 inline-block max-w-full border border-white/50 shadow-2xl transition-all duration-300 hover:shadow-3xl" style={{animation: 'fadeInUp 0.8s ease-out 0.6s backwards'}}>
               <div className="flex items-center justify-center space-x-3 mb-3">
                 <Clock size={20} className="text-purple-600" />
                 <div className="text-left">
@@ -315,7 +284,7 @@ const EnhancedHome = () => {
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center px-4 sm:px-0" style={{animation: 'fadeInUp 0.8s ease-out 0.8s backwards'}}>
             <Button 
               size="lg" 
-              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all text-white" 
+              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-white" 
               onClick={() => navigate("/watch-live")}
             >
               <Play className="mr-2" size={20} />
@@ -324,7 +293,7 @@ const EnhancedHome = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-5 bg-white/95 backdrop-blur-sm border-2 border-white text-gray-900 hover:bg-white hover:text-gray-900 shadow-2xl transform hover:scale-105 transition-all font-semibold" 
+              className="rounded-full w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-5 bg-white/95 backdrop-blur-sm border-2 border-white text-gray-900 hover:bg-white hover:text-gray-900 shadow-2xl transform hover:scale-105 transition-all duration-300 font-semibold" 
               onClick={() => navigate("/giving")}
             >
               <Heart className="mr-2" size={20} />
@@ -335,22 +304,22 @@ const EnhancedHome = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="section bg-white border-y border-gray-200">
+      <section className="section bg-white border-y border-gray-200 transition-all duration-500">
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
+            <div className="text-center transition-all duration-300 hover:scale-105">
               <div className="stat-number text-blue-600 mb-2">500+</div>
               <div className="text-lg sm:text-xl font-medium text-gray-700">Active Members</div>
             </div>
-            <div className="text-center">
+            <div className="text-center transition-all duration-300 hover:scale-105">
               <div className="stat-number text-purple-600 mb-2">15</div>
               <div className="text-lg sm:text-xl font-medium text-gray-700">Years Serving</div>
             </div>
-            <div className="text-center">
+            <div className="text-center transition-all duration-300 hover:scale-105">
               <div className="stat-number text-blue-600 mb-2">20+</div>
               <div className="text-lg sm:text-xl font-medium text-gray-700">Ministries</div>
             </div>
-            <div className="text-center">
+            <div className="text-center transition-all duration-300 hover:scale-105">
               <div className="stat-number text-purple-600 mb-2">1000+</div>
               <div className="text-lg sm:text-xl font-medium text-gray-700">Lives Changed</div>
             </div>
@@ -363,9 +332,9 @@ const EnhancedHome = () => {
         <div className="container max-w-6xl">
           <div 
             ref={missionRef} 
-            className={`grid md:grid-cols-2 gap-12 items-center ${missionVisible ? 'visible' : ''}`}
+            className={`grid md:grid-cols-2 gap-12 items-center transition-all duration-700 ${missionVisible ? 'visible' : ''}`}
           >
-            <div className={`animate-left ${missionVisible ? 'visible' : ''}`}>
+            <div className={`animate-left transition-all duration-700 ${missionVisible ? 'visible' : ''}`}>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Our Mission</h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                 Imparting Faith, Impacting Lives. We are committed to sharing the hope of the Gospel, 
@@ -377,12 +346,12 @@ const EnhancedHome = () => {
                 of God's love, grow in their faith journey, and discover their unique purpose.
               </p>
             </div>
-            <div className={`animate-right ${missionVisible ? 'visible' : ''}`}>
+            <div className={`animate-right transition-all duration-700 ${missionVisible ? 'visible' : ''}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl image-hover-zoom">
                 <img 
                   src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800" 
                   alt="Community"
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[400px] object-cover transition-transform duration-700"
                 />
                 <div className="gradient-overlay" />
               </div>
@@ -398,15 +367,13 @@ const EnhancedHome = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
               Upcoming Events
             </h2>
-            {!loading && events.length > 0 && (
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate("/events")}
-                className="hover:scale-105 transition-transform"
-              >
-                View All →
-              </Button>
-            )}
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/events")}
+              className="transition-all duration-300 hover:scale-105"
+            >
+              View All Events
+            </Button>
           </div>
           
           {loading ? (
@@ -420,63 +387,52 @@ const EnhancedHome = () => {
               {events.map((event, index) => (
                 <div 
                   key={event.id} 
-                  className="card group" 
-                  style={{ animation: `fadeInUp 0.6s ease-out ${index * 0.1}s backwards` }}
+                  className="card cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                  onClick={() => navigate("/events")}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {event.image_url && (
-                    <div className="image-hover-zoom relative">
-                      <img src={event.image_url} alt={event.title} className="card-image" />
-                      <div className="gradient-overlay flex items-center justify-center">
-                        <Calendar className="text-white" size={48} />
-                      </div>
+                    <div className="overflow-hidden">
+                      <img 
+                        src={event.image_url} 
+                        alt={event.title} 
+                        className="card-image transition-transform duration-500 hover:scale-110" 
+                      />
                     </div>
                   )}
                   <div className="card-content">
-                    <h3 className="text-xl font-semibold mb-3 line-clamp-2">{event.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2 line-clamp-2">{event.title}</h3>
                     <div className="flex items-center text-gray-600 text-sm mb-2">
-                      <Calendar size={16} className="mr-2 flex-shrink-0" />
-                      <span>{new Date(event.date).toLocaleDateString()}</span>
+                      <Calendar size={14} className="mr-2" />
+                      {new Date(event.date).toLocaleDateString()}
                     </div>
-                    {event.time && (
-                      <div className="flex items-center text-gray-600 text-sm mb-2">
-                        <Clock size={16} className="mr-2 flex-shrink-0" />
-                        <span>{event.time}</span>
-                      </div>
-                    )}
-                    <div className="flex items-center text-gray-600 text-sm mb-3">
-                      <MapPin size={16} className="mr-2 flex-shrink-0" />
-                      <span className="truncate">{event.location}</span>
-                    </div>
-                    <p className="text-gray-600 text-sm line-clamp-2">{event.description}</p>
+                    <p className="text-gray-600 text-sm line-clamp-3">{event.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 text-gray-500">
-              <Calendar size={48} className="mx-auto mb-4 opacity-50" />
-              <p>No upcoming events at the moment. Check back soon!</p>
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No upcoming events at this time.</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Ministries Preview */}
+      {/* Ministries Section */}
       <section className="section bg-white">
         <div className="container">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-3">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              Get Involved
+              Our Ministries
             </h2>
-            {!loading && ministries.length > 0 && (
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate("/ministries")}
-                className="hover:scale-105 transition-transform"
-              >
-                View All →
-              </Button>
-            )}
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/ministries")}
+              className="transition-all duration-300 hover:scale-105"
+            >
+              View All Ministries
+            </Button>
           </div>
           
           {loading ? (
@@ -490,145 +446,143 @@ const EnhancedHome = () => {
               {ministries.map((ministry, index) => (
                 <div 
                   key={ministry.id} 
-                  className="card group" 
+                  className="card cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                  onClick={() => navigate("/ministries")}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {ministry.image_url && (
-                    <div className="image-hover-zoom relative">
-                      <img src={ministry.image_url} alt={ministry.title} className="card-image" />
-                      <div className="gradient-overlay flex items-center justify-center">
-                        <Users className="text-white" size={48} />
-                      </div>
+                    <div className="overflow-hidden">
+                      <img 
+                        src={ministry.image_url} 
+                        alt={ministry.title} 
+                        className="card-image transition-transform duration-500 hover:scale-110" 
+                      />
                     </div>
                   )}
                   <div className="card-content">
-                    <h3 className="text-xl font-semibold mb-2 line-clamp-2">{ministry.title}</h3>
-                    <p className="text-gray-600 text-sm line-clamp-3 mb-4">{ministry.description}</p>
-                    <Button 
-                      size="sm" 
-                      onClick={() => navigate("/ministries")}
-                      className="w-full transform group-hover:scale-105 transition-transform"
-                    >
-                      Learn More
-                    </Button>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2 line-clamp-2">{ministry.title}</h3>
+                    <p className="text-gray-600 text-sm line-clamp-3">{ministry.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 text-gray-500">
-              <Users size={48} className="mx-auto mb-4 opacity-50" />
-              <p>No ministries available at the moment.</p>
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No ministries available at this time.</p>
             </div>
           )}
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="section bg-gradient-to-br from-gray-50 to-gray-100">
+      <section className="section bg-gray-50">
         <div className="container max-w-6xl">
-          <h2 
-            ref={testimonialsRef}
-            className={`text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 animate-on-scroll ${testimonialsVisible ? 'visible' : ''}`}
-          >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12">
             What People Are Saying
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div 
+            ref={testimonialsRef}
+            className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${testimonialsVisible ? 'visible' : ''}`}
+          >
             {testimonials.map((testimonial, index) => (
               <div 
-                key={testimonial.id}
-                className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 animate-scale ${testimonialsVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${index * 200}ms` }}
+                key={testimonial.id} 
+                className="card text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="flex items-center mb-4">
+                <div className="card-content">
                   <img 
                     src={testimonial.image} 
                     alt={testimonial.name}
-                    className="w-16 h-16 rounded-full object-cover mr-4"
+                    className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-4 border-gray-100 transition-transform duration-300 hover:scale-110"
                   />
-                  <div>
-                    <h4 className="font-semibold text-lg">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-600">{testimonial.role}</p>
-                  </div>
+                  <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
+                  <h4 className="font-semibold text-lg">{testimonial.name}</h4>
+                  <p className="text-sm text-gray-500">{testimonial.role}</p>
                 </div>
-                <p className="text-gray-700 italic leading-relaxed">"{testimonial.text}"</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Image Gallery Section */}
+      {/* Gallery Section */}
       <section className="section bg-white">
         <div className="container">
-          <h2 
-            ref={galleryRef}
-            className={`text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 animate-on-scroll ${galleryVisible ? 'visible' : ''}`}
-          >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12">
             Our Community
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div 
+            ref={galleryRef}
+            className={`grid grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-700 ${galleryVisible ? 'visible' : ''}`}
+          >
             {galleryImages.map((image, index) => (
               <div 
                 key={index}
-                className={`image-hover-zoom relative cursor-pointer rounded-xl overflow-hidden shadow-lg animate-scale ${galleryVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer group transition-all duration-300 hover:shadow-2xl"
                 onClick={() => openLightbox(index)}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <img 
                   src={image} 
                   alt={`Gallery ${index + 1}`}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="gradient-overlay flex items-center justify-center">
-                  <div className="text-white font-semibold text-lg">View Image</div>
-                </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
               </div>
             ))}
           </div>
-          <div className="text-center mt-8">
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+        <div className="container text-center max-w-4xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Join Us This Sunday</h2>
+          <p className="text-lg sm:text-xl mb-8 opacity-90">
+            Experience the presence of God and connect with a community that cares
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              onClick={() => navigate("/gallery")}
-              className="rounded-full transform hover:scale-105 transition-transform"
+              className="rounded-full bg-white text-blue-600 hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+              onClick={() => navigate("/events")}
             >
-              View Full Gallery →
+              Plan Your Visit
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="rounded-full border-2 border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-300 hover:scale-105"
+              onClick={() => navigate("/contact")}
+            >
+              Get In Touch
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="section relative overflow-hidden" style={{marginTop: '4rem', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'}}></div>
-        </div>
-        <div className="container text-center max-w-4xl relative z-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" style={{color: '#FFFFFF', textShadow: '3px 3px 10px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.3)'}}>
-            Ready to Take the Next Step?
-          </h2>
-          <p className="text-lg sm:text-xl mb-8" style={{color: '#FFFFFF', textShadow: '2px 2px 6px rgba(0,0,0,0.4)'}}>
-            Whether you're new to faith or looking to grow deeper, we're here for you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="rounded-full bg-white text-purple-600 hover:bg-gray-100 transform hover:scale-105 transition-all text-lg px-8 shadow-xl font-semibold"
-              onClick={() => navigate("/contact")}
-            >
-              Get Connected
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="rounded-full border-2 border-white text-white hover:bg-white/20 transform hover:scale-105 transition-all text-lg px-8 font-semibold"
-              onClick={() => navigate("/prayer-wall")}
-            >
-              Request Prayer
+      {/* Urgent Announcement Modal */}
+      {showUrgentModal && urgentAnnouncement && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeIn transition-all duration-300">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-2xl animate-slideUp transition-all duration-300">
+            <div className="flex items-start justify-between mb-4">
+              <h3 className="text-xl font-bold text-red-600">Urgent Announcement</h3>
+              <button 
+                onClick={closeUrgentModal}
+                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <h4 className="text-lg font-semibold mb-2">{urgentAnnouncement.title}</h4>
+            <p className="text-gray-700 mb-4">{urgentAnnouncement.content}</p>
+            <Button onClick={closeUrgentModal} className="w-full transition-all duration-300">
+              Got It
             </Button>
           </div>
         </div>
-      </section>
+      )}
 
       {/* Lightbox */}
       {lightboxOpen && (
@@ -640,59 +594,6 @@ const EnhancedHome = () => {
           onPrev={prevImage}
         />
       )}
-
-      {/* Urgent Announcement Modal */}
-      {showUrgentModal && urgentAnnouncement && (
-        <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm animate-fadeIn" 
-            onClick={closeUrgentModal}
-          />
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-            <div className="bg-white rounded-2xl max-w-md w-full p-6 pointer-events-auto animate-slideUp shadow-2xl">
-              <h3 className="text-2xl font-bold mb-4 text-red-600">
-                ⚠️ Important Announcement
-              </h3>
-              <h4 className="text-lg font-semibold mb-2">{urgentAnnouncement.title}</h4>
-              <p className="text-gray-700 mb-6 whitespace-pre-wrap max-h-64 overflow-y-auto">
-                {urgentAnnouncement.content}
-              </p>
-              <Button 
-                onClick={closeUrgentModal} 
-                className="w-full rounded-full"
-              >
-                Got it
-              </Button>
-            </div>
-          </div>
-        </>
-      )}
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-        
-        .animate-slideUp {
-          animation: slideUp 0.3s ease-out;
-        }
-      `}</style>
     </div>
   );
 };
