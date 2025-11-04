@@ -277,11 +277,95 @@ db.ministries.insert_many(ndm_ministries + fc_ministries)
 print("Creating announcements...")
 db.announcements.insert_many(ndm_announcements + fc_announcements)
 
+# Create foundations for Nehemiah David Ministries
+ndm_foundations = [
+    {
+        "id": str(uuid.uuid4()),
+        "brand_id": ndm_id,
+        "title": "Children's Education Fund",
+        "description": "Supporting underprivileged children with educational resources, school supplies, and scholarships. Help us make education accessible to every child in our community.",
+        "image_url": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
+        "gallery_images": [
+            "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&q=80",
+            "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80",
+            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+            "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80",
+            "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&q=80",
+            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
+        ],
+        "goal_amount": 50000,
+        "raised_amount": 12500,
+        "is_active": True,
+        "created_at": datetime.utcnow().isoformat()
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "brand_id": ndm_id,
+        "title": "Community Feeding Program",
+        "description": "Providing meals and food assistance to families in need. Join us in fighting hunger and showing God's love through action.",
+        "image_url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+        "gallery_images": [
+            "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80",
+            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+            "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=80",
+            "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80",
+            "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?w=800&q=80",
+            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
+        ],
+        "goal_amount": 30000,
+        "raised_amount": 8750,
+        "is_active": True,
+        "created_at": datetime.utcnow().isoformat()
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "brand_id": ndm_id,
+        "title": "Widow & Orphan Care",
+        "description": "Supporting widows and orphans with financial assistance, counseling, and community support. Be a blessing to those who need it most.",
+        "image_url": "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=80",
+        "gallery_images": [
+            "https://images.unsplash.com/photo-1516733968668-dbdce39c4651?w=800&q=80",
+            "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80",
+            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+            "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
+            "https://images.unsplash.com/photo-1509099863731-ef4bff19e808?w=800&q=80",
+            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
+        ],
+        "goal_amount": 75000,
+        "raised_amount": 25000,
+        "is_active": True,
+        "created_at": datetime.utcnow().isoformat()
+    },
+    {
+        "id": str(uuid.uuid4()),
+        "brand_id": ndm_id,
+        "title": "Medical Mission Outreach",
+        "description": "Providing free medical camps, health screenings, and medicine to underserved communities. Your donation saves lives.",
+        "image_url": "https://images.unsplash.com/photo-1576765608622-7f259b5b4b4e?w=800&q=80",
+        "gallery_images": [
+            "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&q=80",
+            "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=800&q=80",
+            "https://images.unsplash.com/photo-1579165466741-7f35e4755660?w=800&q=80",
+            "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80",
+            "https://images.unsplash.com/photo-1571844307880-751c6d86f3f3?w=800&q=80",
+            "https://images.unsplash.com/photo-1576765608622-7f259b5b4b4e?w=800&q=80"
+        ],
+        "goal_amount": 100000,
+        "raised_amount": 35000,
+        "is_active": True,
+        "created_at": datetime.utcnow().isoformat()
+    }
+]
+
+print("Creating foundations...")
+db.foundations.insert_many(ndm_foundations)
+
 # Verify
 print("\n=== Database Seeded Successfully! ===")
 print(f"Brands: {db.brands.count_documents({})}")
 print(f"Events: {db.events.count_documents({})}")
 print(f"Ministries: {db.ministries.count_documents({})}")
 print(f"Announcements: {db.announcements.count_documents({})}")
+print(f"Foundations: {db.foundations.count_documents({})}")
 
 client.close()
