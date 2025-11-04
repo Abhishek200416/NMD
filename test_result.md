@@ -186,6 +186,43 @@ backend:
         agent: "testing"
         comment: "✅ API endpoint working correctly. Successfully accepts subscriber data and returns 200 status with created subscriber object including generated UUID. Proper JSON validation and response format confirmed."
 
+  - task: "POST /api/events/{event_id}/register endpoint"
+    implemented: true
+    working: "NA"
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created event registration endpoint to allow users to register for events with name, email, phone, guests count, and notes"
+        
+  - task: "GET /api/events/{event_id}/attendees endpoint"
+    implemented: true
+    working: "NA"
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created endpoint for admins to view all attendees for a specific event"
+        
+  - task: "GET /api/attendees endpoint"
+    implemented: true
+    working: "NA"
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created endpoint for admins to view all attendees across all events with optional brand filtering"
+
+
 frontend:
   - task: "Enhanced CSS with fluid typography and responsive design"
     implemented: true
