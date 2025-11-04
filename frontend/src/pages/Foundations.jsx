@@ -105,7 +105,7 @@ const Foundations = () => {
   return (
     <div className="fade-in">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-50 py-20">
+      <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Our Foundations</h1>
@@ -121,7 +121,7 @@ const Foundations = () => {
         <div className="container mx-auto px-4">
           {loading ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="animate-spin h-8 w-8 text-amber-600" />
+              <Loader2 className="animate-spin h-8 w-8 text-purple-600" />
             </div>
           ) : foundations.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -152,13 +152,13 @@ const Foundations = () => {
                         <div className="mb-4">
                           <div className="flex justify-between items-center mb-2">
                             <div className="flex items-center space-x-2">
-                              <TrendingUp size={18} className="text-amber-600" />
+                              <TrendingUp size={18} className="text-purple-600" />
                               <span className="text-sm font-medium text-gray-700">
                                 ${foundation.raised_amount.toLocaleString()} raised
                               </span>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Target size={18} className="text-amber-600" />
+                              <Target size={18} className="text-purple-600" />
                               <span className="text-sm font-medium text-gray-700">
                                 Goal: ${foundation.goal_amount.toLocaleString()}
                               </span>
@@ -166,7 +166,7 @@ const Foundations = () => {
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-3">
                             <div
-                              className="bg-gradient-to-r from-amber-500 to-orange-500 h-3 rounded-full transition-all duration-500"
+                              className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500"
                               style={{ width: `${progressPercentage}%` }}
                             />
                           </div>
@@ -179,7 +179,7 @@ const Foundations = () => {
                       <div className="flex gap-3">
                         <Button
                           onClick={() => openDonateModal(foundation)}
-                          className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white"
+                          className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                         >
                           <Heart size={18} className="mr-2" />
                           Donate Now
@@ -187,7 +187,7 @@ const Foundations = () => {
                         <Button
                           onClick={() => openGalleryModal(foundation)}
                           variant="outline"
-                          className="flex-1 border-amber-600 text-amber-600 hover:bg-amber-50"
+                          className="flex-1 border-purple-600 text-purple-600 hover:bg-purple-50"
                         >
                           View Gallery
                         </Button>
@@ -214,15 +214,15 @@ const Foundations = () => {
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white rounded-lg max-w-md w-full pointer-events-auto animate-slideUp shadow-2xl max-h-[90vh] overflow-y-auto">
-              <div className="sticky top-0 bg-gradient-to-r from-amber-600 to-orange-600 text-white p-6 rounded-t-lg">
+              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-lg">
                 <div className="flex items-start justify-between">
                   <div>
                     <h3 className="text-2xl font-bold mb-2">Donate to Foundation</h3>
-                    <p className="text-amber-100 text-sm">{selectedFoundation.title}</p>
+                    <p className="text-purple-100 text-sm">{selectedFoundation.title}</p>
                   </div>
                   <button
                     onClick={() => setShowDonateModal(false)}
-                    className="text-white hover:text-amber-200 transition-colors"
+                    className="text-white hover:text-purple-200 transition-colors"
                   >
                     <X size={24} />
                   </button>
@@ -288,7 +288,7 @@ const Foundations = () => {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white"
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                   >
                     {submitting ? (
                       <>
@@ -318,7 +318,7 @@ const Foundations = () => {
               <div className="relative">
                 <button
                   onClick={() => setShowGalleryModal(false)}
-                  className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
+                  className="absolute -top-12 right-0 text-white hover:text-purple-400 transition-colors"
                 >
                   <X size={32} />
                 </button>
