@@ -1747,8 +1747,16 @@ def main():
     print("\n📹 YOUTUBE INTEGRATION TESTS")
     print("-" * 40)
     
-    # Test 23: YouTube Channel Videos
-    results['youtube_channel'] = test_youtube_channel()
+    # Test 23: Faith Center YouTube Channel (@faithcenter_in)
+    results['youtube_faith_center'] = test_youtube_faith_center_channel()
+    print()
+    
+    # Test 24: Nehemiah David YouTube Channel (@nehemiahdavid)
+    results['youtube_nehemiah_david'] = test_youtube_nehemiah_david_channel()
+    print()
+    
+    # Test 25: YouTube Channels Content Uniqueness
+    results['youtube_channels_uniqueness'] = test_youtube_channels_uniqueness()
     print()
     
     # ========== LIVE STREAM TESTS ==========
