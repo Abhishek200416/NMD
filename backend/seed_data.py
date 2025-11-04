@@ -22,7 +22,7 @@ ndm_brand = {
     "name": "Nehemiah David Ministries",
     "domain": "nehemiahdavid.com",
     "tagline": "Imparting Faith, Impacting Lives",
-    "logo_url": "https://nehemiahdavid.com/assets/images/logo.svg",
+    "logo_url": "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=200&h=80&fit=crop",
     "hero_image_url": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920",
     "hero_video_url": "",
     "location": "Amaravathi Rd, above Yousta, Gorantla, Guntur, Andhra Pradesh 522034",
