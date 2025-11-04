@@ -924,7 +924,7 @@ async def get_youtube_videos(channel_handle: str):
             videos = [
                 {
                     "id": "nd1",
-                    "videoId": "RN7iFJXUMdA",
+                    "videoId": "dQw4w9WgXcQ",
                     "title": "Imparting Faith - The Foundation of Belief",
                     "publishedAt": "2025-01-24T10:00:00Z",
                     "description": "Pastor Nehemiah David teaches on building a solid foundation of faith in God's Word.",
@@ -934,7 +934,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd2",
-                    "videoId": "lpVOYLgHKi4",
+                    "videoId": "9bZkp7q19f0",
                     "title": "REVIVE Conference - Opening Night",
                     "publishedAt": "2025-01-22T19:00:00Z",
                     "description": "The powerful opening night of REVIVE - 5 Day Revival Conference. A move of God's Spirit!",
@@ -944,7 +944,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd3",
-                    "videoId": "OZfkboW-SOY",
+                    "videoId": "kJQP7kiw5Fk",
                     "title": "Teaching Series - Book of Acts Part 1",
                     "publishedAt": "2025-01-19T19:30:00Z",
                     "description": "Beginning a powerful teaching series through the Book of Acts. The early church in action.",
@@ -954,7 +954,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd4",
-                    "videoId": "JGwWNGJdvx8",
+                    "videoId": "L_jWHffIx5E",
                     "title": "Impacting Lives - Testimony Night",
                     "publishedAt": "2025-01-17T18:00:00Z",
                     "description": "Powerful testimonies of transformed lives through Jesus Christ. God is still working miracles!",
@@ -964,7 +964,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd5",
-                    "videoId": "v_4KHXowAnQ",
+                    "videoId": "fJ9rUzIMcZQ",
                     "title": "Sunday Worship - The Anointing of God",
                     "publishedAt": "2025-01-15T10:00:00Z",
                     "description": "Understanding and walking in the anointing that God has placed upon your life.",
@@ -974,7 +974,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd6",
-                    "videoId": "Z99IdPmutxI",
+                    "videoId": "y6120QOlsfU",
                     "title": "Youth Gathering - Purpose Driven Life",
                     "publishedAt": "2025-01-12T18:30:00Z",
                     "description": "A message for the youth about discovering and fulfilling God's purpose for their lives.",
@@ -984,7 +984,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd7",
-                    "videoId": "bjoSu2IwY_g",
+                    "videoId": "Sagg08DrO5U",
                     "title": "Prophetic Word - 2025 Year of Breakthrough",
                     "publishedAt": "2025-01-10T19:00:00Z",
                     "description": "Pastor Nehemiah releases a prophetic word for 2025 - A year of breakthrough and victory!",
@@ -994,7 +994,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd8",
-                    "videoId": "mWRsgZuwf_8",
+                    "videoId": "astISOttCQ0",
                     "title": "Ministry Training - Effective Evangelism",
                     "publishedAt": "2025-01-08T14:00:00Z",
                     "description": "Equipping the saints for ministry work. Practical training on sharing the Gospel effectively.",
@@ -1004,7 +1004,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd9",
-                    "videoId": "XqZsoesa55w",
+                    "videoId": "M7lc1UVf-VE",
                     "title": "Sunday Service - Living in Victory",
                     "publishedAt": "2025-01-05T10:00:00Z",
                     "description": "How to live in the victory that Christ has already won for us. Walking in triumph!",
@@ -1014,7 +1014,7 @@ async def get_youtube_videos(channel_handle: str):
                 },
                 {
                     "id": "nd10",
-                    "videoId": "oyEuk8j8imI",
+                    "videoId": "ZZ5LpwO-An4",
                     "title": "Prayer & Fasting - Breakthrough Session",
                     "publishedAt": "2025-01-03T06:00:00Z",
                     "description": "Join us for an early morning prayer and fasting session. Seeking God's face together.",
