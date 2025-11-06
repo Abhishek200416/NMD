@@ -17,6 +17,43 @@ const SkeletonCard = () => (
   </div>
 );
 
+// Image with fallback component for better error handling
+const ImageWithFallback = ({ src, alt, className, fallbackSrc = "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800" }) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setImgSrc(src);
+    setIsLoading(true);
+  }, [src]);
+
+  const handleError = () => {
+    if (imgSrc !== fallbackSrc) {
+      setImgSrc(fallbackSrc);
+    }
+  };
+
+  const handleLoad = () => {
+    setIsLoading(false);
+  };
+
+  return (
+    <>
+      {isLoading && (
+        <div className={`${className} animate-pulse bg-gray-200`} />
+      )}
+      <img
+        src={imgSrc}
+        alt={alt}
+        className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        onError={handleError}
+        onLoad={handleLoad}
+        loading="lazy"
+      />
+    </>
+  );
+};
+
 // Image Lightbox Component
 const Lightbox = ({ images, currentIndex, onClose, onNext, onPrev }) => {
   useEffect(() => {
