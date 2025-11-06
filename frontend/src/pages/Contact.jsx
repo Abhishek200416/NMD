@@ -88,6 +88,11 @@ const Contact = () => {
 
   return (
     <div>
+      <SEO 
+        title={`Contact ${currentBrand.name}`}
+        description={`Get in touch with ${currentBrand.name}. We'd love to hear from you! Contact us for prayer requests, questions, or to learn more about our ministry.`}
+        url={window.location.href}
+      />
       {/* Header */}
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
         <div className="container text-center">
