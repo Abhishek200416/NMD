@@ -261,6 +261,12 @@ const EnhancedHome = () => {
 
   return (
     <div className="fade-in">
+      <SEO 
+        title={`${currentBrand.name} - ${currentBrand.tagline}`}
+        description={`Welcome to ${currentBrand.name}. ${currentBrand.tagline}. Join us for worship, fellowship, and spiritual growth. Service times: ${currentBrand.service_times}`}
+        image={currentBrand.hero_image_url}
+        url={window.location.href}
+      />
       {/* Enhanced Hero Section - Updated with better image and reduced shadow */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {currentBrand.hero_video_url ? (
