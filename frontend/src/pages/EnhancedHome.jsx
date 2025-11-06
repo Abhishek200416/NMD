@@ -4,6 +4,7 @@ import { useBrand, API } from "@/App";
 import axios from "axios";
 import { Calendar, MapPin, Clock, Loader2, Users, Heart, Video, TrendingUp, Play, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
 
 const SkeletonCard = () => (
   <div className="card animate-pulse">
