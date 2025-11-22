@@ -85,8 +85,8 @@ const AttendeesManager = () => {
               <p className="text-gray-600 text-sm font-medium">Active Events</p>
               <p className="text-3xl font-bold text-gray-900 mt-2">{events.length}</p>
             </div>
-            <div className="bg-purple-100 p-3 rounded-lg">
-              <Calendar size={24} className="text-purple-600" />
+            <div className="bg-blue-100 p-3 rounded-lg">
+              <Calendar size={24} className="text-blue-600" />
             </div>
           </div>
         </div>

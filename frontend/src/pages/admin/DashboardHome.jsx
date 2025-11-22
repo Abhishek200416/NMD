@@ -73,7 +73,7 @@ const DashboardHome = () => {
 
         <div className="bg-white rounded-lg p-6 shadow" data-testid="stat-announcements">
           <div className="flex items-center justify-between mb-4">
-            <Megaphone size={32} className="text-purple-600" />
+            <Megaphone size={32} className="text-blue-700" />
             <span className="text-3xl font-bold">{stats.announcements}</span>
           </div>
           <h3 className="text-gray-600 font-medium">Announcements</h3>
