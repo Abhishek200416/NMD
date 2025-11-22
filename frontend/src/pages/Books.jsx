@@ -1,44 +1,92 @@
 import { useState } from 'react';
-import { BookOpen, ShoppingCart, ExternalLink } from 'lucide-react';
+import { BookOpen, ShoppingCart, ExternalLink, Download, Star } from 'lucide-react';
 import SEO from '@/components/SEO';
 
 const Books = () => {
   const books = [
     {
       id: 1,
-      title: "Faith & Purpose",
+      title: "Imparting Faith",
+      subtitle: "Building a Strong Foundation in Christ",
       author: "Nehemiah David",
-      description: "Discover God's purpose for your life through practical biblical teachings and real-life examples.",
+      description: "A comprehensive guide to understanding and applying biblical principles for building unshakeable faith. Learn how to develop spiritual disciplines, overcome doubt, and grow deeper in your relationship with God.",
       image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&q=80",
-      price: "$19.99",
-      buyLink: "#"
+      price: "$24.99",
+      pages: 280,
+      rating: 4.8,
+      category: "Spiritual Growth",
+      buyLink: "https://amazon.com",
+      featured: true
     },
     {
       id: 2,
-      title: "Building Strong Foundations",
+      title: "The Power of Word",
+      subtitle: "Unlocking Biblical Truths",
       author: "Nehemiah David",
-      description: "A comprehensive guide to establishing unshakeable spiritual foundations in your walk with Christ.",
+      description: "Discover the transformative power of God's Word and how to apply Scripture effectively in your daily life. This book provides practical insights from years of ministry experience.",
       image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&q=80",
-      price: "$24.99",
-      buyLink: "#"
+      price: "$19.99",
+      pages: 220,
+      rating: 4.9,
+      category: "Bible Study",
+      buyLink: "https://amazon.com",
+      featured: true
     },
     {
       id: 3,
-      title: "Power of Prayer",
+      title: "Corporate Prayer",
+      subtitle: "Praying Together for Revival",
       author: "Prathibha David",
-      description: "Learn the transformative power of prayer and how to develop a deeper connection with God.",
+      description: "Learn the principles of corporate and Spirit-led prayer that bring revival and transformation. Based on years of leading prayer ministry at Faith Center.",
       image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400&q=80",
       price: "$16.99",
-      buyLink: "#"
+      pages: 180,
+      rating: 4.7,
+      category: "Prayer",
+      buyLink: "https://amazon.com",
+      featured: false
     },
     {
       id: 4,
-      title: "Leading with Grace",
+      title: "Leading with Vision",
+      subtitle: "Ministry Leadership Principles",
       author: "Nehemiah David",
-      description: "Principles of servant leadership based on biblical teachings and modern ministry practices.",
+      description: "Principles of servant leadership and vision casting for church and ministry leaders. Learn how to build and lead effective ministry teams.",
       image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400&q=80",
+      price: "$22.99",
+      pages: 240,
+      rating: 4.6,
+      category: "Leadership",
+      buyLink: "https://amazon.com",
+      featured: false
+    },
+    {
+      id: 5,
+      title: "Faith in Action",
+      subtitle: "Practical Christianity for Daily Living",
+      author: "Nehemiah David",
+      description: "Apply the principles of the Bible to practical situations and challenges of daily living. This book bridges the gap between Sunday teaching and Monday reality.",
+      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&q=80",
+      price: "$18.99",
+      pages: 200,
+      rating: 4.8,
+      category: "Christian Living",
+      buyLink: "https://amazon.com",
+      featured: true
+    },
+    {
+      id: 6,
+      title: "Grace & Truth",
+      subtitle: "Balancing Love and Holiness",
+      author: "Nehemiah David",
+      description: "Navigate the balance between grace and truth in your Christian walk. Understanding God's unconditional love while pursuing holiness and righteousness.",
+      image: "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&q=80",
       price: "$21.99",
-      buyLink: "#"
+      pages: 260,
+      rating: 4.9,
+      category: "Theology",
+      buyLink: "https://amazon.com",
+      featured: false
     }
   ];
 
