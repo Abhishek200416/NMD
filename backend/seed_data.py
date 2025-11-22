@@ -15,7 +15,7 @@ db.events.delete_many({})
 db.ministries.delete_many({})
 db.announcements.delete_many({})
 
-# Create Nehemiah David Ministries Brand
+# Create Nehemiah David Ministries Brand (ONLY BRAND)
 ndm_id = str(uuid.uuid4())
 ndm_brand = {
     "id": ndm_id,
@@ -27,32 +27,14 @@ ndm_brand = {
     "hero_video_url": "",
     "location": "Amaravathi Rd, above Yousta, Gorantla, Guntur, Andhra Pradesh 522034",
     "service_times": "Morning: 7:00 AM - 9:00 AM | Service: 10:00 AM - 12:00 PM | Evening (Online): 6:30 PM - 8:30 PM | Friday: 7:00 PM - 9:00 PM",
-    "primary_color": "#1a1a1a",
-    "secondary_color": "#4a90e2",
+    "primary_color": "#1e3a8a",  # Corporate navy blue
+    "secondary_color": "#6b7280",  # Corporate grey
     "whatsapp_number": "+919876543210",
     "created_at": datetime.utcnow().isoformat()
 }
 
-# Create Faith Centre Brand
-fc_id = str(uuid.uuid4())
-fc_brand = {
-    "id": fc_id,
-    "name": "Faith Centre",
-    "domain": "faithcentre.com",
-    "tagline": "Where Faith Meets Community",
-    "logo_url": "https://nehemiahdavid.com/images/logo.svg",
-    "hero_image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1920",
-    "hero_video_url": "",
-    "location": "123 Faith Street, Community Center, Vijayawada, Andhra Pradesh 520001",
-    "service_times": "Morning: 7:00 AM - 9:00 AM | Service: 10:00 AM - 12:00 PM | Evening (Online): 6:30 PM - 8:30 PM | Friday: 7:00 PM - 9:00 PM",
-    "primary_color": "#1a1a1a",
-    "secondary_color": "#4a90e2",
-    "whatsapp_number": "+919876543210",
-    "created_at": datetime.utcnow().isoformat()
-}
-
-print("Creating brands...")
-db.brands.insert_many([ndm_brand, fc_brand])
+print("Creating brand (Nehemiah David Ministries only)...")
+db.brands.insert_one(ndm_brand)
 
 # Create events for Nehemiah David Ministries
 ndm_events = [
