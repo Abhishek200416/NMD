@@ -98,11 +98,11 @@ const Books = () => {
       />
       
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-blue-900 via-gray-800 to-blue-900 text-white py-24">
+      <div className="relative bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 text-white py-24">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80')] opacity-10 bg-cover bg-center"></div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <BookOpen className="w-20 h-20 mx-auto mb-8 text-blue-300 animate-pulse" />
+            <BookOpen className="w-20 h-20 mx-auto mb-8 text-gray-300 animate-pulse" />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
               Books & Resources
             </h1>
@@ -136,13 +136,13 @@ const Books = () => {
                         alt={book.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute top-4 right-4 bg-blue-900 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                      <div className="absolute top-4 right-4 bg-gray-900 text-white px-3 py-1 rounded-full text-xs font-semibold">
                         {book.category}
                       </div>
                     </div>
                     <div className="p-6 flex-1 flex flex-col">
                       <h3 className="text-2xl font-bold text-gray-900 mb-1">{book.title}</h3>
-                      <p className="text-sm text-blue-700 font-medium mb-3">{book.subtitle}</p>
+                      <p className="text-sm text-gray-700 font-medium mb-3">{book.subtitle}</p>
                       <p className="text-sm text-gray-600 mb-4">by {book.author}</p>
                       <p className="text-gray-700 mb-4 flex-1 leading-relaxed">{book.description}</p>
                       
@@ -157,10 +157,10 @@ const Books = () => {
                       </div>
 
                       <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                        <span className="text-3xl font-bold text-blue-900">{book.price}</span>
+                        <span className="text-3xl font-bold text-gray-900">{book.price}</span>
                         <button
                           onClick={() => window.open(book.buyLink, '_blank')}
-                          className="px-5 py-2.5 bg-gradient-to-r from-blue-700 to-blue-900 text-white rounded-lg hover:from-blue-800 hover:to-gray-900 transition-all flex items-center gap-2 text-sm font-semibold shadow-lg hover:shadow-xl"
+                          className="px-5 py-2.5 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-lg hover:from-gray-800 hover:to-gray-950 transition-all flex items-center gap-2 text-sm font-semibold shadow-lg hover:shadow-xl"
                         >
                           <ShoppingCart size={16} />
                           Purchase
@@ -196,7 +196,7 @@ const Books = () => {
                     </div>
                     <div className="p-6 flex-1 flex flex-col">
                       <h3 className="text-xl font-bold text-gray-900 mb-1">{book.title}</h3>
-                      <p className="text-xs text-blue-700 font-medium mb-2">{book.subtitle}</p>
+                      <p className="text-xs text-gray-700 font-medium mb-2">{book.subtitle}</p>
                       <p className="text-sm text-gray-600 mb-3">by {book.author}</p>
                       <p className="text-gray-700 mb-4 flex-1 text-sm leading-relaxed line-clamp-3">{book.description}</p>
                       
@@ -211,10 +211,10 @@ const Books = () => {
                       </div>
 
                       <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                        <span className="text-2xl font-bold text-blue-900">{book.price}</span>
+                        <span className="text-2xl font-bold text-gray-900">{book.price}</span>
                         <button
                           onClick={() => window.open(book.buyLink, '_blank')}
-                          className="px-4 py-2 bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors flex items-center gap-2 text-sm font-semibold"
+                          className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors flex items-center gap-2 text-sm font-semibold"
                         >
                           <ShoppingCart size={14} />
                           Buy
@@ -229,15 +229,15 @@ const Books = () => {
             {/* Free Resources & Coming Soon Section */}
             <div className="mt-20 grid md:grid-cols-2 gap-8">
               {/* Free Downloads */}
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-md p-8 border border-blue-200">
-                <Download className="w-12 h-12 text-blue-700 mb-4" />
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-md p-8 border border-gray-200">
+                <Download className="w-12 h-12 text-gray-700 mb-4" />
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">Free Study Guides</h3>
                 <p className="text-gray-700 mb-6 leading-relaxed">
                   Download complementary study guides and teaching materials to accompany our books and enhance your learning experience.
                 </p>
                 <button
                   onClick={() => window.open('/contact', '_self')}
-                  className="inline-flex items-center gap-2 px-5 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-semibold shadow-md"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-semibold shadow-md"
                 >
                   <Download size={18} />
                   Access Free Resources
@@ -262,7 +262,7 @@ const Books = () => {
             </div>
 
             {/* Testimonial Section */}
-            <div className="mt-16 bg-gradient-to-r from-blue-900 to-gray-900 rounded-xl shadow-xl p-12 text-white text-center">
+            <div className="mt-16 bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-xl p-12 text-white text-center">
               <div className="max-w-3xl mx-auto">
                 <div className="flex justify-center mb-6">
                   {[...Array(5)].map((_, i) => (
@@ -272,7 +272,7 @@ const Books = () => {
                 <p className="text-xl md:text-2xl italic mb-6 leading-relaxed">
                   "These books have transformed my understanding of faith and helped me apply biblical principles in practical ways. The teachings are deep yet accessible, perfect for both new believers and mature Christians."
                 </p>
-                <p className="font-semibold text-blue-200">— Sarah M., Faith Center Member</p>
+                <p className="font-semibold text-gray-200">— Sarah M., Faith Center Member</p>
               </div>
             </div>
           </div>
