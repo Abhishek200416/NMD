@@ -50,7 +50,7 @@ const Books = () => {
       />
       
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white py-20">
+      <div className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-blue-900 text-white py-20">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80')] opacity-10 bg-cover bg-center"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
