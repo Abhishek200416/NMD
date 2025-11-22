@@ -16,21 +16,24 @@ db = client['ministry_platform']
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-# Create admin user
+# Create admin user with new credentials
 admin_data = {
     "id": str(uuid.uuid4()),
-    "email": "admin@faithcenter.com",
-    "password_hash": hash_password("Admin@2025"),
+    "email": "promptforge.dev@gmail.com",
+    "password_hash": hash_password("P9$wX!7rAq#4Lz@M2f"),
     "role": "admin",
     "created_at": datetime.now(timezone.utc).isoformat()
 }
 
-# Check if admin already exists
-existing = db.admins.find_one({"email": "admin@faithcenter.com"})
+# Delete old admin if exists
+db.admins.delete_many({"email": "admin@faithcenter.com"})
+
+# Check if new admin already exists
+existing = db.admins.find_one({"email": "promptforge.dev@gmail.com"})
 if existing:
     print("Admin user already exists")
 else:
     db.admins.insert_one(admin_data)
     print("Admin user created successfully")
-    print(f"Email: admin@faithcenter.com")
-    print(f"Password: Admin@2025")
+    print(f"Email: promptforge.dev@gmail.com")
+    print(f"Password: P9$wX!7rAq#4Lz@M2f")
