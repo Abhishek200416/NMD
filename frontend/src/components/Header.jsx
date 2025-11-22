@@ -1,18 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useBrand, useAuth } from "@/App";
-import { Menu, X, ChevronDown, Heart, Video, User, LogOut, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import { useBrand } from "@/App";
+import { Menu, X, ExternalLink, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 const Header = () => {
-  const { brands, currentBrand, switchBrand } = useBrand();
-  const { memberUser, memberLogout } = useAuth();
+  const { currentBrand } = useBrand();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,69 +23,43 @@ const Header = () => {
     setMobileMenuOpen(false);
   }, [location]);
 
-  // Filter navigation links based on brand
-  const getNavLinks = () => {
-    const baseLinks = [
-      { path: "/", label: "Home" },
-      { path: "/about", label: "About" },
-      { path: "/ministries", label: "Ministries" },
-      { path: "/events", label: "Events" },
-    ];
+  // Corporate navigation links - clean and professional
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
+    { path: "/ministries", label: "Ministries" },
+    { path: "/events", label: "Events" },
+    { path: "/foundations", label: "Foundations" },
+    { path: "/books", label: "Books" },
+    { 
+      path: "https://faithcentre.in", 
+      label: "Faith Centre", 
+      external: true 
+    },
+    { path: "/giving", label: "Give", highlight: true },
+    { path: "/contact", label: "Contact" }
+  ];
 
-    // Only show Foundations for Nehemiah David Ministries
-    if (currentBrand?.name === "Nehemiah David Ministries") {
-      baseLinks.push({ path: "/foundations", label: "Foundations" });
-    }
-
-    baseLinks.push(
-      { path: "/watch-live", label: "Watch Live" },
-      { path: "/messages", label: "Sermons" },
-      { path: "/giving", label: "Give", highlight: true },
-      { path: "/contact", label: "Contact" }
-    );
-
-    return baseLinks;
-  };
-
-  const getMobileNavLinks = () => {
-    const baseLinks = [
-      { path: "/", label: "Home" },
-      { path: "/about", label: "About" },
-      { path: "/ministries", label: "Ministries" },
-      { path: "/events", label: "Events" },
-    ];
-
-    // Only show Foundations for Nehemiah David Ministries
-    if (currentBrand?.name === "Nehemiah David Ministries") {
-      baseLinks.push({ path: "/foundations", label: "Foundations" });
-    }
-
-    baseLinks.push(
-      { path: "/watch-live", label: "Watch Live" },
-      { path: "/messages", label: "Sermons" },
-      { path: "/giving", label: "Give" },
-      { path: "/testimonials", label: "Testimonials" },
-      { path: "/prayer-wall", label: "Prayer" },
-      { path: "/gallery", label: "Gallery" },
-      { path: "/contact", label: "Contact" }
-    );
-
-    return baseLinks;
-  };
-
-  const navLinks = getNavLinks();
-  const mobileNavLinks = getMobileNavLinks();
+  const mobileNavLinks = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
+    { path: "/ministries", label: "Ministries" },
+    { path: "/events", label: "Events" },
+    { path: "/foundations", label: "Foundations" },
+    { path: "/books", label: "Books" },
+    { 
+      path: "https://faithcentre.in", 
+      label: "Faith Centre", 
+      external: true 
+    },
+    { path: "/giving", label: "Give" },
+    { path: "/testimonials", label: "Testimonials" },
+    { path: "/prayer-wall", label: "Prayer" },
+    { path: "/gallery", label: "Gallery" },
+    { path: "/contact", label: "Contact" }
+  ];
 
   const isActive = (path) => location.pathname === path;
-
-  // Function to toggle between brands with a single click
-  const handleBrandToggle = () => {
-    if (brands.length > 1) {
-      const currentIndex = brands.findIndex(b => b.id === currentBrand.id);
-      const nextIndex = (currentIndex + 1) % brands.length;
-      switchBrand(brands[nextIndex].id);
-    }
-  };
 
   if (!currentBrand) return null;
 
