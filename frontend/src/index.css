@@ -12,10 +12,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar Styles */
+/* Custom Scrollbar Styles - Corporate Navy Blue */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #8b5cf6 #f3f4f6;
+    scrollbar-color: #1e3a8a #f3f4f6;
 }
 
 *::-webkit-scrollbar {
@@ -29,13 +29,13 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #8b5cf6 0%, #6366f1 100%);
+    background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 100%);
     border-radius: 10px;
     border: 2px solid #f3f4f6;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #7c3aed 0%, #4f46e5 100%);
+    background: linear-gradient(180deg, #1e40af 0%, #2563eb 100%);
 }
 
 *::-webkit-scrollbar-corner {
