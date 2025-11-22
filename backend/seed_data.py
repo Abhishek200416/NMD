@@ -92,64 +92,8 @@ ndm_events = [
     }
 ]
 
-# Create events for Faith Centre
-fc_events = [
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Sunday Worship",
-        "description": "Experience the presence of God in our Sunday morning service.",
-        "date": (datetime.utcnow() + timedelta(days=7)).isoformat(),
-        "time": "9:00 AM - 11:00 AM",
-        "location": "Main Hall",
-        "image_url": "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80",
-        "is_free": True,
-        "accepts_donations": True,
-        "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Prayer Meeting",
-        "description": "Join us for a powerful time of prayer and intercession.",
-        "date": (datetime.utcnow() + timedelta(days=3)).isoformat(),
-        "time": "6:00 PM - 8:00 PM",
-        "location": "Prayer Room",
-        "image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&q=80",
-        "is_free": True,
-        "accepts_donations": False,
-        "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Community Service Day",
-        "description": "Make a difference in our community. Volunteers needed!",
-        "date": (datetime.utcnow() + timedelta(days=15)).isoformat(),
-        "time": "8:00 AM - 4:00 PM",
-        "location": "Various Locations",
-        "image_url": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80",
-        "is_free": True,
-        "accepts_donations": True,
-        "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Family Fellowship",
-        "description": "Bring your family for a fun time of fellowship and games.",
-        "date": (datetime.utcnow() + timedelta(days=21)).isoformat(),
-        "time": "3:00 PM - 6:00 PM",
-        "location": "Fellowship Hall",
-        "image_url": "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&q=80",
-        "is_free": True,
-        "accepts_donations": False,
-        "created_at": datetime.utcnow().isoformat()
-    }
-]
-
 print("Creating events...")
-db.events.insert_many(ndm_events + fc_events)
+db.events.insert_many(ndm_events)
 
 # Create ministries for Nehemiah David Ministries
 ndm_ministries = [
