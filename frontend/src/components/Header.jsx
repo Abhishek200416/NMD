@@ -93,7 +93,7 @@ const Header = () => {
                       href={link.path}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-md font-medium text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-900 transition-all duration-200 whitespace-nowrap flex items-center gap-1"
+                      className="px-4 py-2 rounded-md font-medium text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 whitespace-nowrap flex items-center gap-1"
                     >
                       {link.label}
                       <ExternalLink size={14} />
@@ -106,10 +106,10 @@ const Header = () => {
                     to={link.path}
                     className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-200 whitespace-nowrap ${
                       link.highlight
-                        ? "bg-blue-900 text-white hover:bg-blue-800 shadow-md"
+                        ? "bg-gray-900 text-white hover:bg-gray-700 shadow-md"
                         : isActive(link.path)
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-700 hover:bg-gray-100 hover:text-blue-900"
+                        ? "bg-gray-800 text-white"
+                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     }`}
                   >
                     {link.label}
@@ -229,7 +229,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
                   style={{ animationDelay: `${index * 30}ms` }}
-                  className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center justify-between text-gray-700 hover:bg-gray-100 hover:text-blue-900 ${
+                  className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center justify-between text-gray-700 hover:bg-gray-100 hover:text-gray-900 ${
                     mobileMenuOpen ? 'animate-slideIn' : ''
                   }`}
                 >
@@ -246,8 +246,8 @@ const Header = () => {
                 style={{ animationDelay: `${index * 30}ms` }}
                 className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center ${
                   isActive(link.path)
-                    ? "bg-gray-900 text-white"
-                    : "text-gray-700 hover:bg-gray-100 hover:text-blue-900"
+                    ? "bg-gray-800 text-white"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 } ${mobileMenuOpen ? 'animate-slideIn' : ''}`}
               >
                 {link.label}
