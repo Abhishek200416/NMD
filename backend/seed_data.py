@@ -139,52 +139,8 @@ ndm_ministries = [
     }
 ]
 
-# Create ministries for Faith Centre
-fc_ministries = [
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Prayer Team",
-        "description": "Interceding for the needs of our community and church family.",
-        "leader": "Grace Thompson",
-        "image_url": "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&q=80",
-        "meeting_schedule": "Wednesdays, 6:00 PM",
-        "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Hospitality Team",
-        "description": "Making everyone feel welcome and at home in God's house.",
-        "leader": "James Wilson",
-        "image_url": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80",
-        "meeting_schedule": "Sundays, 8:30 AM",
-        "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Youth Ministry",
-        "description": "Empowering the next generation to live for Christ.",
-        "leader": "Alex Martinez",
-        "image_url": "https://images.unsplash.com/photo-1610070835951-156b6921281d?w=800&q=80",
-        "meeting_schedule": "Fridays, 7:00 PM",
-        "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Community Care",
-        "description": "Supporting those in need through practical help and resources.",
-        "leader": "Linda Brown",
-        "image_url": "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&q=80",
-        "meeting_schedule": "Saturdays, 10:00 AM",
-        "created_at": datetime.utcnow().isoformat()
-    }
-]
-
 print("Creating ministries...")
-db.ministries.insert_many(ndm_ministries + fc_ministries)
+db.ministries.insert_many(ndm_ministries)
 
 # Create announcements
 announcements = [
