@@ -63,145 +63,196 @@ const About = () => {
         description={`Learn more about ${currentBrand.name}. ${currentBrand.tagline}. Our mission, vision, and values guide everything we do.`}
         url={window.location.href}
       />
+      
       {/* Header Section */}
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
         <div className="container text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6" data-testid="about-title">
-            About {currentBrand.name}
+            About Nehemiah David Ministries
           </h1>
-          {currentBrand.tagline && (
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-              {currentBrand.tagline}
-            </p>
-          )}
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+            Imparting Faith, Impacting Lives
+          </p>
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* About Pastors Section */}
       <section className="section bg-white">
-        <div className="container max-w-4xl">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div data-testid="mission-section">
-              <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-              <p className="text-gray-600 leading-relaxed">
-                To be a community where people encounter God's love, grow in faith, and serve with purpose. 
-                We're committed to creating an environment where everyone feels welcomed, valued, and empowered 
-                to live out their God-given potential.
-              </p>
+        <div className="container max-w-6xl">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center text-gray-900">About Pastors</h2>
+          
+          <div className="grid md:grid-cols-2 gap-12 mb-12">
+            {/* Pastor Image Placeholder */}
+            <div className="flex items-center justify-center">
+              <div className="w-full h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-lg flex items-center justify-center">
+                <Users className="w-32 h-32 text-gray-400" />
+              </div>
             </div>
-            <div data-testid="vision-section">
-              <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
-              <p className="text-gray-600 leading-relaxed">
-                To see lives transformed by the power of God's word, building a thriving community that reflects 
-                His love and compassion. We envision a church that impacts our local community and reaches beyond, 
-                making disciples who make disciples.
-              </p>
+            
+            {/* Pastor Content */}
+            <div className="flex flex-col justify-center">
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Pastors Nehemiah David and Prathibha</h3>
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p>
+                  Nehemiah David and Prathibha are senior pastors of Faith Center, a large and growing body of Christian believers in Guntur, Andhra Pradesh, India. Nehemiah David is graduated from <strong>RHEMA BIBLE TRAINING CENTER, SINGAPORE</strong>. He is broadly acclaimed for his ability to teach and impart faith and to apply the principles of the Bible to practical situations and the challenges of daily living.
+                </p>
+                <p>
+                  While helping her husband pastor Faith Center, Prathibha takes care of their children and all the home needs. Prathibha is actively involved in the women ministry and kids ministry. The desire of Prathibha's heart is to impart principles of corporate and Spirit-led prayer to the Church.
+                </p>
+                <p>
+                  After nearly 4 years, Faith Center's church attendance has grown from thirty one people in 2016 to an active church body of more than 1,000 members. Today Faith Center sends the hope of the Gospel across the country and around the world through Television broadcasts and Social Media and brings practical help and the message of God's grace and love to an ever-growing number of people!
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* About Faith Center */}
       <section className="section bg-gray-50">
         <div className="container max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center" data-testid="story-title">Our Story</h2>
-          <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="mb-4">
-              {currentBrand.name} began with a simple vision: to create a place where people could experience 
-              authentic community and encounter God in a meaningful way. What started as a small gathering has 
-              grown into a vibrant community of believers committed to making a difference.
-            </p>
-            <p className="mb-4">
-              Over the years, we've seen countless lives transformed through the power of God's love. From healing 
-              and restoration to purpose and calling, our community has witnessed the faithfulness of God in every season.
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-gray-900">About Faith Center</h2>
+          <div className="prose prose-lg max-w-none text-gray-700 space-y-4">
+            <p>
+              Founded in 2016 by Senior Pastors Nehemiah David & Prathibha, Faith Center is a non-denominational, Bible-based, Spirit-empowered, and growing church committed to sharing the hope of the Gospel and making a difference in people's lives and teaching the Body of Christ how to effectively apply God's principles to have victory in every area of life.
             </p>
             <p>
-              Today, we continue to be driven by the same passion that sparked our beginning: to love God, love people, 
-              and serve our community with excellence and integrity.
+              Today we meet as one church in four services every week with a heart to serve people with the unconditional and unlimited love of God for all. Our heart is for you to know the person of Jesus and to genuinely experience the life and hope He has to offer. That's why our mission is to reach people, touch lives, and make a difference.
+            </p>
+            <p>
+              The best way to do that is through the uncompromising Word of God, so our weekend services are central to everything we do. Each service offers a great opportunity to build a rock-solid spiritual foundation that will prepare you for a growing experience of God's goodness and plan for your life.
+            </p>
+            <p>
+              We are committed to the Vision that the Lord has given to us to reach all the people at large scale with the Good News of Jesus Christ.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Values */}
+      {/* What We Believe Section */}
       <section className="section bg-white">
-        <div className="container max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center" data-testid="values-title">Our Values</h2>
-          <div className="grid sm:grid-cols-2 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">❤️</span>
+        <div className="container max-w-5xl">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center text-gray-900">What We Believe</h2>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Our fundamental beliefs are based on the inspired Word of God and guide our ministry
+          </p>
+          
+          <div className="space-y-3">
+            <Accordion type="single" collapsible className="space-y-3">
+              {beliefs.map((belief, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`belief-${index}`} 
+                  className="bg-gray-50 rounded-lg px-6 border border-gray-200 hover:border-gray-300 transition-colors"
+                >
+                  <AccordionTrigger className="text-left font-bold text-gray-900 py-4 hover:no-underline">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        {index + 1}
+                      </div>
+                      <span>{belief.title}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 leading-relaxed pt-2 pb-4">
+                    {belief.content}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+
+          {/* Summary Points */}
+          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+              <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <BookOpen className="text-white" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Love</h3>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">The Bible</h3>
+              <p className="text-sm text-gray-600">The inspired Word of God</p>
+            </div>
+            <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+              <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="text-white" size={24} />
+              </div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Salvation</h3>
+              <p className="text-sm text-gray-600">Gift of God through faith</p>
+            </div>
+            <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+              <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="text-white" size={24} />
+              </div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">The Godhead</h3>
+              <p className="text-sm text-gray-600">One God in three Persons</p>
+            </div>
+            <div className="text-center p-6 bg-gray-50 rounded-xl border border-gray-200">
+              <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="text-white" size={24} />
+              </div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">The Return</h3>
+              <p className="text-sm text-gray-600">Christ's second coming</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="section bg-gray-50">
+        <div className="container max-w-4xl">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center text-gray-900">Our Core Values</h2>
+          <div className="grid sm:grid-cols-2 gap-8">
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">❤️</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Love</h3>
               <p className="text-gray-600 text-sm">We believe love is the foundation of everything we do</p>
             </div>
-            <div className="text-center p-6">
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-200">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🙏</span>
+                <span className="text-3xl">🙏</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Faith</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Faith</h3>
               <p className="text-gray-600 text-sm">We trust in God's promises and His faithfulness</p>
             </div>
-            <div className="text-center p-6">
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-200">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🤝</span>
+                <span className="text-3xl">🤝</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Community</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Community</h3>
               <p className="text-gray-600 text-sm">We're better together, supporting and encouraging one another</p>
             </div>
-            <div className="text-center p-6">
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm border border-gray-200">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🌟</span>
+                <span className="text-3xl">🌟</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Excellence</h3>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900">Excellence</h3>
               <p className="text-gray-600 text-sm">We honor God by doing everything with excellence</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="section bg-gray-50">
-        <div className="container max-w-3xl">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center" data-testid="faq-title">Frequently Asked Questions</h2>
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="bg-white rounded-lg px-6" data-testid={`faq-item-${index}`}>
-                <AccordionTrigger className="text-left font-semibold">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-600">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
       {/* Location Section */}
       <section className="section bg-white">
         <div className="container max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center" data-testid="location-title">Visit Us</h2>
-          <div className="bg-gray-50 rounded-lg p-8">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-gray-900">Visit Us</h2>
+          <div className="bg-gray-50 rounded-xl shadow-sm p-8 border border-gray-200">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <div className="flex items-start space-x-3 mb-4">
-                  <MapPin className="flex-shrink-0 mt-1" size={20} />
+                  <MapPin className="flex-shrink-0 mt-1 text-gray-700" size={20} />
                   <div>
-                    <h3 className="font-semibold mb-1">Address</h3>
-                    <p className="text-gray-600 text-sm">{currentBrand.location || "Rajendra Nagar opposite Icon Mall, Guntur"}</p>
+                    <h3 className="font-semibold mb-1 text-gray-900">Address</h3>
+                    <p className="text-gray-600 text-sm">Amaravathi Rd, above Yousta, Gorantla, Guntur, Andhra Pradesh 522034</p>
                   </div>
                 </div>
-                {currentBrand.service_times && (
-                  <div className="flex items-start space-x-3 mb-4">
-                    <Mail className="flex-shrink-0 mt-1" size={20} />
-                    <div>
-                      <h3 className="font-semibold mb-1">Service Times</h3>
-                      <p className="text-gray-600 text-sm">{currentBrand.service_times}</p>
-                    </div>
+                <div className="flex items-start space-x-3 mb-4">
+                  <Mail className="flex-shrink-0 mt-1 text-gray-700" size={20} />
+                  <div>
+                    <h3 className="font-semibold mb-1 text-gray-900">Service Times</h3>
+                    <p className="text-gray-600 text-sm">Morning: 7:00 AM - 9:00 AM | Service: 10:00 AM - 12:00 PM | Evening (Online): 6:30 PM - 8:30 PM | Friday: 7:00 PM - 9:00 PM</p>
                   </div>
-                )}
+                </div>
               </div>
               <div className="h-64 bg-gray-200 rounded-lg overflow-hidden">
                 <iframe
