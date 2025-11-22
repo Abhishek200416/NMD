@@ -115,39 +115,115 @@ const Books = () => {
       </div>
 
       {/* Books Grid */}
-      <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {books.map((book) => (
-                <div 
-                  key={book.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
-                >
-                  <div className="relative h-64 overflow-hidden">
-                    <img 
-                      src={book.image} 
-                      alt={book.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{book.title}</h3>
-                    <p className="text-sm text-gray-600 mb-3">by {book.author}</p>
-                    <p className="text-gray-700 mb-4 flex-1 line-clamp-3">{book.description}</p>
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                      <span className="text-2xl font-bold text-blue-900">{book.price}</span>
-                      <button
-                        onClick={() => window.open(book.buyLink, '_blank')}
-                        className="px-4 py-2 bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors flex items-center gap-2 text-sm font-medium"
-                      >
-                        <ShoppingCart size={16} />
-                        Buy Now
-                      </button>
+      <div className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            {/* Featured Books Section */}
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 text-center">Featured Books</h2>
+              <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                Popular titles that have transformed lives and strengthened faith in thousands of believers
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {books.filter(book => book.featured).map((book) => (
+                  <div 
+                    key={book.id}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col group"
+                  >
+                    <div className="relative h-72 overflow-hidden">
+                      <img 
+                        src={book.image} 
+                        alt={book.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 right-4 bg-blue-900 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        {book.category}
+                      </div>
+                    </div>
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-1">{book.title}</h3>
+                      <p className="text-sm text-blue-700 font-medium mb-3">{book.subtitle}</p>
+                      <p className="text-sm text-gray-600 mb-4">by {book.author}</p>
+                      <p className="text-gray-700 mb-4 flex-1 leading-relaxed">{book.description}</p>
+                      
+                      {/* Book Details */}
+                      <div className="flex items-center gap-4 mb-4 text-sm text-gray-600">
+                        <div className="flex items-center gap-1">
+                          <Star size={16} className="text-yellow-500 fill-yellow-500" />
+                          <span className="font-semibold">{book.rating}</span>
+                        </div>
+                        <span>•</span>
+                        <span>{book.pages} pages</span>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                        <span className="text-3xl font-bold text-blue-900">{book.price}</span>
+                        <button
+                          onClick={() => window.open(book.buyLink, '_blank')}
+                          className="px-5 py-2.5 bg-gradient-to-r from-blue-700 to-blue-900 text-white rounded-lg hover:from-blue-800 hover:to-gray-900 transition-all flex items-center gap-2 text-sm font-semibold shadow-lg hover:shadow-xl"
+                        >
+                          <ShoppingCart size={16} />
+                          Purchase
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            {/* All Books Section */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 text-center">More Resources</h2>
+              <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                Additional books and study materials for your spiritual growth journey
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {books.filter(book => !book.featured).map((book) => (
+                  <div 
+                    key={book.id}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col group"
+                  >
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src={book.image} 
+                        alt={book.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 right-4 bg-gray-900 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        {book.category}
+                      </div>
+                    </div>
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h3 className="text-xl font-bold text-gray-900 mb-1">{book.title}</h3>
+                      <p className="text-xs text-blue-700 font-medium mb-2">{book.subtitle}</p>
+                      <p className="text-sm text-gray-600 mb-3">by {book.author}</p>
+                      <p className="text-gray-700 mb-4 flex-1 text-sm leading-relaxed line-clamp-3">{book.description}</p>
+                      
+                      {/* Book Details */}
+                      <div className="flex items-center gap-3 mb-4 text-xs text-gray-600">
+                        <div className="flex items-center gap-1">
+                          <Star size={14} className="text-yellow-500 fill-yellow-500" />
+                          <span className="font-semibold">{book.rating}</span>
+                        </div>
+                        <span>•</span>
+                        <span>{book.pages} pages</span>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                        <span className="text-2xl font-bold text-blue-900">{book.price}</span>
+                        <button
+                          onClick={() => window.open(book.buyLink, '_blank')}
+                          className="px-4 py-2 bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors flex items-center gap-2 text-sm font-semibold"
+                        >
+                          <ShoppingCart size={14} />
+                          Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Coming Soon Section */}
