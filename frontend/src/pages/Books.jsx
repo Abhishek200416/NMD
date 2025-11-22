@@ -226,19 +226,54 @@ const Books = () => {
               </div>
             </div>
 
-            {/* Coming Soon Section */}
-            <div className="mt-16 text-center bg-white rounded-lg shadow-md p-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">More Resources Coming Soon</h2>
-              <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
-                We're constantly working on new books, study guides, and teaching materials to help you grow in your faith journey.
-              </p>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors font-medium"
-              >
-                Request a Topic
-                <ExternalLink size={18} />
-              </a>
+            {/* Free Resources & Coming Soon Section */}
+            <div className="mt-20 grid md:grid-cols-2 gap-8">
+              {/* Free Downloads */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-md p-8 border border-blue-200">
+                <Download className="w-12 h-12 text-blue-700 mb-4" />
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Free Study Guides</h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Download complementary study guides and teaching materials to accompany our books and enhance your learning experience.
+                </p>
+                <button
+                  onClick={() => window.open('/contact', '_self')}
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-semibold shadow-md"
+                >
+                  <Download size={18} />
+                  Access Free Resources
+                </button>
+              </div>
+
+              {/* Coming Soon */}
+              <div className="bg-white rounded-xl shadow-md p-8 border border-gray-200">
+                <BookOpen className="w-12 h-12 text-gray-700 mb-4" />
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">More Coming Soon</h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  We're working on new books, teaching series, and digital resources. Have a topic you'd like us to cover?
+                </p>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-semibold shadow-md"
+                >
+                  Request a Topic
+                  <ExternalLink size={18} />
+                </a>
+              </div>
+            </div>
+
+            {/* Testimonial Section */}
+            <div className="mt-16 bg-gradient-to-r from-blue-900 to-gray-900 rounded-xl shadow-xl p-12 text-white text-center">
+              <div className="max-w-3xl mx-auto">
+                <div className="flex justify-center mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={24} className="text-yellow-400 fill-yellow-400 mx-1" />
+                  ))}
+                </div>
+                <p className="text-xl md:text-2xl italic mb-6 leading-relaxed">
+                  "These books have transformed my understanding of faith and helped me apply biblical principles in practical ways. The teachings are deep yet accessible, perfect for both new believers and mature Christians."
+                </p>
+                <p className="font-semibold text-blue-200">— Sarah M., Faith Center Member</p>
+              </div>
             </div>
           </div>
         </div>
