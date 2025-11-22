@@ -160,22 +160,6 @@ announcements = [
         "content": "Join a small group this season! Groups meet weekly for Bible study, prayer, and fellowship.",
         "is_urgent": False,
         "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Prayer Meeting Tonight",
-        "content": "Join us tonight at 6 PM for a powerful prayer meeting. All are welcome!",
-        "is_urgent": False,
-        "created_at": datetime.utcnow().isoformat()
-    },
-    {
-        "id": str(uuid.uuid4()),
-        "brand_id": fc_id,
-        "title": "Volunteer Opportunities Available",
-        "content": "We're looking for volunteers to help with our community service initiatives. Sign up today!",
-        "is_urgent": False,
-        "created_at": datetime.utcnow().isoformat()
     }
 ]
 
