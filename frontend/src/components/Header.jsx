@@ -171,7 +171,7 @@ const Header = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-[45] lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-[45] lg:hidden transition-opacity duration-300 ${
           mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setMobileMenuOpen(false)}
@@ -180,33 +180,20 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <nav
-        className={`fixed top-14 sm:top-16 lg:top-20 left-0 right-0 bg-gradient-to-b from-black to-gray-900 z-[48] lg:hidden border-b border-gray-800 shadow-2xl transition-all duration-300 ease-out ${
+        className={`fixed top-16 left-0 right-0 bg-white z-[48] lg:hidden border-b border-gray-200 shadow-xl transition-all duration-300 ease-out ${
           mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
         }`}
         data-testid="mobile-menu"
         aria-label="Mobile navigation"
       >
-        <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 max-h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar">
-          {/* Brand Switcher in Mobile Menu */}
-          {brands.length > 1 && (
-            <div className="mb-4 pb-4 border-b border-gray-800">
-              <button
-                onClick={handleBrandToggle}
-                className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg"
-              >
-                <span className="truncate">Switch to {brands.find(b => b.id !== currentBrand.id)?.name}</span>
-                <ChevronDown size={16} className="flex-shrink-0 ml-2" />
-              </button>
-            </div>
-          )}
-
+        <div className="container mx-auto px-4 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
           {/* Social Media in Mobile Menu */}
-          <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-gray-800 xl:hidden">
+          <div className="flex items-center justify-center gap-4 pb-4 mb-4 border-b border-gray-200 lg:hidden">
             <a 
               href="https://facebook.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="p-2.5 text-gray-300 hover:text-blue-400 hover:bg-white/10 rounded-lg transition-all hover:scale-110"
+              className="p-2.5 text-gray-600 hover:text-blue-600 hover:bg-gray-100 rounded-md transition-all"
               aria-label="Facebook"
             >
               <Facebook size={20} />
@@ -215,7 +202,7 @@ const Header = () => {
               href="https://instagram.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="p-2.5 text-gray-300 hover:text-pink-400 hover:bg-white/10 rounded-lg transition-all hover:scale-110"
+              className="p-2.5 text-gray-600 hover:text-pink-600 hover:bg-gray-100 rounded-md transition-all"
               aria-label="Instagram"
             >
               <Instagram size={20} />
@@ -224,7 +211,7 @@ const Header = () => {
               href="https://youtube.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="p-2.5 text-gray-300 hover:text-red-400 hover:bg-white/10 rounded-lg transition-all hover:scale-110"
+              className="p-2.5 text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-md transition-all"
               aria-label="YouTube"
             >
               <Youtube size={20} />
@@ -232,39 +219,41 @@ const Header = () => {
           </div>
 
           {/* Mobile Navigation Links */}
-          {mobileNavLinks.map((link, index) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setMobileMenuOpen(false)}
-              style={{ animationDelay: `${index * 30}ms` }}
-              className={`block px-4 py-3.5 font-medium rounded-lg transition-all duration-200 mb-2 min-h-[48px] flex items-center ${
-                isActive(link.path)
-                  ? "bg-purple-600 text-white shadow-lg shadow-purple-500/30"
-                  : "text-gray-200 hover:bg-white/10 hover:text-white"
-              } ${mobileMenuOpen ? 'animate-slideIn' : ''}`}
-            >
-              {link.label}
-            </Link>
-          ))}
-
-          {/* User Actions in Mobile Menu */}
-          {!memberUser && (
-            <div className="pt-4 mt-4 border-t border-gray-800">
-              <Button 
-                size="lg"
-                variant="outline" 
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  navigate('/member/login');
-                }}
-                className="w-full gap-2 text-white border-gray-700 hover:bg-white/10 min-h-[48px]"
+          {mobileNavLinks.map((link, index) => {
+            if (link.external) {
+              return (
+                <a
+                  key={link.path}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{ animationDelay: `${index * 30}ms` }}
+                  className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center justify-between text-gray-700 hover:bg-gray-100 hover:text-blue-900 ${
+                    mobileMenuOpen ? 'animate-slideIn' : ''
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  <ExternalLink size={16} />
+                </a>
+              );
+            }
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ animationDelay: `${index * 30}ms` }}
+                className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center ${
+                  isActive(link.path)
+                    ? "bg-gray-900 text-white"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-blue-900"
+                } ${mobileMenuOpen ? 'animate-slideIn' : ''}`}
               >
-                <User size={18} />
-                Member Login
-              </Button>
-            </div>
-          )}
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </nav>
 
