@@ -98,16 +98,17 @@ const Books = () => {
       />
       
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-blue-900 text-white py-20">
+      <div className="relative bg-gradient-to-br from-blue-900 via-gray-800 to-blue-900 text-white py-24">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80')] opacity-10 bg-cover bg-center"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <BookOpen className="w-16 h-16 mx-auto mb-6 text-blue-300" />
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Ministry Books & Resources
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <BookOpen className="w-20 h-20 mx-auto mb-8 text-blue-300 animate-pulse" />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+              Books & Resources
             </h1>
-            <p className="text-xl text-gray-200">
-              Deepen your faith and grow spiritually with our collection of inspiring books and teaching resources
+            <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl mx-auto">
+              Explore transformative books and teaching materials by Nehemiah David and ministry leaders. 
+              Each resource is designed to help you grow in faith and apply biblical principles to daily living.
             </p>
           </div>
         </div>
