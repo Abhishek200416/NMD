@@ -159,11 +159,11 @@ const Giving = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12">
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-6">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-700 to-blue-900 rounded-full mb-6">
             <Heart className="h-10 w-10 text-white" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -191,7 +191,7 @@ const Giving = () => {
                         onClick={() => setSelectedCategory(cat)}
                         className={`p-4 rounded-lg border-2 transition-all ${
                           selectedCategory === cat
-                            ? 'border-purple-600 bg-purple-50 text-purple-900'
+                            ? 'border-blue-700 bg-blue-50 text-blue-900'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
@@ -215,7 +215,7 @@ const Giving = () => {
                       onClick={() => setAmount(amt.toString())}
                       className={`py-3 rounded-lg border-2 transition-all font-semibold ${
                         amount === amt.toString()
-                          ? 'border-purple-600 bg-purple-50 text-purple-900'
+                          ? 'border-blue-700 bg-blue-50 text-blue-900'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
@@ -238,7 +238,7 @@ const Giving = () => {
                     min="1"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 text-2xl font-bold border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                    className="w-full pl-12 pr-4 py-4 text-2xl font-bold border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
                     placeholder="0.00"
                     required
                   />
@@ -254,7 +254,7 @@ const Giving = () => {
                   type="text"
                   value={donorName}
                   onChange={(e) => setDonorName(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition"
                   placeholder="John Doe"
                 />
               </div>
@@ -263,7 +263,7 @@ const Giving = () => {
               <Button
                 type="submit"
                 disabled={loading || !amount}
-                className="w-full py-6 text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className="w-full py-6 text-xl font-bold bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-700 hover:to-purple-700"
               >
                 {loading ? (
                   <>
