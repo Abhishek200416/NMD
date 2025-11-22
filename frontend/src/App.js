@@ -188,6 +188,7 @@ function App() {
                       <Route path="/giving/success" element={<Giving />} />
                       <Route path="/watch-live" element={<WatchLive />} />
                       <Route path="/foundations" element={<Foundations />} />
+                      <Route path="/books" element={<Books />} />
                     </Routes>
                     <Footer />
                   </>
