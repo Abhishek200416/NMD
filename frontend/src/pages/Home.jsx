@@ -108,7 +108,7 @@ const Home = () => {
           {currentBrand.service_times && (
             <div className="bg-white/95 backdrop-blur-md text-gray-900 rounded-lg p-3 sm:p-4 mb-4 sm:mb-5 inline-block max-w-full shadow-2xl border border-white/50 animate-fadeIn text-sm sm:text-base" style={{ animationDelay: '0.2s' }}>
               <div className="flex items-start space-x-2 sm:space-x-3 mb-3">
-                <Clock size={18} className="sm:w-5 sm:h-5 flex-shrink-0 text-purple-600 mt-0.5" />
+                <Clock size={18} className="sm:w-5 sm:h-5 flex-shrink-0 text-blue-600 mt-0.5" />
                 <div className="text-left">
                   <p className="font-bold text-base sm:text-lg mb-1.5 text-gray-900">Service Times</p>
                   <div className="space-y-1 text-xs sm:text-sm">
@@ -129,7 +129,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center px-4 sm:px-0 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
             <Button 
               size="lg" 
-              className="rounded-full w-full sm:w-auto text-sm sm:text-base px-6 py-4 sm:py-5 shadow-2xl hover:scale-110 transition-all hover:shadow-purple-500/50 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" 
+              className="rounded-full w-full sm:w-auto text-sm sm:text-base px-6 py-4 sm:py-5 shadow-2xl hover:scale-110 transition-all hover:shadow-blue-500/50 bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-gray-900" 
               onClick={() => navigate("/watch-live")} 
               data-testid="cta-join-sunday"
             >
