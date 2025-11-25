@@ -78,8 +78,8 @@ const Events = () => {
 
   if (!currentBrand) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="animate-spin h-8 w-8 text-gray-600" />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+        <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
       </div>
     );
   }
