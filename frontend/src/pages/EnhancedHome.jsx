@@ -290,8 +290,8 @@ const EnhancedHome = () => {
 
   if (!currentBrand) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="animate-spin h-8 w-8 text-gray-600" />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <Loader2 className="animate-spin h-8 w-8 text-white" />
       </div>
     );
   }
