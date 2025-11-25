@@ -77,4 +77,15 @@ agenthub/agents/youtube/db
 .cache/
 
 # Mobile development
-android-sdk/ 
+android-sdk/
+
+# Unused frontend files
+**/Home.jsx
+**/Messages.jsx
+**/WhatsAppButton.jsx
+
+# Backup files
+*.bak
+*.backup
+*.old
+*~ 
