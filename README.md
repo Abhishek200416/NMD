@@ -45,8 +45,8 @@ This creates:
 - Sample events, ministries, and announcements
 
 2. **Access the Application**
-- Public Site: https://faithmin-portal.preview.emergentagent.com
-- Admin Panel: https://faithmin-portal.preview.emergentagent.com/admin/login
+- Public Site: https://faith-banner-system.preview.emergentagent.com
+- Admin Panel: https://faith-banner-system.preview.emergentagent.com/admin/login
 
 ## 🔐 Admin Credentials
 
