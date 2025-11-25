@@ -27,8 +27,8 @@ ndm_brand = {
     "hero_video_url": "",
     "location": "Amaravathi Rd, above Yousta, Gorantla, Guntur, Andhra Pradesh 522034",
     "service_times": "Morning: 7:00 AM - 9:00 AM | Service: 10:00 AM - 12:00 PM | Evening (Online): 6:30 PM - 8:30 PM | Friday: 7:00 PM - 9:00 PM",
-    "primary_color": "#1e3a8a",  # Corporate navy blue
-    "secondary_color": "#6b7280",  # Corporate grey
+    "primary_color": "#1e293b",  # Corporate slate
+    "secondary_color": "#64748b",  # Corporate grey-blue
     "whatsapp_number": "+919876543210",
     "created_at": datetime.utcnow().isoformat()
 }
