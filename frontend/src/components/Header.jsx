@@ -78,7 +78,7 @@ const Header = () => {
               className="flex items-center transition-all hover:opacity-80 relative z-50 flex-shrink-0" 
               data-testid="header-logo"
             >
-              <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 tracking-tight leading-tight">
+              <div className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
                 {currentBrand.name}
               </div>
             </Link>
@@ -93,7 +93,7 @@ const Header = () => {
                       href={link.path}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-md font-medium text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200 whitespace-nowrap flex items-center gap-1"
+                      className="px-4 py-2 rounded-md font-medium text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-all duration-200 whitespace-nowrap flex items-center gap-1"
                     >
                       {link.label}
                       <ExternalLink size={14} />
@@ -106,10 +106,10 @@ const Header = () => {
                     to={link.path}
                     className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-200 whitespace-nowrap ${
                       link.highlight
-                        ? "bg-gray-900 text-white hover:bg-gray-700 shadow-md"
+                        ? "bg-slate-900 text-white hover:bg-slate-700 shadow-md"
                         : isActive(link.path)
-                        ? "bg-gray-800 text-white"
-                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        ? "bg-slate-800 text-white"
+                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
                     {link.label}
