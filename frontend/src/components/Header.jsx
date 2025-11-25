@@ -153,7 +153,7 @@ const Header = () => {
 
               {/* Hamburger Menu Button */}
               <button
-                className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition-all text-gray-900 relative z-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="lg:hidden p-2 rounded-md hover:bg-slate-100 transition-all text-slate-900 relative z-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 data-testid="mobile-menu-toggle"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -229,7 +229,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
                   style={{ animationDelay: `${index * 30}ms` }}
-                  className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center justify-between text-gray-700 hover:bg-gray-100 hover:text-gray-900 ${
+                  className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center justify-between text-slate-700 hover:bg-slate-100 hover:text-slate-900 ${
                     mobileMenuOpen ? 'animate-slideIn' : ''
                   }`}
                 >
@@ -246,8 +246,8 @@ const Header = () => {
                 style={{ animationDelay: `${index * 30}ms` }}
                 className={`block px-4 py-3.5 font-medium rounded-md transition-all duration-200 mb-2 min-h-[48px] flex items-center ${
                   isActive(link.path)
-                    ? "bg-gray-800 text-white"
-                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                 } ${mobileMenuOpen ? 'animate-slideIn' : ''}`}
               >
                 {link.label}
