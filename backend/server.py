@@ -455,6 +455,36 @@ class FoundationDonationCreate(BaseModel):
     message: Optional[str] = None
     brand_id: str
 
+
+# ========== PAGE BANNER MODELS ==========
+
+class PageBanner(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    page_type: str  # home, about, events, ministries, books, foundations, messages, contact, etc.
+    title: str
+    subtitle: Optional[str] = None
+    image_url: str
+    is_active: bool = True
+    brand_id: str
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class PageBannerCreate(BaseModel):
+    page_type: str
+    title: str
+    subtitle: Optional[str] = None
+    image_url: str
+    is_active: bool = True
+    brand_id: str
+
+class PageBannerUpdate(BaseModel):
+    page_type: Optional[str] = None
+    title: Optional[str] = None
+    subtitle: Optional[str] = None
+    image_url: Optional[str] = None
+    is_active: Optional[bool] = None
+
 # ========== AUTH UTILITIES ==========
 
 def hash_password(password: str) -> str:
