@@ -1778,6 +1778,74 @@ async def get_foundation_donations(foundation_id: str, admin = Depends(get_curre
     ).sort("created_at", -1).to_list(1000)
     return donations
 
+
+# ========== PAGE BANNER ENDPOINTS ==========
+
+@api_router.get("/page-banners", response_model=List[PageBanner])
+async def get_page_banners(brand_id: Optional[str] = None, page_type: Optional[str] = None):
+    """Get all page banners, optionally filtered by brand_id and page_type"""
+    query = {}
+    if brand_id:
+        query["brand_id"] = brand_id
+    if page_type:
+        query["page_type"] = page_type
+    
+    banners = await db.page_banners.find(query, {"_id": 0}).to_list(1000)
+    return banners
+
+@api_router.get("/page-banners/{banner_id}", response_model=PageBanner)
+async def get_page_banner(banner_id: str):
+    """Get a specific page banner by ID"""
+    banner = await db.page_banners.find_one({"id": banner_id}, {"_id": 0})
+    if not banner:
+        raise HTTPException(status_code=404, detail="Page banner not found")
+    return banner
+
+@api_router.post("/page-banners", response_model=PageBanner)
+async def create_page_banner(banner: PageBannerCreate, admin = Depends(get_current_admin)):
+    """Create a new page banner (Admin only)"""
+    # Check if banner already exists for this page_type and brand_id
+    existing = await db.page_banners.find_one({
+        "page_type": banner.page_type,
+        "brand_id": banner.brand_id
+    })
+    
+    if existing:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Banner already exists for page type '{banner.page_type}'. Please update the existing banner."
+        )
+    
+    banner_dict = PageBanner(**banner.model_dump()).model_dump()
+    await db.page_banners.insert_one(banner_dict)
+    return banner_dict
+
+@api_router.put("/page-banners/{banner_id}", response_model=PageBanner)
+async def update_page_banner(banner_id: str, banner_update: PageBannerUpdate, admin = Depends(get_current_admin)):
+    """Update a page banner (Admin only)"""
+    existing_banner = await db.page_banners.find_one({"id": banner_id})
+    if not existing_banner:
+        raise HTTPException(status_code=404, detail="Page banner not found")
+    
+    update_data = {k: v for k, v in banner_update.model_dump().items() if v is not None}
+    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    await db.page_banners.update_one(
+        {"id": banner_id},
+        {"$set": update_data}
+    )
+    
+    updated_banner = await db.page_banners.find_one({"id": banner_id}, {"_id": 0})
+    return updated_banner
+
+@api_router.delete("/page-banners/{banner_id}")
+async def delete_page_banner(banner_id: str, admin = Depends(get_current_admin)):
+    """Delete a page banner (Admin only)"""
+    result = await db.page_banners.delete_one({"id": banner_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Page banner not found")
+    return {"message": "Page banner deleted successfully"}
+
 # Include router
 app.include_router(api_router)
 
