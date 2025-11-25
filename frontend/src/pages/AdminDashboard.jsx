@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/App";
-import { LayoutDashboard, Calendar, Users, Megaphone, Mail, UserCircle, Settings, LogOut, DollarSign, Video } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, Megaphone, Mail, UserCircle, Settings, LogOut, DollarSign, Video, Image } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import DashboardHome from "./admin/DashboardHome";
@@ -13,6 +13,7 @@ import BrandsManager from "./admin/BrandsManager";
 import MembersManager from "./admin/MembersManager";
 import LiveStreamManager from "./admin/LiveStreamManager";
 import AttendeesManager from "./admin/AttendeesManager";
+import BannersManager from "./admin/BannersManager";
 
 const AdminDashboard = () => {
   const location = useLocation();
@@ -27,6 +28,7 @@ const AdminDashboard = () => {
   const menuItems = [
     { path: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { path: "/admin/brands", icon: Settings, label: "Brands" },
+    { path: "/admin/banners", icon: Image, label: "Page Banners" },
     { path: "/admin/members", icon: UserCircle, label: "Members" },
     { path: "/admin/events", icon: Calendar, label: "Events" },
     { path: "/admin/attendees", icon: Users, label: "Attendees" },
@@ -83,6 +85,7 @@ const AdminDashboard = () => {
         <Routes>
           <Route path="dashboard" element={<DashboardHome />} />
           <Route path="brands" element={<BrandsManager />} />
+          <Route path="banners" element={<BannersManager />} />
           <Route path="members" element={<MembersManager />} />
           <Route path="events" element={<EventsManager />} />
           <Route path="attendees" element={<AttendeesManager />} />
