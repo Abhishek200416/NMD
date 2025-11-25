@@ -158,16 +158,10 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
           <p className="text-xs sm:text-sm text-gray-500 text-center sm:text-left">
             © {new Date().getFullYear()} {currentBrand.name}. All rights reserved.
           </p>
-          <Link 
-            to="/admin/login" 
-            className="text-xs sm:text-sm text-gray-500 hover:text-gray-300 transition-colors"
-          >
-            Admin Login
-          </Link>
         </div>
       </div>
     </footer>
